@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array Slide 14 - jQ Each Example</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+
+<body>
+<h1>JQ .each example</h1>
+<ul id="list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+    <li>Item 5</li>
+</ul>
+<p>look in the console to see how jQ gets each item in the list</p>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+var itemList = $('#list li');
+//.each is mentioned on slide 8
+itemList.each( function(i){
+	//the i in the function parameter above allows us to capture the index of the item in the array it is iterating over
+	var theLiText =$(this).text(); //gets the text from that item.
+	console.log('index:', i, theLiText);
+}); //note that the each is a loop
+</script>
+</body>
+</html>

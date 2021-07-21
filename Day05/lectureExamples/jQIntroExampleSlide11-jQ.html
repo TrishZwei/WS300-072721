@@ -1,0 +1,71 @@
+<html>
+<head>
+	<title>Slide 11 Example - Calculation</title>
+
+	<style type="text/css">
+	body{
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	</style>
+</head>
+<body>
+<h1>Slide 5 Example - Calculation</h1>
+<form>
+Number 1: <input type="number" id="textone"><br>
+Number 2: <input type="number" id="texttwo"><br>
+</form>
+<select id="mathtype">
+	<option value="">Pick One</option>
+	<option value="add">Add</option>
+	<option value="sub">Subtract</option>
+	<option value="mult">Multiply</option>
+	<option value="div">Divide</option>
+</select><br>
+<button id="calc">Calculate</button>
+<div id="output"></div>
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+
+
+$('#calc').click(function(){
+val1 = Number($('#textone').val());
+val2 = Number($('#texttwo').val());;
+
+if(isNaN(val1) || isNaN(val2) || val1=='' || val2 ==''){
+	alert('One of your entries is not a number. Please make it a number');
+}else{
+mathtype = $('#mathtype').val();
+
+switch(mathtype){
+case 'add':
+var total = val1 + val2;
+break;
+
+case 'sub':
+var total = val1 - val2;
+break;
+
+case 'mult':
+var total = val1 * val2;
+break;
+
+case 'div':
+var total = val1 / val2;
+break;
+
+default:
+alert('You didn\'t pick a correct math type.')
+} //end switch
+
+$('#output').html('Your total is: '+total);
+
+}//end else
+
+});//end do math
+
+
+</script>
+</body>
+</html>

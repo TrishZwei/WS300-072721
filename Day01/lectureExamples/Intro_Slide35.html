@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 35</title>
+	
+</head>
+<body>
+<input type="text" id="mytext">
+<input type="button" id="myBtn" value="check my type">
+<script type="text/javascript">
+	'use strict';
+
+	function getNumber(){
+		'use strict';
+
+		let myNum = document.getElementById('mytext').value
+		//try putting in a hexidecimal value starting with: 0xffffff 
+		let valueType = typeof myNum;
+		if(!isNaN(myNum)){
+			//isNaN recognizes the hex value because of the 0x in front. So it passes the muster.
+			console.log(myNum); //note that this is the value passed and it is still a string
+			//Number(myNum); old method.
+
+			myNum *= 1; 
+			//converts to number object, base 10.
+
+			alert('your number is: '+myNum);
+
+		}else{
+			alert('You input '+myNum+' which is not a number. Please try again.')
+		}
+
+	} //end get number
+
+	//there are better ways of writing event listeners.
+	document.getElementById('myBtn').onclick = getNumber;
+
+
+
+	//other examples:
+	let myNum1 = '5';
+	let myNum2 = 5;
+
+	myNum2 = myNum2.toString();
+	console.log(typeof myNum2); //returns small s string
+	console.log(myNum2 instanceof String); //retuns false since it is not a String object
+	console.log(myNum2.constructor); //returns the data prototype String()
+
+	myNum1 = parseFloat(myNum1); //please note that parseInt converts to whole number, will lose any trailing decimal values
+	console.log(typeof myNum1); //returns small n number
+	console.log(myNum1 instanceof Number); //retruns false since it is not a Number object
+	console.log(myNum1.constructor); //returns the data prototype Number()
+
+
+	myNum1 = String(myNum1); //better to use toString() method OR myNum1 += '';
+	console.log(typeof myNum1);//returns small s string
+	console.log(myNum1 instanceof String); //retuns false since it is was not instantiated by the keyword 'new'
+	console.log(myNum1.constructor); //returns the data prototype String()
+</script>
+</body>
+</html>

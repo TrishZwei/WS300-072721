@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 10 Example - Comparison Operators</title>
+<style type="text/css">
+	body{
+    font-size: 20px;
+    font-family: Verdana;
+	}
+
+	div{
+		padding: 0.5em;
+
+	}
+	.true{
+		background-color: green;
+	}
+	.false{
+		background-color: red;
+	}
+
+</style>
+</head>
+<body>
+    <h1>Slide 10 Example Comparison Operators</h1>
+    <p>This text comes from the comparison operators page at w3schools.
+    <div id="output"></div>
+
+<script type="text/javascript"> 
+	'use strict';
+	var x=5;
+	//x=8; //reassign the value to another number to see how it changes things.
+
+	//these are the comparison operators on slide 10
+	var exp1 = x==8; //false
+	var exp2 = x==5; //true
+	var exp3 = x === '5'; //false
+	var exp4 = x === 5; //true
+	var exp5 = x != 8; //true
+	var exp6 = x !=='5'; //true
+	var exp7 = x > 8; //false
+	var exp8 = x < 8; //true
+	var exp9 = x >= 8; //false
+	var exp10 = x <= 8 //true;
+
+	expList = [exp1, exp2 ,exp3 ,exp4 ,exp5 ,exp6 ,exp7 ,exp8 ,exp9 ,exp10];
+
+	/*******************
+	Below is a for loop. You can see it is a for loop by the keyword: for
+	the arguments in a for loop are as follows (initializer / condition / incrementer)
+	*******************/
+
+	for(var i = 0; i<expList.length; i++){
+		var message = 'This expression is '+expList[i];
+	   	  var divClass = String(expList[i]); //converts true/false into a string to give a class="true" or class=false"
+
+	      var newDiv = document.createElement("div"); //shows how to create an element with plain JS
+
+	      var newText = document.createTextNode(message); 
+
+	      newDiv.appendChild(newText); //appends the text we just created into the div element we just created
+
+	      newDiv.setAttribute('class', divClass); //gives a class to the div we have created
+
+	      document.getElementById('output').appendChild(newDiv); //places the newDiv into the output container.
+	}	
+</script>
+</body>
+</html>

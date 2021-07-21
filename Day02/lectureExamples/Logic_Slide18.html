@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 18 Ternary Operator Example</title>
+<style type="text/css">
+	body{
+    font-size: 20px;
+    font-family: Verdana;
+	}
+</style>
+</head>
+<body>
+    <h1>Slide 18 Ternary Operator Example</h1>
+    <div id="output"></div>
+
+<script type="text/javascript"> 
+	'use strict';
+	var goodOrEvil = 'good';
+	//uncomment below to see different result
+	//goodOrEvil = 'not sure'; 
+
+	//ternary operator is a shorthand for an if/else statement
+	//  variableName = (test/condition)   ?  if condition is true     : if condition is false 
+	var talkingTo = (goodOrEvil == 'good') ? 'You are talking to Smegol.' : 'You are talking to Golum';
+	//alert(talkingTo);
+
+	document.querySelector('#output').innerHTML = talkingTo;
+</script>
+</body>
+</html>

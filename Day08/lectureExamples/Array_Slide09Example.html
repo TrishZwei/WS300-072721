@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array Slide 9 Example</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+
+<body>
+<p>Look in the console. Then refresh the page. You'll see the proper results.</p>
+<!-- note no jquery! -->
+<script>
+var myArray = ['item1', 'item2']; //this is the best way to create an array that has stuff in it;
+
+console.log('The current value of myArray is: ', myArray); //will list the whole of what is currently in the array.
+console.log('first item is: ', myArray[0]); //gets the first item at the 0 index of the array - myArray
+console.log('second item is: ', myArray[1]); //gets the second item at the 1 index of the array - myArray
+
+//adding items to an array:
+ myArray[7] = 'Milk';
+ console.log('the current value of myArray is: ',myArray);
+//puts "Milk" at the 7th index (or the 8th item of the array -- the index positions between are undefined) 
+ myArray.push('milk');
+ console.log('the current value of myArray is: ',myArray); 
+ myArray.unshift('lettuce');
+ console.log('the current value of myArray is: ',myArray); 
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

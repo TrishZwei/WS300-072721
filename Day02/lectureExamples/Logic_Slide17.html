@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 17 Additional Conditions Example (OR)</title>
+<style type="text/css">
+	body{
+    font-size: 20px;
+    font-family: Verdana;
+	}
+
+	div{
+		padding: 0.5em;
+
+	}
+	.true{
+		background-color: green;
+	}
+	.false{
+		background-color: red;
+	}
+
+</style>
+</head>
+<body>
+    <h1>Slide 16 Additional Conditions Example (OR)</h1>
+    <div id="output"></div>
+
+<script type="text/javascript"> 
+	'use strict';
+	var gandalfSaid1= 'You cannot pass',
+	 gandalfSaid2= 'You cannot pass',
+	 gandalfSaid3= 'You shall not pass',
+	 message='';
+	 
+	 /****************
+	 uncomment one or both of the lines below 
+	 and check out the resulting message... 
+	 what does it say? 
+	 Can you tell why it says that?
+	******************/
+
+	 //gandalfSaid3 = 'something else';
+	 //gandalfSaid2 = 'something else';
+
+	if(gandalfSaid1 == 'You cannot pass' && gandalfSaid2 == 'You cannot pass'){
+		//nested if statement
+		if (gandalfSaid3 == 'You cannot pass' || gandalfSaid3 == 'You shall not pass' ){
+	       	message = 'Who cares! It\'s LOTR! Huzzah!';
+	   	}else{
+	       	message = 'What?! It\'s not LOTR!';
+	   	}
+
+	}else{
+	  	    	message = 'Bah! It\'s not LOTR!';
+	}
+	//alert (message);
+	document.querySelector('#output').innerHTML = message;
+</script>
+</body>
+</html>

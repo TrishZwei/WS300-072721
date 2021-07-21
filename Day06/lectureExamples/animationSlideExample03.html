@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Animation Slide 3 Example</title>
+    <style type="text/css">
+        #theDiv {
+            border: 1px solid gray;
+            background-color: #b3c8d0;
+            font-size:14pt;
+            padding-left: 10pt;
+            padding-right: 10pt;
+            height: 200px;
+            width: 300px;
+        }
+        p, span {
+            font-size: 16pt;
+        }
+        button {
+            margin: 5pt 5pt 0 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Using the show and hide effects</h1>
+    <p>The .show() and .hide() functions are the simplest way to reveal and hide elements. This can be done with an optional animation.</p>
+    <div id="theDiv">Example &lt;div&gt; element
+    </div>
+    <button id="show">Show</button>
+    <button id="hide">Hide</button>
+    <button id="toggle">Toggle</button>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        $('#show').click(function() {
+                $('#theDiv').show('fast');
+            });
+        $('#hide').click(function() {
+                $('#theDiv').hide(1000, 'swing'); //or linear
+            });
+        $('#toggle').click(function() {
+                //$('#theDiv').toggle('slow')
+                $('#theDiv').toggle('slow', completion); //fast or slow, completion is a callback function that is called when the animation is complete.
+            });
+
+        function completion() {
+            // the value of this is set to the DOM element being affected
+            //in this case this is the div that has the .toggle on it. It knows what called it.
+            $(this).text('Animation complete');
+            //alert('animation complete');
+        }
+    </script>
+
+</body>
+</html>

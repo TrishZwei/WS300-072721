@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 22 Example</title>
+</head>
+<body>
+<h1>String Methods</h1>
+<div id="message">output goes here.</div>
+<div id="message2">output goes here.</div>
+<div id="message3">output goes here.</div>
+<script type="text/javascript">
+/* 
+So even though a string is considered a primitive piece of data and we mentioned that primative data does not have properties or methods,  JS will put a string in a temporary object wrapper in order to give the primative data access to properties and methods.
+
+Really the only property with a primitive string is length. JS treats a string like an array of characters. We’ll get into arrays shortly.
+
+Earlier I mentioned that certain types of data weren’t objects, but primitive data. While, this string is not an object, because JS treats everything like an object you can also apply methods to them. The method will depend upon what type of object/item it is. toUpperCase() for example would not work on a non-string.
+*/
+'use strict';
+
+var theNum = 5;
+var message = "Hello World";
+var upMessage = message.toUpperCase();
+//if line 25 is uncommented the following error will appear:
+//Uncaught TypeError: theNum.toUpperCase is not a function
+//var theNum = theNum.toUpperCase();
+//this is because a number data type does not have an upper case method. 
+
+var theNum = theNum.toString().toUpperCase();
+//while this code works, because there is no capital to the character of 5, it makes no change. But it works because the number 5 is now a string data type. String Methods work only on strings. 
+
+document.getElementById('message').innerHTML = message;
+document.getElementById('message2').innerHTML = upMessage;
+document.getElementById('message3').innerHTML = theNum;
+
+/*
+Please note that because we did not reassign the value of message with the = (ex: message = message.toUpperCase() ), the original value is still available in message.
+
+This is just one of many methods available  to strings.
+
+*/
+
+
+</script>
+</body>
+</html>

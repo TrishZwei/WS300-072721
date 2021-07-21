@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Date Slide 5</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="message">Look at the code and use the console to retrieve the value of the variables listed. Remember the values are generated when the page is loaded and do not get reset.</div>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+var timeIsNow = new Date(); // gets the date & time from when the page was loaded
+var theDate = timeIsNow.getDate();
+var theDay = timeIsNow.getDay(); 
+var year = timeIsNow.getFullYear(); 
+var hour = timeIsNow.getHours(); 
+var mins = timeIsNow.getMinutes(); 
+var month = timeIsNow.getMonth(); 
+var secs = timeIsNow.getSeconds(); 
+var millisecs = timeIsNow.getTime(); 
+
+</script>
+
+</body>
+</html>

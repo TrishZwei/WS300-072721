@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 41-43</title>
+	
+</head>
+<body>
+<p>See Console.</p>
+<script type="text/javascript">
+	'use strict';
+	//slide 41
+	var myArray = []; //creates an empty array
+	myArray[0] = 5;
+	myArray[1] = 7;
+	myArray[2]= "house";
+
+	myArray = [ 5,   7, "house"];
+	 //        [0] [1]   [2]
+
+	console.log(myArray[2]); //returns "house"
+
+	//slide 42
+	console.log(myArray.length); //returns 3
+
+	console.log(myArray[2]); //returns "house"
+
+	console.log(myArray[3]); //returns undefined
+
+	//slide 43
+	console.log(myArray.toString()); 
+	console.log(myArray.valueOf())
+	console.log(myArray.join(" * ")) //puts an * between values
+
+	myArray.pop(); //removes last item (house)
+	console.log(myArray);
+	myArray.push("mouse"); //adds mouse to end
+	console.log(myArray);
+
+	myArray.shift(); 
+	console.log(myArray);
+
+	myArray.unshift("Joe")
+	console.log(myArray);
+
+	//same as pop & push only at start of array
+
+
+</script>
+</body>
+</html>

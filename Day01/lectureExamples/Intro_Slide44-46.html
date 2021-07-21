@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 44-46</title>
+	
+</head>
+<body>
+<p>See Console.</p>
+<script type="text/javascript">
+'use strict';
+
+//slide 44
+var today = new Date(); //current date and time
+console.log(today);
+var birthday =  new Date(2015, 2, 3);
+//argument: year, month, day (this is March 3)
+console.log(birthday);
+var completeBirthday = new Date(2015, 2, 3, 1, 37, 0);
+//argument: year, month, day, hours, minutes, seconds
+console.log(completeBirthday);
+
+//slide 45
+console.log(today.getMonth()); //returns 0 -11
+console.log(today.getFullYear()); //returns YYYY (not 0 based)
+console.log(today.getDate()); //returns 1 - 31 day of month
+console.log(today.getDay()); //returns 0 - 6 day of week, 0 = sun
+console.log(today.getHours()); //returns 0 - 23;
+console.log(today.getTime());//returns milliseconds since 1/1/1970
+
+//slide 46
+//try using your birtday :)
+birthday.setMonth(10); //this is November
+birthday.setFullYear(1996);
+birthday.setDate(4); 
+console.log(birthday);
+
+//number of days on this planet
+function getDaysAlive(){
+	numOfDays = today.getTime()-birthday.getTime();
+	var oneFullDay = 1000*60*60*24; //one full day in ms
+	numOfDays = Math.floor(numOfDays/oneFullDay);
+	alert('You have been alive for '+numOfDays+ ' days which is '+Math.floor(numOfDays/365)+' years');
+}
+
+getDaysAlive();
+
+</script>
+</body>
+</html>

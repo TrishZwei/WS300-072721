@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Events Slide 13 Example</title>
+    <style type="text/css">
+div {
+  width: 10px;
+  height: 10px;
+  background: orange;
+  float: left;
+}
+
+button {
+  top: 20px;
+  left: 20px;
+}
+
+#stop {
+  left: 100px;
+}
+ 
+    </style>
+</head>
+<body>
+    <h1>Two Timers - One Page</h1>
+    <button id="stop1">Stop Interval</button>
+    <button id="stop2">Stop Timeout</button>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript">
+  var counter = 0;
+  function myFunc(){
+    counter++;
+    alert('I\'ve run ' + counter + ' times. I\'ll pop up again soon.');
+  }
+
+var counter2 = 0
+ function myFunc2(){
+    alert('I\'ll run only once... except for the fact that I am calling myself again...');
+    myTimer2 = setTimeout(myFunc2, 3000)
+  }
+
+var myTimer = setInterval(myFunc, 5000);
+var myTimer2 = setTimeout(myFunc2, 3000);
+
+$(document).click( function(e){
+  var clickId = e.target.id
+  console.log(clickId);
+  switch(clickId){
+    case 'stop1':
+    clearInterval(myTimer);
+    alert('Interval Cleared');
+    break;
+
+    case 'stop2':
+    clearTimeout(myTimer2);
+    alert('Timeout Cleared');
+    break;
+
+    default:
+    //do nothing
+    break;
+
+  }
+
+
+})
+
+
+  </script>
+</body>
+</html>

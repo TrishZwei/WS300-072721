@@ -1,0 +1,190 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Events Slide 3 example</title>
+    <style type="text/css">
+        body{
+            position: relative;
+        }
+
+        #door{
+            height: 200px;
+            width: 50px;
+            background-color: brown;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+
+        #doorbell{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            top:185px;
+            left:155px;
+            border: 5px solid black;
+            box-sizing: border-box;
+        }
+
+        #person{
+            position: absolute;
+            width: 30px;
+            height: 175px;
+            background-color: green;
+            top: 125px;
+            left:-50px;
+        }
+        #package{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            transform: scale(.5);
+            top: 222px;
+            left: 180px;
+
+        }
+
+    #hexagon1 {
+    width: 50px;
+    height: 30px;
+    background: #fc5e5e;
+    position: relative;
+    left: 0;
+    top: -40px;   
+}
+
+#hexagon1:before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -25px;
+    left: 0;
+    border-right: 50px solid transparent;
+    border-bottom: 25px solid #fc5e5e;
+}
+
+#hexagon1:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    border-left: 50px solid transparent;
+    border-top: 25px solid #fc5e5e;
+}
+
+    #hexagon2 {
+    width: 50px;
+    height: 30px;
+    background: #bf4747;
+    position: relative;
+    top:-70px;
+    left: 50px
+   
+}
+
+#hexagon2:before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -25px;
+    left: 0;
+    border-left: 50px solid transparent;
+    border-bottom: 25px solid #bf4747;
+}
+
+#hexagon2:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    border-right: 50px solid transparent;
+    border-top: 25px solid #bf4747;
+}
+
+    #hexagon {
+    width: 100px;
+    height: 55px;
+    background: #f78585;
+    position: relative;
+    margin: 10px auto;
+}
+
+#hexagon:before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -25px;
+    left: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 25px solid #f78585;
+}
+
+#hexagon:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 25px solid #f78585;
+}
+
+
+
+
+
+    </style>
+</head>
+<body>
+	<h1>Events Slide 4 example</h1>
+    <div id="door">
+        
+    </div>
+    <div id="doorbell"></div> 
+    <div id="person"></div>
+    <div id="package">
+    <div id="hexagon"></div>
+    <div id="hexagon1"></div>
+    <div id="hexagon2"></div>
+    </div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+    var package = $('#package');
+
+    function goAnswerTheDoor(){
+    $('#person').animate({left:69,top:125}, 1000, 
+        function(){
+            if(package){
+                //package != null changes package's value to true
+                //package != '' also changes package's value to true
+                //because package has a value it renders as true and does not get reassigned value, we do not have to compare in this situation.
+            $('#door').animate({width:5, left:145});
+            $('#person').animate({left:175},'slow', function(){
+                package.fadeOut();
+            });
+
+            }
+        });
+    
+    }
+
+
+
+    $('#doorbell').click( goAnswerTheDoor)
+    
+    </script>
+</body>
+</html>

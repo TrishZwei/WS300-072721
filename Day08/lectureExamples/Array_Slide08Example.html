@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array Slide 8 Example</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+
+<body>
+<div>Constructor: <span id="con"></span></div>
+<div>Length: <span id="len"></span></div>
+<div>Prototype(s): <span id="proto"></span></div>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+// Create an array and assign it values.
+var colors = ['white', 'black', 'custom'];
+
+//set a new value for the third item in the array
+colors[2] = 'beige';
+
+var el1 = document.getElementById('con');
+//change the number in the square brackets to see what happens.
+el1.textContent = colors.constructor;
+
+var el2 = document.getElementById('len');
+//change the number in the square brackets to see what happens.
+el2.textContent = colors.length;
+
+
+console.log(Object.getOwnPropertyNames(colors.__proto__).filter(function (p) {
+    return typeof colors[p] === 'function';
+}));
+
+var theMethods = (Object.getOwnPropertyNames(colors.__proto__).filter(function (p) {
+    return typeof colors[p] === 'function';
+})).join(', ');
+
+var el3 = document.getElementById('proto');
+//change the number in the square brackets to see what happens.
+el3.textContent = theMethods;
+
+
+
+/* 
+NOTE: textContent does not work in IE8 or earlier
+
+You can use innerHTML on line 7, but note the security issues on p228-231 of JavaScript & jQuery.
+el.textContent = colors[0];
+
+We don't have to worry about this too much with jQuery's .html() method. And especially if we validate any user input.
+
+*/
+</script>
+
+</body>
+</html>

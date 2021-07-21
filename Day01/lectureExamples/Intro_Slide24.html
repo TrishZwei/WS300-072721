@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 24</title>
+</head>
+<body>
+<h1>String Objects vs Primitive Strings</h1>
+<div id="message">output goes here.</div>
+<div id="message2">output goes here.</div>
+<p>Open the console for more information.</p>
+<script type="text/javascript">
+
+'use strict';
+
+var name1 = "John";
+var name2 = new String("John");
+
+//variables can store the result of expressions.
+var message1 = (name1 == name2); //true because they have the same value
+var message2 = (name1 === name2);//false because they are not the same type
+
+//they can also be added to themselves.
+var message1 = 'name1 and name2 have the same value: '+ message1;
+var message2 = 'name1 and name2 have the same value and type: '+ message2;
+
+document.getElementById('message').innerHTML = message1;
+document.getElementById('message2').innerHTML = message2;
+
+/* 
+Why is message1 true and message2 false?
+*/
+
+console.log(typeof name1);//returns string
+console.log(typeof name2); //returns object
+
+//because name1 is primative data, while it is a string type (note the lowercase s) it is not a String, though String is its prototype. 
+
+//Because it is not an object it is not instantiated, therefore there is no instance of anything just primative data - which happens to be of a string type.
+
+console.log('name1 is neither string or object since it is not instantiated', name1 instanceof String, name1 instanceof Object); //both false
+
+//because name2 is a String Object it is an instance of both a String and an Object
+console.log('name2 is both string AND object because it has been instantiated and is a string type.', name2 instanceof String, name2 instanceof Object) //both true
+
+</script>
+</body>
+</html>

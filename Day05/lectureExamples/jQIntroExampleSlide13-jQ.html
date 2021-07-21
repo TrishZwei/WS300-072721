@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title>Fade In/Out jQuery</title>
+
+	<style type="text/css">
+	#button{
+		width: 300px;
+		background-color: gray;
+		border-radius: 5px;
+		font-size: 20px;
+		padding: 0.5em;
+		text-align: center;
+		color: white;
+	}
+	span{
+		text-decoration: underline;
+		color:blue;
+
+	}
+
+	</style>
+</head>
+<body>
+<h1>Fade In/Out Pure jQuery</h1>
+<p>click the button to fade it out. <span>Click here</span> to get it back.</p>
+<div id="button">A Button</div>
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$('#button').click( function(){
+ $(this).fadeOut();
+
+});
+
+$('span').click( function(){
+$('#button').fadeIn();	
+
+})
+
+
+</script>
+</body>
+</html>

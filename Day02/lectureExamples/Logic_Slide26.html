@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 26 While Loop Example</title>
+<style type="text/css">
+	body{
+    font-size: 20px;
+    font-family: Verdana;
+	}
+</style>
+</head>
+<body>
+    <h1>Slide 25 While Loop Example</h1>
+    <div id="output"></div>
+
+<script type="text/javascript"> 
+var message = '';
+var textArray = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+
+var i = 0 ; //initializer outside of the loop so it can get reset every turn of the loop
+//keyword (test)
+
+
+while (i <10){
+	//we can get values out of an array by accessing its [index]
+	//the value of i will change with each iteration of the loop. This is how it can get the next item of the array
+	message += 'The current value of i is '+i+'. '+textArray[i]+' is less than Ten.<br>'; //code block or repeated instruction
+	i++; //counter to ensure that the value of i increases and it stops when i reaches 10; 
+}
+
+/* comment the above loop and uncomment the loop below and see how the code changes or stays the same... */
+
+
+// while (i < textArray.length){
+// 	//the value of i will change with each iteration of the loop. This is how it can get the next item of the array
+//  //this is how you can create an end to a loop that is not set.
+// 	message += 'The current value of i is '+i+'. '+textArray[i]+' is less than the length of the array.<br>'; //code block or repeated instruction
+// 	i++; //counter to ensure that the value of i increases and it stops when i reaches 10; 
+// }
+
+
+
+message+= 'You see this message when the loop has stopped.'
+
+document.querySelector('#output').innerHTML =  message;
+</script>
+</body>
+</html>

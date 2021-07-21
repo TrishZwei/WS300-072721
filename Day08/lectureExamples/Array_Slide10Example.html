@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array Slide 10 Example</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+
+<body>
+<p>Look in the console. Then refresh the page. You'll see the proper results.</p>
+<!-- note no jquery! -->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+var myArray = ['lettuce', 'item1', 'item2', '', '', '', '', '', 'Milk', 'milk']; 
+//this is the array as we last left it in the previous example. 
+
+
+//If you do not see the above array properly, refresh the page.
+//it should show the full value in the console and look like this:
+//The current value of myArray is:  ["lettuce", "item1", "item2", "", "", "", "", "", "Milk", "milk"]
+//if you open the console after the script is run it will show you the end result of myArray instead of the full thing.
+console.log('The current value of myArray is: ', myArray); //will list the whole of what is currently in the array.
+
+//removing item and storing its value:
+var pop = myArray.pop();
+console.log('the current value of myArray is: ',myArray, 'popped: '+pop); 
+
+console.log(myArray[0]);
+var shift = myArray.shift();
+console.log('the current value of myArray is: ',myArray, 'shifted:'+shift); 
+console.log(myArray[0]);
+
+
+myArray.splice(2,1); //removes 1 item from the array starting at the [2] index
+console.log('The current value of myArray is: ', myArray, 'after splice(2,1)');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 23 Example</title>
+</head>
+<body>
+<h1>Method vs Property</h1>
+<p>Both a method and a property use what is called Dot Syntax. Dot Syntax allows us to access properties or objects inside of other objects and apply the appropriate methods to objects. The main difference is seen in the <i>parens</i> <code>( )</code> that follows after the name of the </p>
+<div id="message">output goes here.</div>
+<div id="message2">output goes here.</div>
+<div id="message3">output goes here.</div>
+<script type="text/javascript">
+/* 
+this code is very similar to slide 22 - but please note that the number has been replaced by message.length, which returns the number of characters in the value of message.
+*/
+
+'use strict';
+
+var message = "Hello World"; //variable
+var upMessage = message.toUpperCase(); //method applied to variable
+var msgCharacters = message.length; //length property of message
+
+document.getElementById('message').innerHTML = message;
+document.getElementById('message2').innerHTML = upMessage;
+document.getElementById('message3').innerHTML = msgCharacters;
+
+/*
+Please note that because we did not reassign the value of message with the = (ex: message = message.toUpperCase() ), the original value is still available in message.
+
+This is just one of many methods available  to strings.
+
+*/
+
+
+</script>
+</body>
+</html>

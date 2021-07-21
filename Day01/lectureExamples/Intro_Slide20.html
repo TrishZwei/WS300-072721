@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <title>Intro Slide 20</title>
+</head>
+<body>
+    <h1>Data Examples</h1>
+    <p>Open the console to see more information</p>
+    <div id="myDiv">
+        <p>p1</p>
+        <p>p2</p>
+        <p>p3</p>
+        <p>p4</p>
+    </div>
+    <p>p5 - outside of the div</p>
+    <div id="myDiv2">
+        <p>p6</p>
+        <p>p7</p>
+        <p>p8</p>
+        <p>p9</p>
+    </div>
+
+    <script>
+        'use strict';
+    //slide 20 examples
+        var myString = "Hello";
+        var myNum = 5;
+        var myBool = true;
+        var myArr = ['a', 7, myNum];
+        var myDate = new Date();
+
+        //these are objects not specified on the slide       
+        var myJSObj = {up: true,down: false,left: false,right: false}; //this is an example of JavaScript Object Notation (JSON)
+        var myHTMLObj = document.getElementById('myDiv');
+        var myHTMLCollection = document.getElementsByTagName('p');
+
+        //the querySelector method is based off of jQuery's selector
+        var myHTMLObj2 = document.querySelector('#myDiv2'); //look! A CSS Selector
+        var myHTMLCollection2 = document.querySelectorAll('#myDiv2 p'); //querySelectorAll gets all the p tags within the id of myDiv2
+
+        console.log(myString)
+        console.log(myNum)
+        console.log(myBool)
+        console.log(myArr)
+        console.log(myDate)
+        console.log(myJSObj.up);//gets the value of the property of up
+        console.log(myHTMLObj);//gets the html object
+        console.log(myHTMLCollection);//gets the collection of paragraphs
+        console.log(myHTMLObj2);//gets the html object
+        console.log(myHTMLCollection2);//gets the collection of paragraphs
+
+        //constructor allows us to see what data type a variable is - very specifically.
+
+        console.log(myString.constructor); //returns string
+        console.log(myNum.constructor); //returns number
+        console.log(myBool.constructor); //returns boolean
+        console.log(myArr.constructor); //returns array
+        console.log(myDate.constructor); //returns date
+        console.log(myJSObj.constructor); //returns object
+        console.log(myHTMLObj.constructor); //returns HTMLDivElement
+        console.log(myHTMLCollection.constructor); //returns HTMLCollection
+        console.log(myHTMLObj2.constructor); //returns HTMLDivElement
+        console.log(myHTMLCollection2.constructor); //returns NodeList
+
+        //difference between HTMLCollection and NodeList is that NodeList does not always get updated from the live DOM.
+        //the live DOM is what you see in the inspector, not the page source. 
+    </script>
+</body>
+
+</html>

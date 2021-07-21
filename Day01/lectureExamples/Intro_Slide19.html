@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <title>Intro Slide 19 - Scope Example</title>
+</head>
+
+<body>
+    <h1>Scope Example</h1>
+    <script>
+        'use strict';
+        
+        var localVariable = 'bye there'; //will alert second
+
+        function scopeExample1() {
+            var localVariable = 'hi there';
+            alert(localVariable); //hi there
+            //this second declared var is seen as a different value only temporarily. We actually only set the value of LocalVariable for this function alone by using the keyword var inside the function.
+        }
+        scopeExample1(); //function called...
+
+        function scopeExample2() {
+            alert(localVariable); //bye there
+        }
+        scopeExample2();
+    </script>
+</body>
+
+</html>

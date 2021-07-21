@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 36 Code Joke Example</title>
+<style type="text/css">
+	body{
+    font-size: 20px;
+    font-family: Verdana;
+	}
+</style>
+</head>
+<body>
+    <h1>Slide 37 Code Joke Example</h1>
+    <div id="output"></div>
+
+<script type="text/javascript">
+var eggs = 1; //change this value to 0 to see how goToStore returns a different value
+var milk = '1 carton of milk';
+
+//this is a Person object with a parameter to save the value of its name property
+function Person(name){
+	this.name = name;
+	this.goToStore = function(milk){
+		if(eggs> 0){
+			milk = '6  cartons of milk';
+		}
+		return milk;
+	} //end of goToStore method
+}//end of person object definition
+
+//this creates the new Person custom object and stores it in the value of the variable with the unique identifier: husband.
+var husband = new Person('Brett');
+
+message = husband.name + ' went to the store and brought back '+husband.goToStore(milk);
+
+document.querySelector('#output').innerHTML = message;
+
+</script>
+</body>
+</html>

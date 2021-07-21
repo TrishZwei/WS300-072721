@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 27 Do While Loop Example</title>
+<style type="text/css">
+	body{
+    font-size: 20px;
+    font-family: Verdana;
+	}
+</style>
+</head>
+<body>
+    <h1>Slide 26 Do While Loop Example</h1>
+    <div id="output"></div>
+
+<script type="text/javascript">
+	'use strict';
+	//the do loop executes the code as long as the condition in the while is met.
+	//NaN stands for Not a Number 
+	//prompt gives a dialog box that asks for a response.
+	//parseInt converts string values (like what comes from a prompt box or other HTML text boxes) into a number. 
+	//parseInt(value, base) ex: parseInt('7', 10) seven, base ten
+	var message = ''
+	do{
+		var luckyNumber = prompt('What is your lucky number?', '');
+		luckyNumber = parseInt(luckyNumber, 10);
+		if(luckyNumber == 7){
+			message = 'Cool! '+luckyNumber+' is my lucky number too!';
+		}else{
+			message = luckyNumber + ' is a great lucky number to have!';
+		}
+	}while(isNaN(luckyNumber));
+
+	document.querySelector('#output').innerHTML = message;
+
+</script>
+</body>
+</html>

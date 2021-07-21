@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Events Slide 8 JS Example</title>
+    <style type="text/css">
+div {
+  width: 10px;
+  height: 10px;
+  background: orange;
+  float: left;
+}
+
+button {
+  top: 20px;
+  left: 20px;
+}
+
+#stop {
+  left: 100px;
+}
+ 
+    </style>
+</head>
+<body>
+    <h1>Attaching Events with JavaScript</h1>
+<button id="start1" onclick="myFunc()">Run Script 1</button>
+<!-- the "onclick" inside the button or element is considered a bad practice because it mixes the structure level with the behavioral level
+"Ew! You got your JS in my HTML!" -->
+<button id="start2">Run Script 2</button>
+<button id="start3">Run Script 3</button>
+
+<script type="text/javascript">
+
+function myFunc(){
+  alert('myFunc was called');
+}
+
+document.getElementById('start2').onclick = myFunc;
+
+//object.addEventListener (eventName, function, useCapture);
+document.getElementById('start3').addEventListener('click', myFunc, false)
+
+
+</script>
+</body>
+</html>

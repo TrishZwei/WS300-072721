@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 26 - 27</title>
+</head>
+<body>
+<h1>String Methods (a couple examples)</h1>
+<p>See the console.</p>
+<script type="text/javascript">
+	'use strict';
+	let phrase = 'This is a simple phrase.';
+	//using let to demonstrate that let cannot be redeclared, but can be reassigned a value.
+
+	console.log(phrase.toUpperCase()); 
+	//THIS IS A SIMPLE PHRASE.
+
+	var words = phrase.split(' ');//splitting at the space, removes the space between words and creates an arry of individual words
+	console.log(words);
+	// array [5] "This", "is", "a", "simple", "phrase"
+
+	var pos = phrase.indexOf('simple');
+	console.log(pos); //tells usat what index simple can be found
+
+	phrase = 'Yet another phrase'; //reassigning the phrase variable
+
+	const segment = phrase.slice(6,11); 
+	console.log(segment);
+	//returns: 'other  '
+
+	const segment2 = phrase.substring(0,11);
+	console.log(segment2);
+	//returns: 'Yet another '
+
+	//it has come to my attention that substr has been deprecated, so we won't be using this.
+	const segment3 = phrase.substr(6,11);
+	console.log(segment3);
+	//returns: 'other phras' starts @ 6, goes 11 characters
+
+
+</script>
+</body>
+</html>

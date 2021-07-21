@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Request Animation Frame Rate</title>
+    <style type="text/css">
+div {
+  width: 10px;
+  height: 10px;
+  background: orange;
+  float: left;
+}
+
+button {
+  top: 20px;
+  left: 20px;
+}
+
+#stop {
+  left: 100px;
+}
+ 
+    </style>
+</head>
+<body>
+    <h1>requestAnimationFrame</h1>
+<button id="start">start</button>
+<button id="stop">stop</button>
+<section></section>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+
+/*
+This code found here: http://codepen.io/chriscoyier/pen/ltseg
+
+*/
+
+/*
+Polyfill: http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+*/
+
+var globalID;
+
+function repeatOften() {
+  $("<div>").appendTo("section");
+  globalID = requestAnimationFrame(repeatOften); //sets the value of globalID to the requestAnimationFrame (like setTimeout)
+}
+
+$("#start").on("click", function() {
+  globalID = requestAnimationFrame(repeatOften);
+});
+
+$("#stop").on("click", function() {
+  cancelAnimationFrame(globalID);
+});
+   </script>
+</body>
+</html>

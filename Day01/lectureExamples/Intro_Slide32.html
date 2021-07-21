@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 32</title>
+</head>
+<body>
+<h1>Not a Number</h1>
+<div id="myDiv"><p>See the console.</p></div>
+<script type="text/javascript">
+	'use strict';
+	console.log(isNaN(55)); 
+	//a number data type. Therefore it returns false
+
+	console.log(isNaN('55')); 
+	//while a string data type, it is a numeric format and therefore also returns false
+
+	console.log(isNaN('55b')); 
+	//a string data type that is not a numeric format. Therefore it returns true
+</script>
+</body>
+</html>
+

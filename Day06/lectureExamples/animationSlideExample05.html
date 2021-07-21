@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Animation Slide 5 Example</title>
+    <style type="text/css">
+        div#theDiv {
+            width: 250px;
+            height: 180px;
+            margin: 10px;
+            padding: 20px;
+            background: #b3c8d0;
+            border: 1px solid gray;
+            cursor: pointer;
+        }
+        p, span {
+            font-size: 16pt;
+        }
+        button {
+            margin: 5pt 5pt 0 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Using the slide functions</h1>
+    <p>Elements can also be shown and revealed via the slide functions. A common use case for this feature is when, for example, you have a message to display to the user that can be dismissed once read.</p>
+    <div id="theDiv" >Stuff in this div</div>
+    <button id="slideup">Slide Up</button>
+    <button id="slidedown">Slide Down</button>
+    <button id="toggle">Toggle Slide</button>
+
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+            $('#slideup').click(function() {
+                $('#theDiv').slideUp(1000);
+            });
+            $('#slidedown').click(function() {
+                $('#theDiv').slideDown('fast', 'linear');
+            });
+            $('#toggle').click(function() {
+                //all animate functions allow for a callback function. Here it is called onToggleFinished
+                $('#theDiv').slideToggle('slow', onToggleFinished);
+            });        
+        function onToggleFinished() {
+            // the value of this is set to the DOM element being animated
+        //    this.innerHTML="slideToggle complete on: " + this.id; //js method
+        $(this).html('slideToggle complete on:'+ $(this).attr('id')); //jq method
+        }
+
+    </script>
+
+
+</body>
+</html>

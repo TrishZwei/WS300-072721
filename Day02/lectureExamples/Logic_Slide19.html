@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 19 Switch Example</title>
+<style type="text/css">
+	body{
+    font-size: 20px;
+    font-family: Verdana;
+	}
+</style>
+</head>
+<body>
+    <h1>Slide 19 Switch Example</h1>
+    <div id="output"></div>
+
+<script type="text/javascript"> 
+	'use strict';
+	var ringBearer = 'Golum';
+	//ringBearer = 'Bilbo';
+	//ringBearer = 'Frodo'
+
+	switch (ringBearer){
+		case 'Golum':
+		ring='My precioussssssss...';
+		break; 
+
+		case 'Bilbo':
+		ring='What have I got in my pocket?';
+		break;
+		  
+		case 'Frodo':
+		ring='Aaaahhh get it off, get it off! No wait...';
+		break;
+	}
+
+	//alert(ring);
+
+	document.querySelector('#output').innerHTML = ringBearer+' says: "'+ring+'"';//the " is inside a string so the character will be displayed.
+</script>
+</body>
+</html>

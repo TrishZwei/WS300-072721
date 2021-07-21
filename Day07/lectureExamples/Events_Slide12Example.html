@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Events Slide 12 Example</title>
+    <style type="text/css">
+div {
+  width: 10px;
+  height: 10px;
+  background: orange;
+  float: left;
+}
+
+button {
+  top: 20px;
+  left: 20px;
+}
+
+#stop {
+  left: 100px;
+}
+ 
+    </style>
+</head>
+<body>
+    <h1>Two Timers - One Page</h1>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript">
+  var counter = 0;
+  function myFunc(){
+    counter++;
+    alert('I\'ve run ' + counter + ' times. I\'ll pop up again soon.');
+  }
+
+ function myFunc2(){
+    alert('I\'ll run only once.');
+  }
+
+  setInterval(myFunc, 5000);
+  setTimeout(myFunc2, 3000);
+
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array Slide 6 Example</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+
+<body>
+<div>Color choice: <span id="colors"></span></div>
+
+<script>
+// Create an array and assign it values.
+var colors; 
+colors = ['white', 'black', 'custom'];
+
+//set a new value for the third item in the array
+colors[2] = 'beige';
+
+var el = document.getElementById('colors');
+//change the number in the square brackets to see what happens.
+el.textContent = colors[2];
+
+/* 
+NOTE: textContent does not work in IE8 or earlier
+
+You can use innerHTML on line 7, but note the security issues on p228-231 of JavaScript & jQuery.
+el.textContent = colors[0];
+
+We don't have to worry about this too much with jQuery's .html() method. And especially if we validate any user input.
+
+*/
+</script>
+
+</body>
+</html>

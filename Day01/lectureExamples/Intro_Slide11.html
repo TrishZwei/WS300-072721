@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 11 Example</title>
+</head>
+<body>
+<h1>Intro Slide 11</h1>
+<div id="message"></div>
+<script type="text/javascript" >
+'use strict';
+//variable declarations have been added due to 'strict mode'
+
+const listArr = []; //empty array
+const x = 3;
+
+if(x < 6){
+//if x is less than 6
+
+var output = x*10;
+
+}else{
+	//if x is 6 or greater
+	output = 100 - (x*10);
+}
+
+listArr.push(output)
+
+document.getElementById('message').innerHTML = listArr.join(); 
+
+
+</script>
+</body>
+</html>

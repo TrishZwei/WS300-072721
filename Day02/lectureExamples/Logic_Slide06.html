@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 6 Example Assigning Variable Values</title>
+</head>
+<body>
+    <h1>Slide 6 Example Assigning Variable Values</h1>
+    <p>var a = 10;<br>
+		var b = 20;<br>
+		a = b;<br>
+		What is the value of a? What is the value of b? Take a guess, then click to find out.<br>
+		<input id="button" type="button" value="click Here" >
+    </p>
+    <div id="output"></div>
+<script type="text/javascript"> 
+	'use strict';
+	var a = 10;
+	var b = 20;
+	a = b;
+	var message ='Both a and b are '+ a +'. This is because at the end we say "a = b". This resets the value of a to the value of b which is '+b+'.';
+
+	document.querySelector('input').onclick = getAnswer;
+
+	function getAnswer(){
+	document.querySelector('#output').innerHTML = 'The value of a is: '+a+'. The value of b is '+b+'. '+ message;
+	}
+
+
+</script>
+</body>
+</html>

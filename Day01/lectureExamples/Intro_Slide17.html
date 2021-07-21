@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 17 Example</title>
+</head>
+<body>
+<h1>Intro Slide 17</h1>
+<div id="message"></div>
+<script type="text/javascript" >
+//naming things is hard
+'use strict';
+
+//hard to remember
+var pirate = 5;
+var ninja = 'Morgan';
+var wizard = ['Pieces of Eight', 'Walk the Plank', 'Arrrr, Matey.', 'Dead Men Tell No Tales.'];
+
+//easy to remember
+var pirates = 5;
+var pirateCaptain = 'Morgan';
+var pirateSayings = ['Pieces of Eight', 'Walk the Plank', 'Arrrr, Matey.', 'Dead Men Tell No Tales.'];
+
+//the + operator is concatenating (adding) text together. When the + is used it always adds, numbers or strings, defaulting to strings whenever a number AND a string are added together.
+
+document.getElementById('message').innerHTML = 'Captain '+pirateCaptain+' told '+pirates+' pirates on his crew "'+pirateSayings[3]+'"';
+
+
+</script>
+</body>
+</html>

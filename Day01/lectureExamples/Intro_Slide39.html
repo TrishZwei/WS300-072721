@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 39</title>
+	
+</head>
+<body>
+<p>See Console.</p>
+<script type="text/javascript">
+'use strict';
+
+let myBool = Boolean(10>9); //returns true. this is a Boolean object, do not use.
+console.log(myBool);
+
+myBool = 10<9; //returns false
+console.log(myBool);
+
+myBool = "false"; //returns true -- because it is a real value 
+console.log(myBool);
+
+myBool = 0;//returns 0
+console.log(myBool);
+
+myBool = '';//returns empty string
+console.log(myBool);
+//try setting myBool = 1;
+
+
+//if myBool is of a truthy value, it will return true. if not it will return false. empty string or 0 is a false value.
+
+if(myBool){
+
+	alert('true');
+
+}else{
+
+	alert('false');
+}
+
+</script>
+</body>
+</html>

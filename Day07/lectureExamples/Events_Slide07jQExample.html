@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Day 7 Slide 7 JS Example</title>
+    <style type="text/css">
+div {
+  width: 10px;
+  height: 10px;
+  background: orange;
+  float: left;
+}
+
+button {
+  top: 20px;
+  left: 20px;
+}
+
+#stop {
+  left: 100px;
+}
+ 
+    </style>
+</head>
+<body>
+    <h1>Attaching an Event with jQuery</h1>
+<button id="start">start</button>
+
+
+
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript">
+//select an item to recieve an event. 
+//Determine what type of event.
+//write code to happen when event happens.
+
+$('#start').click(function(e){
+  alert('event data:'+ e);
+  console.log(e); //lets us look at the stuff associated with the mouseEvent.
+  console.log(e.type);
+  //console.log(e.bubbles);
+
+});
+
+   </script>
+</body>
+</html>

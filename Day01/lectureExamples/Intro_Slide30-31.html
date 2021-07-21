@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 30</title>
+</head>
+<body>
+<h1>Testing Data Type</h1>
+<div id="myDiv"><p>See the console.</p></div>
+<script type="text/javascript">
+'use strict';
+//slide 30
+console.log(typeof  "John"); //returns string
+console.log(typeof 3.14) //returns number
+console.log(typeof false) //returns boolean 
+console.log(typeof [1,2,3,4]) //returns object
+console.log(typeof {name:'John', age:34}) //returns object	
+//slide 31
+var myString = 'My String',
+myNumber = 5,
+myBool = true,
+myArray = [1,3,5,7,11,13],
+myObj = {up:false, down:false, left:false, right:false },
+myElement = document.getElementById('myDiv');
+
+console.log(myString.constructor); //returns String
+console.log(myNumber.constructor); //returns Number
+console.log(myBool.constructor); //returns Boolean
+console.log(myArray.constructor); //returns Array
+console.log(myObj.constructor); //returns Object
+console.log(myElement.constructor); //returns HTMLDivObject
+</script>
+</body>
+</html>

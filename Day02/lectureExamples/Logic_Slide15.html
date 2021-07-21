@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 14 if, elseif, else Example</title>
+<style type="text/css">
+	body{
+    font-size: 20px;
+    font-family: Verdana;
+	}
+
+	div{
+		padding: 0.5em;
+
+	}
+	.true{
+		background-color: green;
+	}
+	.false{
+		background-color: red;
+	}
+
+</style>
+</head>
+<body>
+    <h1>Slide 15 if, elseif, else Example</h1>
+    <div id="output"></div>
+
+<script type="text/javascript"> 
+	'use strict';
+	var message = ''; //declared variable with no value until set below...
+
+	//declared variable with assigned value
+	var gandalfSaid= 'You shall not pass';
+
+	//update value by uncommenting line below:
+	//gandalfSaid = 'You cannot pass';
+
+	//update value by uncommenting this line below as well:
+	//gandalfSaid = 'Something else.';
+
+	if (gandalfSaid == 'You cannot pass'){
+	    media = 'book';
+	    }else if(gandalfSaid == 'You shall not pass'){
+	    		media = 'movie';  
+	    }else{
+	    		media = 'none';
+	    }
+
+	//alert(media);
+	//end direct code example//
+
+
+	//additional conditional statements to make this script perhaps a little more useful...    
+	if(media == 'book'){
+		message = 'You read the '+media+'!';
+	}else if( media == 'movie'){
+		message = 'You saw the '+media+'!';
+	}else{
+		message = 'It wasn\'t LOTR.';
+	}
+
+
+	document.querySelector('#output').innerHTML = message;
+</script>
+</body>
+</html>

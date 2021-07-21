@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Date Slide 4</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="message">Look at the code and use the console to retrieve the value of the variables listed. Remember the values are generated when the page is loaded and do not get reset.</div>
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+/*date creation syntax:
+ new Date();
+ new Date(milliseconds);
+ new Date(dateString);
+ new Date(year, month, day, hours, seconds, milliseconds);
+*/
+
+//working examples:
+var d1 = new Date();
+var d2 = new Date(86400000); //milliseconds
+var d3 = new Date("October 13, 2014 11:13:00"); //dateString
+var d4 = new Date(99,5,24,11,33,30,0);//Y,M,D,h,m,s,ms
+console.log(d1, d2, d3, d4);
+
+</script>
+
+</body>
+</html>

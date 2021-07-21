@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EventsSlide 10 JS Example</title>
+    <style type="text/css">
+div {
+  width: 10px;
+  height: 10px;
+  background: orange;
+  float: left;
+}
+
+button {
+  top: 20px;
+  left: 20px;
+}
+
+#stop {
+  left: 100px;
+}
+ 
+    </style>
+</head>
+<body>
+    <h1>Attaching Events with jQuery</h1>
+<button id="start">start</button>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript">
+//select an item to recieve an event. 
+//Determine what type of event.
+//write code to happen when event happens.
+
+$("#start").on('click', function(e) {
+//e stands for event data which will let us capture information about the event (eg: which item within #theDiv was pressed);
+    console.log(e.target); 
+//this tells me which item in the div was clicked.
+    console.log(e.pageX, e.pageY); 
+//this tells me where on the page inside the div it was clicked
+    console.log(this); 
+  //this is the item that called the event
+ });
+   </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 9 Example</title>
+</head>
+<body>
+<h1>Intro Slide 9</h1>
+<div id="message"></div>
+<script type="text/javascript" >
+//this example has been updated from the slide. We are now using strict and the declaration of let and const for examples of each.
+'use strict';
+
+function myFunc(){
+	//let allows us to redeclare the value of this variable within the block level scope
+	let myVar = 'I\'ll just say hello world!';
+
+	//const ensures we do not redeclare the value of myArray later in our script, but DOES allow us to mutate the values within the array. 
+	const myArray = ["one", 'two', 3];
+	
+	//innerHTML is a property of our div element which has been selected by the getElementById method used on the document object.
+	document.getElementById('message').innerHTML = myVar+' and '+myArray.join();
+}	
+
+myFunc();
+
+</script>
+</body>
+</html>

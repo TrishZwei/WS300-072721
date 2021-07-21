@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array Slide 11 Example</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+<body>
+<p>Look in the console. Then refresh the page. You'll see the proper results.</p>
+<!-- note no jquery! -->
+<script>
+var appleDipList = ['cream cheese', 'apples', 'vanilla extract', 'brown sugar', 'apples']; 
+
+console.log('The current value of appleDipList is: ', appleDipList); //will list the whole of what is currently in the array.
+
+var theIndex = appleDipList.indexOf('apples');
+console.log(theIndex, ' is the index of the array that holds the word: apples counting from the front.');
+
+var theIndex2 = appleDipList.lastIndexOf('apples');
+console.log(theIndex2, ' is the index of the array that holds the word: apples counting from the end.');
+
+var howMany = appleDipList.length; //how many items are in the array?
+console.log(howMany, ' is the number of items in our appleDipList');
+</script>
+
+</body>
+</html>

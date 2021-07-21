@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Array.some()</h2>
+
+<p>The some() method checks to see if any of the array values pass a test. If any one value is true, the whole thing passes</p>
+
+<p id="demo"></p>
+<p id="demo2"></p>
+
+
+<script>
+var numbers = [45, 4, 9, 16, 25];
+var numbers2 = [5, 4, 9, 6, 2];
+
+var over18 = numbers.some(myFunction);
+var over18Test2 = numbers2.some(myFunction);
+
+document.getElementById("demo").innerHTML = "Over 18 is " + over18 + '. There is at least one value that is greater than 18.';
+document.getElementById("demo2").innerHTML = "Second set of numbers is " + over18Test2 + ' because all values are less than 18';
+
+
+
+function myFunction(value, index, array) {
+  return value > 18;
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 7 Example Addition and Concatenation</title>
+<style type="text/css">
+	
+
+
+</style>
+</head>
+<body>
+    <h1>Slide 7 Example Addition and Concatenation</h1>
+    <p>var a = 10; <em>(note: this is a number data type)</em><br>
+		var b = '20'; <em>(note: this is a string data type)</em><br>
+		a = b;<br>
+		c = a+b;<br> 
+		What is the value of c? Take a guess, then click to find out.<br>
+		<input id="button" type="button" value="click Here" >
+    </p>
+    <div id="output"></div>
+<script type="text/javascript"> 
+	'use strict';
+	var a = 10;
+	var b = '20';
+	var c = a+b;
+	var message ='a is '+ a +' and b is '+b+'. c is: '+c+'. That\'s odd. Shouldn\'t it be '+(a+Number(b))+'?<br>The reason it is not is because JavaScript favors concatenation over addition. In order to make a+b=30 we have to convert b to a number data type. We can do that with the Number() constructor as seen in the code in this example.';
+
+	document.querySelector('input').onclick = getAnswer;
+
+	function getAnswer(){
+		document.querySelector('#output').innerHTML = message;
+	}
+
+
+</script>
+</body>
+</html>

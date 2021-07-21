@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title>Fade In/Out Pure JS</title>
+
+	<style type="text/css">
+	#button{
+		width: 300px;
+		background-color: gray;
+		border-radius: 5px;
+		font-size: 20px;
+		padding: 0.5em;
+		text-align: center;
+		color: white;
+	}
+	span{
+		text-decoration: underline;
+		color:blue;
+
+	}
+
+	</style>
+</head>
+<body>
+<h1>Fade In/Out Pure JS</h1>
+<p>click the button to fade it out. <span>Click here</span> to get it back.</p>
+<div id="button">A Button</div>
+
+<script type="text/javascript">
+var theButton = document.getElementById('button');
+var fadeTheObject;
+
+function fadeOutAnimation(){
+theOpacity = theButton.style.opacity;
+
+if(theOpacity>"0"){
+	theButton.style.opacity -= 0.05;
+	}else{
+	clearInterval(fadeTheObject); //clears the fadeTheSlide interval so it does not keep trying to apply opacity to the object when it is already invisible.
+	theButton.style.display="none"; 
+	} //end if/else opacity
+} //end fadeAnimation
+
+function fadeButton(){
+theButton.style.opacity=1;
+fadeOutAnimation(theButton);
+fadeTheObject = setInterval(fadeOutAnimation, 50);
+}
+
+function fadeInAnimation(){
+theOpacity = theButton.style.opacity;
+console.log(theOpacity);
+if(theOpacity< 0.05){
+	theButton.style.display="block"; 
+}
+if(theOpacity<1){
+	theButton.style.opacity = Number(theOpacity)+0.05;
+	}else{
+	clearInterval(fadeTheObject); //clears the fadeTheSlide interval so it does not keep trying to apply opacity to the object when it is already invisible.
+	} //end if/else opacity
+} //end fadeAnimation
+
+
+theButton.onclick = fadeButton;
+document.querySelector('span').onclick = function() {
+fadeInAnimation(theButton);
+fadeTheObject = setInterval(fadeInAnimation, 50);
+
+}
+
+</script>
+</body>
+</html>

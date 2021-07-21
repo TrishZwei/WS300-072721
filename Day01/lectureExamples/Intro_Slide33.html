@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro Slide 33</title>
+</head>
+<body>
+<h1>Loose Data types</h1>
+<div id="myDiv"><p>See the console.</p></div>
+<script type="text/javascript">
+	'use strict';
+	//changed from var on slide to let
+	let myVariable = '5';
+	//is a string. If I use + I concatenate
+	console.log('please note the color of this item in the console ', myVariable + 1)
+	/*myVariable = Number(myVariable);
+	The above example is a bad practice. Use any of the following:
+	myVariable = myVariable - 0;
+	myVariable = myVariable * 1;
+	myVariable -= 0;
+	myVariable *= 1; //this always works, even when string is a decimal
+	myVariable = Number.parseInt(myVariable) //converts to whole number only, but is great for other reasons.
+	*/
+	myVariable *= 1;
+	console.log('please note the color of this item in the console ', myVariable + 1)
+	//it is now a number. If I use + I add
+
+	myVariable = [myVariable]; 
+		console.log('please note the array ', myVariable); //do you know why this has a value of 5?
+	//it is now an array. If I use + I get an error which is why this is commented out.
+	//console.log( myVariable + 1)
+
+	myVariable = myVariable[0]-=0
+	//it is once again a number
+	console.log('please note the color of this item in the console ', myVariable + 1)
+
+</script>
+</body>
+</html>
+

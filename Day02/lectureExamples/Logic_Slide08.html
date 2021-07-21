@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 8 Example Minus vs Dash</title>
+</head>
+<body>
+    <h1>Slide 8 Example Minus vs. Dash</h1>
+    <p>var a = 10; <em>(note: this is a number data type)</em><br>
+		var b = '20'; <em>(note: this is a string data type)</em><br>
+		a = b;<br>
+		c = b-a;<br> 
+		What is the value of c? Take a guess, then click to find out.<br>
+		<input id="button" type="button" value="click Here" >
+    </p>
+    <div id="output"></div>
+<script type="text/javascript"> 
+	'use strict';
+	var a = 10;
+	var b = '20';
+	var c = b-a;
+	var message ='a is '+ a +' and b is '+b+'. c is: '+c+'. Why?<br>The reason it works is because JavaScript always sees the - as a minus and never as a dash unless it is encased in a string. It works the same for the other math operators. This is why we need to use myElement.style.backgroundColor = \'#fff\' vs. myElement.style.cssText = \'background-color: #fff;\'';
+
+	document.querySelector('input').onclick = getAnswer;
+
+	function getAnswer(){
+		document.querySelector('#output').innerHTML = message;
+	}
+
+
+</script>
+</body>
+</html>

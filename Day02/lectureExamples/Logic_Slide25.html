@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Slide 25 For Loop Example</title>
+<style type="text/css">
+	body{
+    font-size: 20px;
+    font-family: Verdana;
+	}
+</style>
+</head>
+<body>
+    <h1>Slide 24 For Loop Example</h1>
+    <div id="output"></div>
+
+<script type="text/javascript"> 
+var message = '';
+
+//keyword (initializer; test; counter)
+for (var i = 0; i <10; i++){
+	//the += operator will concatenate to message each time the code runs through
+	message += 'Hello '+i+'<br>'; //code block or repeated instruction
+	//i is the current value of i (0 - 9 as it stops when i reaches 10)
+}
+
+document.querySelector('#output').innerHTML =  message;
+</script>
+</body>
+</html>

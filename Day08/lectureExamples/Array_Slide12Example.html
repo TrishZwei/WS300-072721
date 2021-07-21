@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array Slide 12 Example</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+
+<body>
+<p>See the results of our lines of code below:</p>
+<p id="p1"></p>
+<p id="p2"></p>
+<p id="p3"></p>
+<p id="p4"></p>
+<p id="p5"></p>
+<p id="p6"></p>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+var appleDipList = ['cream cheese', 'apples', 'vanilla extract', 'brown sugar', 'apples'];
+
+console.log('The current value of appleDipList is: ', appleDipList); //will list the whole of what is currently in the array.
+var message1 = appleDipList.valueOf(); //comma separated values
+var message2 = appleDipList.toString(); //csv
+var message3 = appleDipList.join(' | '); //allows for other items between
+$('#p1').text(message1);
+$('#p2').text(message2);
+$('#p3').text(message3);
+
+var message4 = appleDipList.sort().join(', ');//chaining in effect here.
+$('#p4').text(message4);
+
+var message5 = appleDipList.reverse().join(', ');
+//.sort changed the original array's order so since we called reverse now, we are reversing the order of array in reverse alphabetical order. If we'd not sorted the array first it would just be in reverse order, no sort.
+$('#p5').text(message5);
+
+delete appleDipList[4];
+//delete gets rid of the value, but not the position as is evidenced by the , at the start of the list.
+
+var message6 = appleDipList.reverse().join(', ');
+//.reverse changed the original array's order so since we called reverse now, we are reversing the order of array back to alphabetical order -- after we deleted the last item in the array (but did not remove the index/position)
+$('#p6').text(message6);
+
+
+
+
+</script>
+
+</body>
+</html>

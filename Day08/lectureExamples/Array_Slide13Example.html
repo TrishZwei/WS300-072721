@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array Slide 13 Example</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+</style>
+</head>
+
+<body>
+<p>Look in the console. Then refresh the page. You'll see the proper results.</p>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+//an empty array for a set of numbers:
+numArray = []; 
+
+
+//a for loop to randomly generate some numbers to put into our array for the numeric sort...
+for (var i = 0; i < 10; i++) {
+	numArray.push(randnum(1,100));
+}
+
+console.log(numArray);
+
+var alphaSort = numArray.sort(); //looks at the numbers as if they were strings...
+console.log(alphaSort);
+
+var numSort = numArray.sort(function(a,b){ return a-b}); 
+//this is some kinda magic...
+//this page has the formula for both ascending and descending numeric sort:
+//http://javascript.about.com/library/blsort.htm
+//this page has a good explanation:
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+
+console.log(numSort);
+
+//random number generator:
+    function randnum(min,max){
+        return Math.round(Math.random()* (max - min))+min            
+    }//end randnum
+
+
+</script>
+
+</body>
+</html>

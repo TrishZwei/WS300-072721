@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Array.forEach()</h2>
+
+<p>Calls a function once for each array element.</p>
+
+<p id="demo"></p>
+
+<script>
+var txt = "";
+var numbers = [45, 4, 9, 16, 25];
+
+console.log(numbers.name); 
+//shows undefined as there is no name property to the numbers array object. We can just add one... hehehe
+
+numbers.name = 'numbers';
+
+//The forEach() method calls a function (a callback function) once for each array element.
+
+numbers.forEach(myFunction);
+document.getElementById("demo").innerHTML = txt;
+
+function myFunction(value, index, array) {
+	//array.name works here because our array has a name assigned to it. otherwise it would output undefined.
+  txt += array.name + ' ['+index+'] '+ value + "<br>";
+}
+</script>
+
+</body>
+</html>
