@@ -1,0 +1,126 @@
+<html>
+<head>
+	<title>JS Clock</title>
+	<style type="text/css">
+		body{
+			background-color: black;
+			margin: 0 auto;
+			text-align: center;
+		}
+		#clock{
+			margin: 10px auto; 
+		}
+	</style>
+</head>
+<body>
+<div id="clock">
+	<img id="hour1" src="images/0.jpg"><img id="hour2" src="images/0.jpg"><img src="images/colon.jpg"><img id="minute1" src="images/0.jpg"><img id="minute2" src="images/0.jpg"><img id="meridiem" src="images/A.jpg">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+//expected way: 34 lines of code
+function clock(){
+	var today = new Date();
+	//today.setHours(20)
+	//clock stuff: ( as a reminder, the commented lines and empty lines do not count...)
+	var currentHour = today.getHours(); //0-23
+	var currentMins = today.getMinutes();
+	var amPm = '';
+	if(currentHour < 12){
+		amPm = 'A';
+	}else{
+		amPm = 'P';
+	}
+	if(currentHour > 11){
+		currentHour-=12;
+	}
+	if (currentHour == 0) {
+		currentHour = 12;
+	}
+
+	if(currentHour < 10){
+		currentHour = '0'+currentHour;
+	}
+
+	if(currentMins < 10){
+		currentMins = '0'+currentMins;
+	}
+
+	currentHour = (''+currentHour).split(''); //should be an array of two items
+	currentMins = (''+currentMins).split('');//the empty '' makes sure that it is converted to a string without the added complexity of the String() object.
+
+	$('#hour1').attr('src', 'images/'+currentHour[0] +'.jpg')
+	$('#hour2').attr('src', 'images/'+currentHour[1] +'.jpg')
+	$('#minute1').attr('src', 'images/'+currentMins[0] +'.jpg')
+	$('#minute2').attr('src', 'images/'+currentMins[1] +'.jpg')
+	$('#meridiem').attr('src', 'images/'+amPm+'.jpg') 
+}
+	clock(); //runs immediately!
+	setInterval(clock, 1000); //waits to be called
+
+/*
+//this uses 30 lines of code	
+(function clock(){
+	var today = new Date();
+	//today.setHours(0); //clock stuff:
+	var currentHour = today.getHours(); //0-23
+	var currentMins = today.getMinutes();
+	var amPm = '';
+	if(currentHour < 12){
+		amPm = 'A';
+	}else{
+		amPm = 'P';
+	}
+	if(currentHour > 11){
+		currentHour-=12;
+	}
+	if(currentHour == 0){
+		currentHour = 12;
+	}
+	if(currentHour < 10){
+		currentHour = '0'+currentHour;
+	}
+	if(currentMins < 10){
+		currentMins = '0'+currentMins;
+	}
+	time = currentHour+':'+currentMins;
+$('#hour1').attr('src', 'images/'+time.charAt(0) +'.jpg')
+$('#hour2').attr('src', 'images/'+time.charAt(1) +'.jpg')
+$('#minute1').attr('src', 'images/'+time.charAt(3) +'.jpg')
+$('#minute2').attr('src', 'images/'+time.charAt(4) +'.jpg')
+$('#meridiem').attr('src', 'images/'+amPm+'.jpg') 
+ setTimeout(clock, 30000);
+})(); //self invoking function: 30 lines
+//clock(); //31 without self invoking function
+*/
+
+/*
+//super lean: 17 lines of code
+(function clock(){
+	var today = new Date();
+	var currentHour = today.getHours(); //0-23
+	var currentMins = today.getMinutes();
+	var ampm = hours<12 ? 'A' : 'P';
+	//if statemens can be collapsed into a single line without {} IF there is only one statement/command and no else.
+	//Though I mentioned it once in class, I said I don't teach you this in class for the same reason that you've had the ; at the last line of your CSS declaration set taught to you. It's easier to just do that rather than having to remember. This is why I don't expect it of you.
+	if(currentHour > 11) currentHour-=12;
+	if(currentHour == 0)currentHour = 12;
+	if(currentHour < 10)currentHour = '0'+currentHour;
+	if(currentMins < 10)currentMins = '0'+currentMins;
+	time = currentHour+':'+currentMins; //could be done without the colon inside the string, but needs to be concatenated and not added in order to make it a string. 
+	//The colon makes it line up with the images and if you read in console during testing, reads like time on a clock.
+$('#hour1').attr('src', 'images/'+time.charAt(0) +'.jpg')
+$('#hour2').attr('src', 'images/'+time.charAt(1) +'.jpg')
+$('#minute1').attr('src', 'images/'+time.charAt(3) +'.jpg')
+$('#minute2').attr('src', 'images/'+time.charAt(4) +'.jpg')
+$('#meridiem').attr('src', 'images/'+amPm+'.jpg') 
+ setTimeout(clock, 30000);
+})();
+
+//looking at the above code makes me wonder if I can reduce this in lines by using an each function for the set of images to set their values. I'd have to test that out. It may work, but may be more lines of code than necessary. The above is very straightforward - which is my coding style.
+
+*/
+</script>
+</body>
+</html>
