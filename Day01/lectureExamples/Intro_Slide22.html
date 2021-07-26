@@ -21,10 +21,10 @@ Earlier I mentioned that certain types of data weren’t objects, but primitive 
 var theNum = 5;
 var message = "Hello World";
 var upMessage = message.toUpperCase();
-//if line 25 is uncommented the following error will appear:
+//if line 26 is uncommented the following error will appear:
 //Uncaught TypeError: theNum.toUpperCase is not a function
 //var theNum = theNum.toUpperCase();
-//this is because a number data type does not have an upper case method. 
+//this is because a number data type does not have an uppercase method. 
 
 var theNum = theNum.toString().toUpperCase();
 //while this code works, because there is no capital to the character of 5, it makes no change. But it works because the number 5 is now a string data type. String Methods work only on strings. 
