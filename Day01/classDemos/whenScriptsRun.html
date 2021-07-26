@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>When Scripts Run</title>
+<script type="text/javascript">
+	alert('I\'m in the head');	
+
+
+</script>
+</head>
+<body>
+<div>Div 1 Yay!</div>
+<script type="text/javascript">
+	alert('I\'m in the body');
+</script>
+<div>Div 2</div>
+<script type="text/javascript">
+var myDiv = document.getElementsByTagName('div'); //this grabs all the divs
+alert(myDiv[1].innerHTML); //this gets the second div's text
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Element Properties</title>
+	<style type="text/css">
+		body{
+			font-size: 16px;
+			font-family: Verdana
+		}
+	</style>
+</head>
+<body>
+<div id="counter-div">0</div>
+<input type="button" id="my-btn" value="+1">
+
+<script type="text/javascript">
+	'use strict';
+//counter made with JS
+var counter = 0; //keeps track of how many times we have clicked the button
+var counterDiv = document.getElementById('counter-div');
+	counterDiv.innerHTML = counter;
+
+function clickButton(){
+	console.log('click');
+	//all the ways you can add 1
+// counter = counter+1;
+//	counter+=1;
+	counter++;
+ 	counterDiv.innerHTML = counter;
+
+if(counter<5){
+	counterDiv.style.color = 'green';
+}else{
+	counterDiv.style.color = 'red';
+}
+
+if(counter == 7 || counter == 10){
+	counterDiv.style.color = 'purple';
+}
+
+if(isOdd(counter)){
+	counterDiv.style.backgroundColor = 'cornflowerblue';
+}else{
+	counterDiv.style.backgroundColor = '#ccc';
+}
+
+if(counter > 15){
+	counterDiv.style.fontSize = counter+'px';
+}
+
+
+}//end function
+
+function isOdd(num){
+
+	if(num%2 == 1){
+		return true;
+	}else{
+		return false;
+	}
+//returns true if odd 
+//returns false if even
+}
+
+
+//EVENT LISTENER
+var myBtn = document.getElementById('my-btn');
+//onclick of the button, run the clickButton function
+myBtn.onclick = clickButton;
+
+</script>
+
+</body>
+</html>

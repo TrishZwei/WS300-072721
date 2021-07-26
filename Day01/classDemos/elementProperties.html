@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Element Properties</title>
+</head>
+<body>
+<div id="my-div">This is a div.</div>
+<input type="button" id="my-btn" value="Click Here">
+<!-- this is a bad practice: <input type="button" id="my-btn" value="Click Here" onclick="clickButton()"> -->
+<script type="text/javascript">
+	'use strict';
+var myDiv = document.getElementById('my-div');
+myDiv.style.cssText='padding:10px; background-color:#ccc; position: absolute; top:100px; left:100px; border: 1px solid black';
+//var currentColor = 'grey';
+var currentColor = myDiv.style.backgroundColor;
+
+function clickButton(){
+//alert('click');
+if(currentColor == 'rgb(204, 204, 204)'){
+myDiv.style.backgroundColor = 'purple';
+myDiv.style.color = 'white';
+myDiv.style.border = 'none';
+
+}else{
+myDiv.style.backgroundColor = '#ccc';
+myDiv.style.color = 'black';
+myDiv.style.border = '1px solid black';
+}
+
+currentColor = myDiv.style.backgroundColor;
+}
+
+//EVENT LISTENER
+var myBtn = document.getElementById('myBtn');
+//onclick of the button, run the clickButton function
+myBtn.onclick = clickButton;
+
+</script>
+
+</body>
+</html>

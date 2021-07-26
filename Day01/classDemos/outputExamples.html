@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Output Examples</title>
+</head>
+<body>
+<div id="message">message goes here.</div>
+<div>Today is:
+<script type="text/javascript">
+	document.write(Date());
+</script>
+</div>
+<script type="text/javascript">
+	'use strict';
+alert('hi'); //alert stops everything from running....
+document.querySelector('#message').innerHTML = "Some String";
+
+window.onresize = function(){
+	var winWidth = window.innerWidth; 
+	var winHeight = window.innerHeight;
+	console.log('width: '+winWidth);
+	console.log('height: '+winHeight);
+	document.querySelector('#message').innerHTML = "Width: "+winWidth+" height: "+winHeight;
+
+}
+
+</script>
+
+</body>
+</html>
