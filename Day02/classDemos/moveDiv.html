@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Move Div</title>
+	<style type="text/css">
+		#wrapper{
+			border:1px solid black;
+			position: absolute;
+			top:10px;
+			left: 10px;
+			bottom: 10px;
+			right: 10px;
+			background-color: #add;
+		}	
+
+		#box{
+			height: 50px;
+			width: 50px;
+			background-color: rebeccapurple;
+			position: absolute;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<button id="moveUp">Move Up</button>
+		<button id="moveDown">Move Down</button>
+		<button id="moveLeft">Move Left</button>
+		<button id="moveRight">Move Right</button>
+		<div id="box"></div>
+
+	</div>
+<script type="text/javascript">
+	var box = document.getElementById('box');
+	box.style.top = '115px';
+	box.style.left = '100px';
+
+	//movement functions:
+	function moveUp(){
+			//alert('moveUp');
+	var theTop = parseInt(box.style.top);
+	box.style.top = (theTop-10)+'px';
+
+	}
+
+	function moveLeft(){
+	 var theLeft = parseInt(box.style.left);
+	 box.style.left = (theLeft-10)+'px';
+	}
+
+	function moveDown(){
+			//alert('moveUp');
+	var theTop = parseInt(box.style.top);
+	box.style.top = (theTop+10)+'px';
+
+	}
+
+	function moveRight(){
+	 var theLeft = parseInt(box.style.left);
+	 box.style.left = (theLeft+10)+'px';
+	}
+
+//event listeners:
+document.getElementById('moveUp').onclick = moveUp;
+document.getElementById('moveLeft').onclick = moveLeft;
+document.getElementById('moveDown').onclick = moveDown;
+document.getElementById('moveRight').onclick = moveRight;
+
+
+</script>
+
+</body>
+</html>

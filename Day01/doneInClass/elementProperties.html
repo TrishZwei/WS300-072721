@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Element Properties</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+	</style>
+</head>
+<body>
+	<div id="my-div">This is a div.</div>
+	<input type="button" id="my-btn" value="Click Here">
+	<!-- <input type="button" id="my-btn" value="Click Here" onclick="clickButton()"> this is a bad practice, we can do better -->
+
+	<script type="text/javascript">
+		'use strict';
+		//let variables need to be at the top of the script
+		let myBtn = document.querySelector('#my-btn'); //Modern JS 
+		const myDiv = document.getElementById('my-div'); //JS 1
+		myDiv.style.backgroundColor = '#ccc'; 
+		//backgroundColor instead of background-color
+		//add padding:
+		myDiv.style.padding = "10px";
+		//single-line style properties
+
+		myDiv.style.cssText = "padding: 5px; background-color: green; color: white; position:absolute; top:100px; left:100px; border: 1px solid black;";
+
+//functions
+		function clickButton(){
+			//alert('click');
+			var currentColor = myDiv.style.backgroundColor;
+			//alert(currentColor);
+			if(currentColor == 'green'){
+				myDiv.style.backgroundColor = 'purple';
+			}else{
+				myDiv.style.backgroundColor = 'green';
+			}
+
+
+		}
+
+//event listeners
+		myBtn.onclick = clickButton; //no parenthesis!
+
+
+
+	</script>
+
+</body>
+</html>

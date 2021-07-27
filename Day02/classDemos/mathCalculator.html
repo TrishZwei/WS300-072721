@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Calculator</title>
+	<style type="text/css">
+		body{
+			font-size: 16;
+			font-family: Verdana;
+		}	
+	</style>
+</head>
+<body>
+	<h1>Calculator</h1>
+	<input type="text" id="value1" value="0"><br>
+	<select id="Op">
+			<option value="">Please Choose</option>
+			<option value="add">Plus</option>
+			<option value="sub">Minus</option>
+			<option value="mul">Times</option>
+			<option value="div">Divided by</option>
+	</select><br>
+	<input type="text" id="value2" value="0"><br>
+	<input type="button" id="doMath" value="Do Math">
+	<div id="total">Total: <span>0</span></div>
+
+	<script type="text/javascript">
+	//global variables
+	const doMathBtn = document.querySelector('#doMath');
+
+
+		function doMath(){
+			let value1 = document.getElementById('value1').value;
+			let value2 = document.getElementById('value2').value;
+			let op = document.getElementById('Op').value;
+//			console.log(value1, value2, op);
+
+			let total = 0;
+
+			if(isNaN(value1) || isNaN(value2)){
+				//we won't be able to do math. tell the user
+				alert('You need to input a number');
+				return false; //stops the program from going further.
+			}else{
+				//if both values are a proper number.... 
+				if(op == ''){
+					//user needs to select an operator
+					alert('You need to select an operator');
+					return false;
+				}else if(op == 'add'){
+					total = (value1 * 1) + (value2 * 1);
+				}else if(op == 'sub'){
+					total = value1 - value2;
+				}else if(op == 'mul'){
+				    total = value1 * value2;	
+				}else if(op == 'div'){
+					total = value1 / value2;
+				}else{
+					//default
+					total = 'Shenannagans!';
+				}
+
+
+			} //end if NaN
+
+			document.querySelector('#total span').textContent = total;
+
+		}
+
+		//event listeners
+		doMathBtn.onclick = doMath;
+
+
+
+
+
+
+	</script>
+</body>
+</html>

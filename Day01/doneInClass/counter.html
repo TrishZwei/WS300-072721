@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Counter</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana ;
+		}
+
+		#my-counter{
+			font-size: .7em;
+		}
+	</style>
+</head>
+<body>
+	<div id="my-counter">0</div>
+	<button id="my-btn">+1</button>
+
+	<script type="text/javascript">
+		'use strict';
+		let myBtn = document.querySelector('#my-btn');
+		//counter made with JS
+		let count = 0; //keeps track of how many times we have clicked the button
+		let counter = document.querySelector('#my-counter');
+		console.log(counter)
+
+		function clickButton(){
+			//alert('click');
+			//all the ways to add one:
+//			count = count+1; //long hand
+//			count += 1; //mid
+			count++; //adds one
+			counter.textContent = count;
+
+
+			if(count < 5){
+				counter.style.color = 'green';
+			}else{
+				counter.style.color = 'red';
+			}
+	
+	//order matters: the purple overwrites the red color
+
+			if(count == 7 || count == 10){
+				counter.style.color = 'purple';
+			}
+		
+		 if(isOdd(count)){
+		 	counter.style.backgroundColor = 'cornflowerblue';
+		 }else{
+		 	counter.style.backgroundColor = 'gray';
+		 }
+
+		 if(count > 15){
+		 	counter.style.fontSize = (count * .5) +'em';
+		 }
+
+		}
+
+//this function checks for an odd value
+
+		function isOdd(num){
+			//a parameter is a local variable
+
+			if(num % 2 == 1){
+				return true; //odd num
+			}else{
+				return false; //even num
+			}
+		}
+
+
+
+		myBtn.addEventListener('click', clickButton);
+
+
+	</script>
+</body>
+</html>

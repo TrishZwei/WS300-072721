@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>When Scripts Run</title>
+	<script>
+		//alert is a method of the window object
+		alert('I am in the head');
+	</script>
+</head>
+<body>
+<div>Div 1 Yay!</div>
+<script type="text/javascript">
+	alert('I\'m in the body');
+	//"I'm in the body"
+
+</script>
+<div>Div 2!</div>
+<script type="text/javascript">
+	let myDiv = document.getElementsByTagName('div'); 
+	console.log(myDiv);
+	alert(myDiv[1].innerHTML); //text from second div
+</script>
+</body>
+</html>

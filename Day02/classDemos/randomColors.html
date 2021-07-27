@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Element Properties</title>
+</head>
+<body>
+	<div id="my-div">This is a Div.</div>
+	<input type="button" id="my-btn" value="Click Here">
+	<script type="text/javascript">
+		var myDiv = document.getElementById('my-div');
+		//individual styling examples
+		//myDiv.style.backgroundColor = 'grey'; 
+		//myDiv.style.color = 'white';
+
+		myDiv.style.cssText = 'background-color:grey; color:white; padding:10px; position: absolute; top:50px; border:1px solid black; width:100px; height:100px;';
+
+		function clickButton(){
+				//alert(myDiv.style.backgroundColor);
+				var myColor = genHex();
+				myDiv.style.backgroundColor = myColor;
+				myDiv.textContent = myColor; 
+
+			
+		}
+//default values is 1 - 100
+		function getRandInt(min = 1, max = 100){
+
+			return Math.floor(Math.random() * (max - min + 1)) + min	
+
+		}
+
+ 		function genHex(){
+
+ 			var hexValues = '0123456789ABCDEF'; //each hex character may be one of these values
+ 			hexValues = hexValues.split(''); //create an array item for each character - ['0','1'.... etc]
+ 			//console.log(hexValues);
+
+ 			var hexColor = '#';
+
+ 			for (var i = 0; i<6; i++){
+ 				//run 6 times 0 - 5
+ 				var newVal = hexValues[getRandInt(0,15)]
+ 				hexColor += newVal; //adds newVal to current value of hexColor.
+ 				console.log(hexColor);
+
+ 			}
+
+ 			return hexColor;
+
+
+
+
+ 		}
+
+
+
+
+
+
+		//event listener
+		var banana = document.querySelector('#my-btn');
+		banana.onclick = clickButton;
+
+		// document.body.onclick = function(e){
+		// 	alert(e.target);
+		// 	e.stopPropagation();
+		// }
+
+
+
+
+	</script>
+</body>
+</html>

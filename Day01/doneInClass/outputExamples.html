@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Output Examples</title>
+	<style type="text/css">
+		#message-output{
+		font-family: Verdana;
+		}
+	</style>
+</head>
+<body>
+	<div id="message-output">
+		message goes here.
+	</div>
+	<div>
+		Today is:
+		<script type="text/javascript">
+			//document.write is a bad practice, avoid this when you can
+			document.write( Date() );
+		</script>
+	</div>
+	<script type="text/javascript">
+		'use strict'; //use keywords in front of variable declarations
+		let myVar = 'hi';
+
+		//innerHTML allows for tags, textContent does not.
+		document.querySelector('#message-output').innerHTML = '<b>Some String</b>';
+		window.onresize = function(){
+			let winWidth = window.innerWidth;
+			let winHeight = window.innerHeight;
+			console.log('width: '+winWidth); //concatenating as 1 arg
+			console.log('height: ', winHeight); //two arguments
+			document.querySelector('#message-output').textContent = "Width: "+winWidth+" height: "+winHeight;
+
+		}
+
+
+
+
+	</script>
+</body>
+</html>
