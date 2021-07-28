@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Move Div</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+			font-size: 16px;			
+		}
+		.wrapper{
+			border:1px solid black;
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			bottom: 10px;
+			right: 10px;
+			background-color: #add;			
+		}
+
+		.box{
+			width: 75px;
+			height: 50px;
+			background-color: rebeccapurple;
+			position: absolute;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<button class="move-up">Move Up</button>
+		<button class="move-down">Move Down</button>
+		<button class="move-left">Move Left</button>
+		<button class="move-right">Move Right</button>
+		<div class="box"></div>
+	</div>
+	<script type="text/javascript">
+		'use strict';
+	//varibles
+	//html collection that gets all the items of class=box: document.querySelectorAll('.box')
+	//needs square bracket index value to grab ONE of them [0];
+	let box = document.querySelector('.box');
+	box.style.top = '115px';
+	box.style.left = '100px';
+	let moveValue = 7;
+	let boxWidth = 75;
+
+	//functions
+	function moveUp(){
+		//grabs the top value of the style of the box and removes the px. parseInt makes integers out of numeric format
+		let theTop = parseInt(box.style.top); 
+		if(theTop-moveValue < 0 ){
+			//gone past top of page
+			box.style.top = '0px';
+		}else{
+		box.style.top = (theTop-moveValue)+'px';			
+		}
+
+	}
+
+var globalVar = "Everyone can use me."
+	//write moveDown
+	function moveDown(){
+		//grabs the top value of the style of the box and removes the px. parseInt makes integers out of numeric format
+		let theTop = parseInt(box.style.top); 
+		let wrapHeight = document.querySelector('.wrapper').clientHeight; //gets height of div
+		console.log(wrapHeight);
+		let maxTop = wrapHeight - boxWidth; //height of box is 50px
+
+		if(theTop + moveValue > maxTop){
+			box.style.top = maxTop+'px';
+		}else{
+			box.style.top = (theTop+moveValue)+'px';			
+		}
+
+	}
+
+
+	function moveLeft(){
+		console.log('test');
+		let theLeft = parseInt(box.style.left);
+		if(theLeft - moveValue < 0){
+		box.style.left = '0px';	
+		}else{
+		box.style.left = (theLeft-moveValue)+'px';			
+		}
+	}
+
+	//write moveRight
+
+	function moveRight(){
+		console.log('test');
+		let theLeft = parseInt(box.style.left);
+
+		let wrapWidth = document.querySelector('.wrapper').clientWidth; //gets width of div
+		console.log(wrapWidth);
+		let maxLeft = wrapWidth - boxWidth; //height of box is 50px
+
+		if(theLeft + moveValue > maxLeft ){
+			box.style.left = maxLeft+'px';
+		}else{
+			box.style.left = theLeft+moveValue+'px';
+		}
+	}
+
+	//event listeners
+	document.querySelector('.move-up').addEventListener('click', moveUp);
+	document.querySelector('.move-left').addEventListener('click', moveLeft);		
+	document.querySelector('.move-right').addEventListener('click', moveRight);
+	document.querySelector('.move-down').addEventListener('click', moveDown);
+
+
+
+
+
+
+	</script>
+
+</body>
+</html>

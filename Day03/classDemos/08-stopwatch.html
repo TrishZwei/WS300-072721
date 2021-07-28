@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day 2 Stopwatch</title>
+<style type="text/css">
+	
+
+
+</style>
+</head>
+<body>
+<div id="clockface">0:00:00</div>
+<input type="button" id="startpause" value="Start">   
+<input type="button" id="reset" value="Reset">
+<input type="button" id="laptime" value="Lap">
+<div id="laptimes"></div>
+    
+<script type="text/javascript">
+//explain why script tag is at the bottom
+    
+//creating a stopwatch timer
+    
+//html components: 
+    // start/pause button 
+    // reset button    
+    // counter / clock face
+    
+    //units
+        //seconds
+    var currenttime = 24444; //seconds (not milliseconds) - current time on clock
+    var tickInterval; //this will hold the timer interval later 
+    //functions
+        //start timer
+        //pause timer
+        //reset timer
+        //convert time (from seconds to minutes and seconds)
+    
+    //grab the button that is on the page
+    var startPauseBtn = document.getElementById('startpause');
+    var clockface = document.getElementById('clockface');
+    var resetBtn = document.getElementById('reset');
+    var lapBtn = document.getElementById('laptime');
+    var lapTimes = document.getElementById('laptimes');
+    
+    function startPause(){
+    //use the value of the button if value = "start -- start timer, else pause the timer
+        if(startPauseBtn.value == 'Start'){
+        //start the timer
+        //change the value to pause
+       //this was temporary: timerTick(); //runs function once
+        //handle = setInterval(function, time in milliseconds)    
+        tickInterval = setInterval(timerTick, 1000);
+            
+        startPauseBtn.value = 'Pause'; 
+        }else{
+         //pause timer
+         startPauseBtn.value = 'Start';
+        //clearInterval(the interval you want to stop)
+         clearInterval(tickInterval);
+         
+        }
+        
+    
+    }//end startpause 
+    
+    //create a timer tick function (a single second)
+    function timerTick(){
+    //add 1 to currenttime
+    currenttime++;
+    
+    //update clockface with new time    
+    //clockface.innerHTML = currenttime;
+    //change to formatted time later
+        
+    //convert seconds to minutes and seconds
+        //Math.floor rounds down to a whole number
+
+//   show this here at first then place in timeFormat
+//        var hours = Math.floor((currenttime/60)/60);
+//        
+//        var minutes = Math.floor((currenttime/60)%60);
+//            if(minutes < 10){
+//            minutes = '0'+minutes;
+//            
+//            }
+//
+//        //% remainder of number divided
+//        var seconds = currenttime%60;
+//            if(seconds < 10){
+//            seconds = '0'+seconds;
+//            
+//            }
+//        
+//        clockface.innerHTML = hours+':'+ minutes +':'+seconds;
+        clockface.innerHTML = timeFormat(currenttime);
+    
+    }//end timerTick()
+    
+    function resetTime(){
+        currenttime = 0;
+        clockface.innerHTML = timeFormat(currenttime);
+       
+    if(startPauseBtn.value == 'Pause'){
+        clearInterval(tickInterval);
+        startPauseBtn.value = 'Start';
+        }      
+    //clear out laptimes
+        lapTimes.innerHTML = '';
+    
+    } //end resetTime
+
+    function timeFormat(ctime){
+    
+        var hours = Math.floor((ctime/60)/60);
+        
+        var minutes = Math.floor((ctime/60)%60);
+            if(minutes < 10){
+            minutes = '0'+minutes;    
+            }
+
+        //% remainder of number divided
+        var seconds = ctime%60;
+            if(seconds < 10){
+            seconds = '0'+seconds;
+            
+            }
+
+       return hours+':'+ minutes +':'+seconds;
+    
+    } //end time format
+    
+    function recordLap(){
+    //record currenttime    
+    lapTimes.innerHTML += timeFormat(currenttime)+'<br>';
+    
+    
+    }
+    
+   //event attachments
+    startPauseBtn.onclick = startPause; //connects the button to the function
+    resetBtn.onclick = resetTime; 
+    lapBtn.onclick = recordLap;
+//demo this -- alert(timeFormat(130));    
+    
+    
+    
+    
+    
+    
+    
+    
+</script>
+</body>
+</html>

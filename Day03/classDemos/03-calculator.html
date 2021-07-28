@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+</head>
+<body>
+<h1>Do Math</h1>
+<input type="number" id="value1"><br>
+<select id="op">
+	<option value="">Please Choose</option>
+	<option value="add">Plus</option>
+	<option value="sub">Minus</option>
+	<option value="mul">Times</option>
+	<option value="div">Divided by</option>	
+</select><br>
+<input type="number" id="value2"><br>
+<input type="button" id="myBtn" value="Add">
+<div id="message">Total: <span></span></div>
+<script type="text/javascript">
+	
+function doMath(){
+
+//capture value from inputs
+var val1 = Number(document.querySelector('#value1').value);
+var val2 = Number(document.querySelector('#value2').value);
+var oper = document.querySelector('#op').value;
+var total;
+
+if(oper == ''){
+	alert('Please choose an operator');
+	return false;
+}else if(oper == 'add'){
+  total = val1 + val2;
+
+}else if( oper == 'sub'){
+
+  total = val1 - val2;
+
+}else if(oper == 'mul'){
+
+  total = val1 * val2;
+
+}else if(oper == 'div'){
+
+  total = val1/val2;
+
+}else{
+	alert('Not a valid operator');
+	return false;
+}
+
+document.querySelector('#message span').innerHTML = total;
+
+}
+
+
+
+document.querySelector('#myBtn').onclick = doMath;
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+	<title>Testing</title>
+</head>
+<body>
+	<p>JS is not running on this page</p>
+
+	<script type="text/javascript">
+		document.querySelector('html').classList = 'js';
+		document.querySelector('p').textContent = 'javascript is running on this page.';	
+
+		/*quick note 
+	
+			if you are already using jQuery, you can use:
+			 $('html').addClass('js').removeClass('no-js');
+	
+		*/
+	</script>
+</body>
+</html>
