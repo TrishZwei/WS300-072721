@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Calculator</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size: 16px;
+		}
+
+		.wrapper{
+			border: 1px solid black;
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			bottom: 10px;
+			right: 10px;
+			background-color: #add;
+		}
+
+		.box{
+			height: 50px;
+			width: 50px;
+			background-color: rebeccapurple;
+			position: absolute;
+		}
+
+	</style>	
+</head>
+<body>
+	<div class="wrapper">
+		<button id="move-up">Move Up</button>		
+		<button id="move-down">Move Down</button>		
+		<button id="move-right">Move Right</button>		
+		<button id="move-left">Move Left</button>		
+		<div class="box"></div>
+	</div>
+	<script type="text/javascript">
+		'use strict';
+		const box = document.querySelector('.box');
+
+		//set style top and left allow me easier access to those properties
+		box.style.top = '115px';
+		box.style.left = '100px';
+
+		let moveValue = 7; //this is how many pixels we're moving our box
+		let boxWidth = 50; //this is the width of our box in px
+
+
+		function moveUp(){
+			let theTop = parseInt(box.style.top);
+			if(theTop - moveValue < 0){
+				//gone past the top of the parent
+				box.style.top = '0px';
+			}else{
+				box.style.top = (theTop - moveValue) + 'px';				
+			}
+		}
+
+		function moveLeft(){
+			let theLeft = parseInt(box.style.left);
+
+			if(theLeft - moveValue < 0){
+				box.style.left = '0px';
+			}else{
+			box.style.left = (theLeft - moveValue) + 'px';			
+			}
+	
+		}
+
+		function moveDown(){
+			let theTop = parseInt(box.style.top);
+			let wrapHeight = document.querySelector('.wrapper').clientHeight; //gets the height of the div
+			let maxTop = wrapHeight - 50;
+
+			if(theTop + moveValue > maxTop){
+				box.style.top = maxTop + 'px';
+			}else{
+			box.style.top = (theTop + moveValue) + 'px';				
+			}
+		}
+
+		function moveRight(){
+			let theLeft = parseInt(box.style.left);
+			let wrapWidth = document.querySelector('.wrapper').clientWidth;
+			let maxLeft = wrapWidth - 50;
+
+			if(theLeft + moveValue > maxLeft){
+				box.style.left = maxLeft + 'px';
+			}else{
+				box.style.left = (theLeft + moveValue) + 'px';				
+			}
+
+		}
+
+
+		//event listeners
+		document.querySelector('#move-up').onclick = moveUp;
+		document.querySelector('#move-left').onclick = moveLeft;
+		document.querySelector('#move-down').onclick = moveDown;
+		document.querySelector('#move-right').onclick = moveRight;
+
+
+	</script>
+</body>
+</html>

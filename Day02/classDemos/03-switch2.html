@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Switch Statements</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+	<div class="hour">0</div>
+
+	<script type="text/javascript">
+		'use strict';
+		const thisTime = new Date(); //gets current date and time as per what is on the local machine (not server)
+		console.log(thisTime); //shows us what the current value of thisTime is.
+
+		const displayDiv = document.querySelector('.hour'); //we're using const here because we aren't going to reassign the value of the displayDiv.
+
+		const year = thisTime.getFullYear();
+		//this is an array of month names: index values: 0 - 11
+		const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+		
+		console.log(monthNames[0])
+
+		const month = thisTime.getMonth()+1; //JS month values display 0-11
+
+		let dayCount; //we need to use let because we need to reassign the value.
+
+		switch (month) {
+		    case 1:
+		    case 3:
+		    case 5:
+		    case 7:
+		    case 8:
+		    case 10:
+		    case 12:
+		        dayCount = 31;
+		        break;
+		    case 4:
+		    case 6:
+		    case 9:
+		    case 11:
+		        dayCount = 30;
+		        break;
+		    case 2:
+		        if (((year % 4 == 0) && !(year % 100 == 0))
+		            || (year % 400 == 0))
+		            dayCount = 29;
+		        else
+		            dayCount = 28;
+		        break;
+		    default:
+		        dayCount = -1; // invalid month
+		}
+
+		console.log(dayCount); 
+
+		// displayDiv.textContent = 'The number of days in this month are: '+dayCount;
+		displayDiv.textContent = `The number of days in ${monthNames[month-1]} are: ${dayCount}.`
+
+	</script>
+</body>
+</html>

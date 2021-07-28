@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Equality Example</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size: 16px;
+		}
+	</style>	
+</head>
+<body>
+	<div class="message">Message goes here</div>
+	<script type="text/javascript">
+		'use strict';
+
+		const messageDiv = document.querySelector('.message');
+
+		let exp1 = 1,
+			exp2 = (exp1 == '1'),
+			exp3 = (exp1 === '1'); //shortcut for multiple variable declarations
+
+//		const message = "exp1 gets its value from the assignment operator and has the value of: " + exp1 + ". exp2 compares exp1's value to a character 1 and the comparison is seen as: " + exp2 +". exp3 compares its value and type to exp1 and is " + exp3 + ". Why?";
+//concatenation example above
+
+		const message = `exp1 gets its value from the assignment operator and has the value of: ${exp1}. exp2 compares exp1's value to a character 1 and the comparison is seen as: ${exp2}. exp3 compares its value and type to exp1 and is ${exp3}. Why?`;
+//es6 interpolation example above
+
+		messageDiv.textContent = message;	
+
+
+		console.log(typeof exp1); //returns number
+		console.log(typeof '1'); //returns string
+		console.log(exp1 == 1); //true
+		console.log(exp1 == '1'); // also true
+		console.log(exp1 === '1'); //not true
+		console.log(exp1 === 1); //true
+		console.log(exp1 = 0)//returns value
+
+
+	</script>
+</body>
+</html>

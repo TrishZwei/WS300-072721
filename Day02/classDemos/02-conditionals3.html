@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Conditional Statements</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+	<div class="hour">0</div>
+
+	<script type="text/javascript">
+		'use strict';
+		let thisTime = new Date(); //gets current date and time as per what is on the local machine (not server)
+
+		//leave this commented to check on current time
+		thisTime.setHours(4); //we can change the hour set in order to check our logic. Uncomment the code to do this in order to check that we have the right logic.
+
+		thisTime = thisTime.getHours(); //returns 0 - 23, military time. We're resetting the value (with the assignment operator, from the date object above to an hour value.
+
+		console.log(thisTime); //shows us what the current value of thisTime is.
+
+		const displayDiv = document.querySelector('.hour'); //we're using const here because we aren't going to reassign the value of the displayDiv.
+
+		let message = 'Good Evening'; //this sets a default value.
+
+		console.log(message, 'default');
+
+
+		if(thisTime < 12){
+			//before noon. This will overwrite the other values for message.	
+			message = 'Good Morning'
+		}
+
+		console.log(message, 'has it changed to morning?');
+
+		//if (thisTime < 17){ //not specific enough or not in a good location
+		if (thisTime < 17 && thisTime > 11){
+			//checking to see if it is before 5PM AND later than 11AM. This additional logic prevents this from changing the value of message unless it is speficially between these two values.
+			message = 'Good Afternoon'
+		}
+
+		console.log(message, 'has it changed to afternoon?');
+
+
+
+		displayDiv.textContent = message;
+
+
+
+	</script>
+</body>
+</html>

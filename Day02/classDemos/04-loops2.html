@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Various Loops</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+	<div class="message"></div>
+	<div class="container">
+		<div>One</div>
+		<div>Two</div>
+		<div>Three</div>
+		<div>Four</div>
+		<div>Five</div>
+	</div>
+	
+<script type="text/javascript">
+	'use strict';
+
+	const messageDiv = document.querySelector('.message');
+	let myDivs = document.querySelectorAll('.container div'); //nodelist
+
+	let message = '';
+	console.log(typeof myDivs); //returns object
+	console.log(myDivs.constructor) //returns node list.	
+	let divArray = [...myDivs]; //converts node list to array 
+	console.log(divArray.constructor)
+
+//foreach array method:
+ // message = 'For Each Array method:'
+ // divArray.forEach( function(item, index){
+ //   	message += '<div>value: '+ item.textContent+ ', index:'+index+'</div>';
+ // })
+
+
+ message = 'For ... in:'
+	for(let item in divArray){
+		message += '<div>value: '+divArray[item].textContent+', index:'+item+'</div>';
+	}
+
+
+
+	messageDiv.innerHTML = message; //used innerHTML here because we are adding HTML elements to the messageDiv.
+
+
+</script>
+</body>
+</html>

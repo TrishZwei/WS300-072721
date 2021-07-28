@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Equality Example</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size: 16px;
+		}
+	</style>	
+</head>
+<body>
+	<div class="hour">0</div>
+	<script type="text/javascript">
+		'use strict';
+
+		let thisTime = new Date(); //creates a new instance of the date object
+			thisTime.setHours(14); //lets me set a value for hours so I can test my conditional statement. I want to do this before I get the value of hours and store it in theHour	
+
+		let theHour = thisTime.getHours(); //returns 0 - 23, military time. number type
+		console.log(theHour);
+
+		let message; //declaring without assigning
+
+		if(theHour < 12){
+			//before noon
+			message = 'Good Morning!';
+
+		}else if(theHour < 18){
+			//checking to see if it is before 5Pm
+			message = 'Good Afternoon!';
+		}else{
+			message = 'Good Evening.';
+		}
+
+		document.querySelector('.hour').textContent = message;
+
+
+
+	</script>
+</body>
+</html>

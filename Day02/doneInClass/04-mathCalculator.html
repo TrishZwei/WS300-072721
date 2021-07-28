@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Calculator</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size: 16px;
+		}
+	</style>	
+</head>
+<body>
+	<h1>Calculator</h1>
+	<input type="text" id="value-one" value="0" placeholder="zero"><br>
+	<select id="the-operator">
+		<option value="">Please Choose</option>
+		<option value="add">Plus</option>
+		<option value="sub">Minus</option>
+		<option value="mul">Times</option>
+		<option value="div">Divided by</option>
+	</select><br>
+	<input type="text" value="0" id="value-two"><br>
+	<input type="button" id="do-math" value="Do Math">
+	<div id="display-total">Total <span>0</span></div>
+
+	<script type="text/javascript">
+		const doMathBtn = document.querySelector('#do-math');
+		// let val1 = document.querySelector('#value-one').value;
+		// let val2 = document.querySelector('#value-two').value;
+
+
+		function doMath(){
+			//alert('clicked!');
+			//declared in the function, these are local to the function
+			let val1 = (document.querySelector('#value-one').value)*1; 
+		    let val2 = Number(document.querySelector('#value-two').value);
+		    let op = document.querySelector('#the-operator').value;
+		    //let is also only available between the curly braces within which they were declared
+		    //console.log(typeof val2); //is this a number object?
+		    let total = 0;
+
+		    if(isNaN(val1)  || isNaN(val2)){
+		    	//we won't be able to do math. tell the user
+		    	alert('You need to input a number.');
+		    	return false; //stope the program from going further in the function
+
+		    }else{
+		    	//both values are a proper number...
+		    	if(op == ''){
+		    		//user needs to select an operator
+		    		alert('You need to select an operator');
+		    		return false;
+		    	}else if(op == 'add'){
+		    		total = val1 + val2;
+		    	}else if(op == 'sub'){
+		    		total = val1 - val2;
+		    	}else if(op == 'mul'){
+		    		total = val1 * val2;
+		    	}else if(op == 'div'){
+		    		total = val1 / val2;
+		    	}else{
+		    		//default
+		    		total = 'Shenannagans!';
+		    	}
+		    } //end if NaN
+
+		    document.querySelector('#display-total span').textContent = total;
+
+		} //end function doMath
+
+
+
+
+		//event listener:
+			doMathBtn.addEventListener('click', doMath)	
+
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Equality Example</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size: 16px;
+		}
+	</style>	
+</head>
+<body>
+	<div class="hour">0</div>
+	<script type="text/javascript">
+		'use strict';
+
+		let thisTime = new Date(); //creates a new instance of the date object
+		//set the year 
+		//thisTime.setFullYear(2024);
+		//set the month
+		//thisTime.setMonth(1);
+
+		let year = thisTime.getFullYear();
+		const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		
+		let message; //declaring without assigning
+
+		let month = thisTime.getMonth()+1; //not for the array but for how we think about months ex: July is 7 in our mind, but 6 in JS
+		let dayCount;
+
+		switch(month){
+			//cases match up to values of months like we think of them: Jan = 1
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 8:
+			case 10:
+			case 12:
+				dayCount = 31;
+			break;
+			
+			case 4:
+			case 6:
+			case 9:
+			case 11:
+				dayCount = 30;
+			break;
+			
+			case 2:
+				if( ((year % 4 == 0) && !(year % 100 == 0)) || (year % 400 == 0)   ){
+					dayCount = 29; //leap year
+				}else{
+					dayCount = 28;
+				}		
+			break;
+			
+			default:
+				dayCount = -1// invalid month	
+
+		}
+
+		message = `The number of days in ${monthNames[month-1]} are: ${dayCount}.`
+
+		document.querySelector('.hour').textContent = message;
+
+
+
+	</script>
+</body>
+</html>

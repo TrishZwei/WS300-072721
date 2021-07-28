@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Various Loops</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+	<div class="message"></div>
+<script type="text/javascript">
+	'use strict';
+
+	const messageDiv = document.querySelector('.message');
+	let message = '';
+	const items = ['one', 'two', 'three', 'four', 'five'];
+	const theLength = items.length; //a little easier on the processor, rather than checking the array each time the loop is run. This is good when the length of the array does not change
+
+	//for loop:
+//	message = 'For Loop V1:'
+	// for(let i = 0; i < theLength; i++){
+	// 	message += '<div>value: '+items[i]+', index:'+i+'</div>';
+	// } //since we are using let, the variable i will not exist outside the curly braces of this for loop
+
+//	message = 'For Loop V2:'
+	//for loop version 2: goes the opposite direction.
+	// for (let i = items.length - 1; i >= 0; i--) {
+	// message += '<div>value: '+items[i]+', index:'+i+'</div>';
+	// }
+
+
+
+let i = 0 ; //must be outside the while loop. In this case the variable is in the global scope and can be accessed by everything.
+
+//while loop:
+
+//	message = 'While Loop:'
+
+// while(i<theLength){
+// 	message += '<div>value: '+ items[i]+', index:'+i+'</div>';
+// 	i++; //to advance the loop
+// }
+
+
+	// message = 'While Loop 2:<br>'
+
+	// while(items[i]){
+	// 	//when there is no value this becomes falsy and stops iterating
+	// 	message += '<div>value: '+ items[i]+', index:'+i+'</div>';
+	// 	i++;
+	// }	
+
+	//do while loop (good for when you need something to happen at least once)
+	//i=5; //reset to this value to show that the do while happens at least once
+	// message = 'Do/While Loop:<br>'
+	// do{
+	// 	message += '<div>value: '+ items[i]+', index:'+i+'</div>';
+	// 	i++;
+	// }while(i < theLength); 
+
+//ES6 loop iterations:
+
+//foreach array method:
+// message = 'For Each Array method:'
+// items.forEach( function(item, index){
+//   	message += '<div>value: '+ item+ ', index:'+index+'</div>';
+// })
+
+
+//for ... in
+//	message = 'For...in Loop:'
+	for(let item in items){
+		message += '<div>value: '+items[item]+', index:'+item+'</div>';
+	}
+
+
+
+messageDiv.innerHTML = message; //used innerHTML here because we are adding HTML elements to the messageDiv.
+
+
+</script>
+</body>
+</html>
