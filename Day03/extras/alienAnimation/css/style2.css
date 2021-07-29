@@ -1,0 +1,418 @@
+
+
+/*apply natural box model*/
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+/*micro-clearfix by Nicolas Gallagher http://nicolasgallagher.com/micro-clearfix-hack/*/
+/* For modern browsers */
+.cf:before, .cf:after {
+	content:"";
+	display:table;
+}
+
+.cf:after {
+	clear:both;
+}
+
+.cf {
+	zoom:1;
+}
+
+/*
+==============================================
+GLOBAL STYLES
+==============================================
+*/
+
+body{
+
+	background-color: #F4F4F4;
+	font-family: 'Trebuchet', sans-serif;
+	font-size: 18px;
+	line-height: 30px;
+	color: #555555;
+	font-weight: bold;	
+	padding:0.5em;
+	margin:0 auto;
+	width:100%;
+}
+header, main{
+	margin:0 auto;
+	width:100%;
+	min-width: 336px;
+}
+section{
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
+}
+
+section#object, section#alien{
+	position: relative;
+}
+
+div#eye{
+	width: 20%;
+	margin: 0 auto;
+	position: absolute;
+	top:44.5%;
+	left: 40%;
+}
+.container{
+	background-color: green;
+	text-align:center;
+}
+
+h1, h2{
+	text-align: center;
+	color:#791F0B;
+
+}
+
+p{
+	text-align: center;
+}
+
+a{
+	text-decoration: none;
+	color: rgb(145,62,162);
+	font-weight: bold;
+	
+}
+
+a:hover{
+	color: green;
+	text-decoration: underline; 
+}
+
+a.button{
+	color: #ffffff;
+	-webkit-transition:all 1s ease 0s;
+	transition:all 1s ease 0s;
+	text-shadow:1px 1px #333;
+}
+
+a.button:hover{
+	background-color: #DEA4EA;
+	text-shadow:3px 3px #333;
+	
+}
+
+
+.button{
+	background-color: #89D742;
+	padding:0.5em;
+	display:block;
+	margin:0.5em 0;
+	
+
+}
+
+img{
+	width:100%;
+}
+
+/*
+==============================================
+no-js stylings
+==============================================
+*/
+
+.no-js #theSelect{
+	display: none;
+}
+
+
+/*
+==============================================
+CSS3 ANIMATIONS 
+based on http://www.justinaguilar.com/animations/index.html#how 
+==============================================
+*/
+
+/*
+==============================================
+slideUp
+==============================================
+*/
+.slideUp{
+	animation-name: slideUp;
+	-webkit-animation-name: slideUp;	
+
+	animation-duration: 1s;	
+	-webkit-animation-duration: 1s;
+
+	animation-timing-function: ease;	
+	-webkit-animation-timing-function: ease;
+	
+}
+
+@-webkit-keyframes slideUp {
+	0% {
+		-webkit-transform: translateY(100%);
+	}
+	50%{
+		-webkit-transform: translateY(-8%);
+	}
+	65%{
+		-webkit-transform: translateY(4%);
+	}
+	80%{
+		-webkit-transform: translateY(-4%);
+	}
+	95%{
+		-webkit-transform: translateY(2%);
+	}			
+	100% {
+		-webkit-transform: translateY(0%);
+	}	
+}
+
+@keyframes slideUp {
+	0% {
+		transform: translateY(100%);
+	}
+	50%{
+		transform: translateY(-8%);
+	}
+	65%{
+		transform: translateY(4%);
+	}
+	80%{
+		transform: translateY(-4%);
+	}
+	95%{
+		transform: translateY(2%);
+	}			
+	100% {
+		transform: translateY(0%);
+	}	
+}
+
+
+/*
+==============================================
+fadeIn
+==============================================
+*/
+
+.fadeIn{
+	animation-name: fadeIn;
+	-webkit-animation-name: fadeIn;	
+
+	animation-duration: 1.5s;	
+	-webkit-animation-duration: 1.5s;
+
+	animation-timing-function: ease-in-out;	
+	-webkit-animation-timing-function: ease-in-out;		
+
+}
+
+@-webkit-keyframes fadeIn {
+	0% {
+		-webkit-transform: scale(0);
+		opacity: 0.0;		
+	}
+	60% {
+		-webkit-transform: scale(1.1);
+	}
+	80% {
+		-webkit-transform: scale(0.9);
+		opacity: 1;	
+	}	
+	100% {
+		-webkit-transform: scale(1);
+		
+	}		
+}
+
+@keyframes fadeIn {
+	0% {
+		transform: scale(0);
+		opacity: 0.0;		
+	}
+	60% {
+		transform: scale(1.1);	
+	}
+	80% {
+		transform: scale(0.9);
+		opacity: 1;	
+	}	
+	100% {
+		transform: scale(1);
+		
+	}		
+}
+
+
+/*
+==============================================
+pulse
+==============================================
+*/
+
+.pulse{
+	animation-name: pulse;
+	-webkit-animation-name: pulse;	
+
+	animation-duration: 1.5s;	
+	-webkit-animation-duration: 1.5s;
+
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+}
+@-webkit-keyframes pulse {
+	0% {
+		-webkit-transform: scale(0.95);
+		opacity: 0.7;		
+	}
+	50% {
+		-webkit-transform: scale(1);
+		opacity: 1;	
+	}	
+	100% {
+		-webkit-transform: scale(0.95);
+		opacity: 0.7;	
+	}			
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.9);
+		opacity: 0.7;		
+	}
+	50% {
+		transform: scale(1);
+		opacity: 1;	
+	}	
+	100% {
+		transform: scale(0.9);
+		opacity: 0.7;	
+	}			
+}
+
+
+
+/*
+==============================================
+floating
+==============================================
+*/
+
+.floating{
+	animation-name: floating;
+	-webkit-animation-name: floating;
+
+	animation-duration: 1.5s;	
+	-webkit-animation-duration: 1.5s;
+
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes floating {
+	0% {
+		-webkit-transform: translateY(0%);	
+	}
+	50% {
+		-webkit-transform: translateY(8%);	
+	}	
+	100% {
+		-webkit-transform: translateY(0%);
+	}			
+}
+
+
+@keyframes floating {
+	0% {
+		transform: translateY(0%);	
+	}
+	50% {
+		transform: translateY(8%);	
+	}	
+	100% {
+		transform: translateY(0%);
+	}			
+}
+
+
+/*
+==============================================
+tossing
+==============================================
+*/
+
+.tossing{
+	animation-name: tossing;
+	-webkit-animation-name: tossing;	
+
+	animation-duration: 2.5s;	
+	-webkit-animation-duration: 2.5s;
+
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes tossing {
+	0% {
+		-webkit-transform: rotate(-4deg);	
+	}
+	50% {
+		-webkit-transform: rotate(4deg);
+	}
+	100% {
+		-webkit-transform: rotate(-4deg);	
+	}				
+}
+
+@keyframes tossing {
+	0% {
+		transform: rotate(-4deg);	
+	}
+	50% {
+		transform: rotate(4deg);
+	}
+	100% {
+		transform: rotate(-4deg);	
+	}						
+}
+
+
+/*
+===============================================
+MEDIA QUERIES
+===============================================
+*/
+
+@media only screen and (min-width: 480px){
+	.button{
+		display:inline-block;
+		padding:0.5em;
+		-webkit-border-radius: 10px 0px 10px 0px;link the
+		-moz-border-radius: 10px 0px 10px 0px;
+		border-radius: 10px 0px 10px 0px;
+		-webkit-box-shadow: 0px 0px 0px #333;
+		-moz-box-shadow: 0px 0px 0px #333;
+		box-shadow: 0px 0px 0px #333;
+	}
+
+	.button:hover{
+		-webkit-box-shadow: 4px 4px 2px #333;
+		-moz-box-shadow: 4px 4px 2px #333;
+		box-shadow: 4px 4px 2px #333;
+	}
+	img{
+		width:auto;
+		height:auto;
+	}
+	section div#eye{
+	margin: 0 auto;
+	position: absolute;
+	top:44.5%;
+	left: 40%;
+	}
+
+}
+
+/*Javascript test*/
+

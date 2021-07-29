@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <title>Animations and Transitions Example</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/style2.css" />
+</head>
+<body>
+	<header>
+		<h1> Animation Playground</h1>
+	</header>
+	<main>
+		<section id="alien">
+			<img src="images/alienbody.png" >
+			<div  id="eye"><img src="images/eye.png"></div>
+		</section>
+		<section id="theSelect">
+			<h2>Select Your Animation</h2>
+			<div class="container">
+				<a href="#" id="slideUpBtn" class="button">Slide Up</a>
+				<a href="#" id="fadeInBtn" class="button">Fade In</a>
+				<a href="#" id="pulseBtn" class="button">Pulse</a>
+				<a href="#" id="floatBtn" class="button">Floating</a>
+				<a href="#" id="tossingBtn" class="button">Tossing</a>
+			</div>
+		</section>
+		<p>This CSS animation library can be found at: <a href="http://www.justinaguilar.com/animations/" target="_blank" title="Link will open in new tab.">http://www.justinaguilar.com/animations/</a></p>
+	</main>
+	<!-- jquery goes here -->
+	
+	<script type="text/javascript">
+		document.querySelector('html').classList = 'js'; //shows buttons
+
+		var alien = document.querySelector('#alien'); 
+
+		function reapplyClass(){
+			alien.classList = '';
+		}
+
+		//lists of buttons, and anon functions	
+
+		document.querySelector('.container').addEventListener('click', function(e){
+			var el = e.target; //element that was clicked:
+
+			switch(el.id){
+				case 'slideUpBtn':
+				alien.classList = 'slideUp';
+			//setTimeout(reapplyClass, 1200);
+				break;
+
+				case 'fadeInBtn':
+				alien.classList = 'fadeIn';
+				//setTimeout(reapplyClass, 1200)				
+				break;
+
+				case 'pulseBtn':
+				alien.classList = 'pulse';
+				break;
+
+				case 'floatBtn':
+				alien.classList = 'floating';
+				break;
+
+				case 'tossingBtn':
+				alien.classList = 'tossing';
+
+			}
+
+		})
+
+
+		//eye animation... cool huh. I can add an event listener to the whole of the document.
+		document.addEventListener( 'mousemove', function(event){
+			//the event argument tells the program to keep track of the event object and its properties. Below I am accessing the event property .pageX and comparing it to the window property.
+
+			oneThird = window.innerWidth/3;
+
+			if(event.pageX < oneThird){
+				//on lefthand side ofscreen
+				eye.style.cssText = 'left:39%';
+			}else if(event.pageX < oneThird * 2){
+				eye.style.cssText = '';
+			}else{
+				eye.style.cssText = 'left:41%';
+			}
+			/* 
+			
+			Please note that we did not create the variable 'eye'. Because eye is an id on the page, it is a global window variable attached to that element. This is why id usage has fallen out of favor and not considered a best practice.
+			
+			*/
+		})
+
+	</script>
+</body>
+</html>
