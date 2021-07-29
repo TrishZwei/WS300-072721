@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Various Loops</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size: 16px;
+		}
+	</style>	
+</head>
+<body>
+	<div class="message">message goes here</div>
+	<script type="text/javascript">
+		'use strict';
+
+		//demo of block level scope too!
+		const messageDiv = document.querySelector('.message');
+		let message = ''; //holds the space for a value.
+		const items = ['one', 'two', 'three', 'four', 'five'];
+		const theLength = items.length; 
+
+		// //for loop:
+		// message = 'For Loop V1:';
+		// 	for(var i = 0; i < theLength; i++){
+		// 		message+='<div>Value: '+items[i]+', index:'+i+'</div>';
+		// 	}
+		// //var has a function level scope, which means it is available outside the curly brackets of the for loop	
+		// message += i;
+
+		// message += '<br>For Loop V2';
+		// 	for(let i = items.length - 1; i >= 0; i--){
+		// 		//block level scope means i is only available inside of THESE braces
+		// 		message+='<div>Value: '+items[i]+', index:'+i+'</div>';	
+		// 	}
+		// message += i; //be value 5.	
+
+		let i = 0; 
+
+		//while loop:
+		message = 'While Loop:';
+
+		while(i<theLength){
+			message+='<div>Value: '+items[i]+', index:'+i+'</div>';
+			i++; //increments the loop.
+		}
+
+		i = 0; //reassigning the value of i to 0
+
+		message += 'While Loop V2';
+
+		while(items[i]){
+			//when there is no value this becomes falsy
+			message+='<div>Value: '+items[i]+', index:'+i+'</div>';
+			i++;
+		}
+	
+	messageDiv.innerHTML = message; //using innerHTML because... tags.
+
+
+	</script>
+</body>
+</html>

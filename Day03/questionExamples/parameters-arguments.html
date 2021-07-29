@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Parameters and Arguments</title>
+</head>
+<body>
+	<div class="message">info goes here</div>
+
+	<script type="text/javascript">
+		/*
+		*takes two numbers and shows the sum in the message div
+		*@param num1 number
+		*@param num2 number
+		*/
+		function addTwoNums(num1, num2){
+			let total = num1 + num2
+			document.querySelector('.message').textContent = total;
+		}
+//this is calling the function with arguments to be stored in the parameters 
+		addTwoNums(5,7);
+
+		let first = 2,
+			second = 9
+
+		addTwoNums(first,second);
+
+
+	</script>
+</body>
+</html>

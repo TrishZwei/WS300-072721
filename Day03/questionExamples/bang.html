@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Parameters and Arguments</title>
+</head>
+<body>
+	<div class="message">info goes here</div>
+
+	<script type="text/javascript">
+		//the bang operator checks for false (when not true)
+		//w3 schools
+		let x = 6,
+			y = 3,
+			z = '6';
+
+			if(x===y){
+			alert('x and y have the same value and type')
+			}else{
+
+			alert('x and y do not have the same value or type');		
+			}
+
+			if(x==z){
+				alert('x and z have the same value.');
+			}
+
+			if(x===z){
+				alert('x and z are not the same value OR type...')
+			}
+
+			if(typeof x == typeof z){
+				alert('same type')
+			}else{
+				alert('not same type.')
+			}
+
+			if(x!==y){
+				alert('x and y are not the same in value or type')
+			}
+//reassigning y to 6
+	y = 6;		
+
+//this prevents you from having two conditions. We don't care if its true, we only care if its false.
+		if ( !(x === y) ){
+			alert('x is not equal to y');
+		}else{
+			alert('x is equal to y in value and type');
+		}
+
+
+
+
+
+	</script>
+</body>
+</html>

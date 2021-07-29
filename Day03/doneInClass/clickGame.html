@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Click Game</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}	
+		#game-stage{
+			width: 400px;
+			height: 400px;
+			border: 1px solid black;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.box{
+			width: 40px;
+			height: 40px;
+			border: 1px solid black;
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			background-color: rebeccapurple;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="ui">
+		Score: <span class="score">0</span> | Time Remaining: <span class="time">10</span> seconds
+	</div>
+	<div id="game-stage">
+		<div class="box"></div>
+	</div>
+	<script type="text/javascript">
+		/*
+		event listener on box
+			-add one to score, display new score
+			-move the box' position
+			-change size
+			-change color
+		stores the current score (a variable)
+		stores the current value of seconds
+		need a timer to count down the seconds
+		*/
+
+		//global variables:
+		let score = 0, //stores the score
+			seconds = 10, //stores the seconds
+			timer, //reserving space for when the timer is started
+			gameRunning = false;
+
+
+		//html elements:
+		let box = document.querySelector('.box'),
+			timeDisplay = document.querySelector('.time'),
+			scoreDisplay = document.querySelector('.score');	
+
+
+		//function for box
+		function moveBox(){
+			//alert('clicked');
+
+			//timer only added once
+			if(!gameRunning){
+				//when gameRunning is false, do this code:
+				timer = setInterval(setTime, 1000); 
+				gameRunning = true;
+			}
+
+			score++; //or score+=1 or score = score+1 
+			scoreDisplay.textContent = score;
+			//variables for property values:
+			let boxWidth = getRandInt(10,50);
+			let boxHeight = getRandInt(10,50);
+			//rgba color:
+			let r = getRandInt(0,255),
+				g = getRandInt(0,255),
+				b = getRandInt(0,255);
+				a = Math.random();
+
+
+			box.style.top = getRandInt(0,400-boxHeight)+'px';
+			box.style.left = getRandInt(0,400-boxWidth)+'px';
+			box.style.width = boxWidth+'px';
+			box.style.height = boxHeight+'px';
+			box.style.backgroundColor = generateHex(); 
+			//box.style.borderColor = generateHex(); 
+			box.style.borderColor = 'rgba('+r+','+g+','+b+','+a+')';
+			//you can use the keyword this
+			this.style.transform = 'rotate('+getRandInt(0,359)+'deg)';
+		}	
+
+		//generate whole number:
+		function getRandInt(min = 1, max = 100){
+			//min and max have default values
+			return Math.floor(Math.random() * (max - min) ) + min;
+		}
+
+		function generateHex(){
+			let hexValues = '0123456789ABCDEF'; 
+			//string of valid characters for hex values
+			hexValues = hexValues.split('');
+			//console.log(hexValues);
+			let hexColor = '#';
+
+			for(let count = 0; count < 6; count++){
+				let newVal = hexValues[getRandInt(0,15)];
+				hexColor += newVal;
+				//console.log(hexColor);
+			}
+			return hexColor;
+		}
+
+
+
+		function setTime(){
+			//subtract 1 from seconds
+			//update the time display
+			//when seconds = 0 alert game over
+			seconds--; //OR seconds = seconds - 1 OR seconds -= 1
+			timeDisplay.textContent = seconds;
+
+			if(seconds == 0){
+				clearInterval(timer);
+				timeDisplay.textContent = '0';
+				//remove click from box
+				box.removeEventListener('click', moveBox);
+				alert('Game Over');
+			}
+
+		}
+
+		box.addEventListener('click', moveBox);
+
+
+	</script>
+</body>
+</html>
