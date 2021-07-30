@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Problem 6</title>
+</head>
+<body>
+    <h1>Problem 6</h1>
+    <p>What's wrong with this?</p>
+    <div id="greet"></div>
+    <script>
+    var h = new Date().getHours();
+    //h = 19;
+    
+    if(h<=18){
+        display = 'Good Evening.';
+    }else if(h<11){
+        display = 'Good Afternoon.';
+    }else{
+        display = 'Good Morning.';
+    }
+
+    document.getElementById('greet').innerHTML = display;
+
+    </script>
+</body>
+</html>

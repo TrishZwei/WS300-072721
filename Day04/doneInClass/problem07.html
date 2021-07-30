@@ -1,0 +1,23 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Problem 8</title>
+</head>
+<body>
+	<h1>Problem 8</h1>
+	<p>What's wrong with this?</p>
+    <div id="output"></div>
+    <button id="myBtn">Display Random Number</button>
+	
+    <script>
+    function getRandomInt( min, max ){
+    return Math.floor(Math.random()*(max-min+1) )+min;
+    }    
+
+
+    document.getElementById('myBtn').onclick = function(){
+        document.getElementById('output').innerHTML = getRandomInt();
+        }
+    </script>
+</body>
+</html>
