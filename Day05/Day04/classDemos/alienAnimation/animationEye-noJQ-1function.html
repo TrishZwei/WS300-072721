@@ -72,14 +72,23 @@
 		})
 
 
-		//eye animation... cool huh. I can add an event listener to the whole of the document.
+//eye animation... cool huh. I can add an event listener to the whole of the document.
 		document.addEventListener( 'mousemove', function(event){
 			//the event argument tells the program to keep track of the event object and its properties. Below I am accessing the event property .pageX and comparing it to the window property.
-			if(event.pageX > window.innerWidth / 2){
+
+			oneThird = window.innerWidth/3;
+
+			if(event.pageX < oneThird){
 				//on lefthand side ofscreen
-				eye.style.cssText = 'left:41%';
+				eye.style.cssText = 'left:38.3333%';
+				console.log('left one third? ')
+			}else if(event.pageX < oneThird * 2){
+				eye.style.cssText = 'left:40%';
+				console.log('right one third? ')
 			}else{
-				eye.style.cssText = 'left:39%';
+				eye.style.cssText = 'left:41.6666%';
+				console.log('middle one third? ')
+
 			}
 			/* 
 			
@@ -87,6 +96,7 @@
 			
 			*/
 		})
+
 
 	</script>
 </body>

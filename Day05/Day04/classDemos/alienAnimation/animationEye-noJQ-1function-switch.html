@@ -79,11 +79,15 @@
 
 			if(event.pageX < oneThird){
 				//on lefthand side ofscreen
-				eye.style.cssText = 'left:39%';
+				eye.style.cssText = 'left:38.3333%';
+				console.log('left one third? ')
 			}else if(event.pageX < oneThird * 2){
-				eye.style.cssText = '';
+				eye.style.cssText = 'left:40%';
+				console.log('right one third? ')
 			}else{
-				eye.style.cssText = 'left:41%';
+				eye.style.cssText = 'left:41.6666%';
+				console.log('middle one third? ')
+
 			}
 			/* 
 			

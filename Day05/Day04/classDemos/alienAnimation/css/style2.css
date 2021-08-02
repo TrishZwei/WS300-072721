@@ -47,11 +47,11 @@ section{
 	margin: 0 auto;
 }
 
-section#object, section#alien{
+section#object, section.alien{
 	position: relative;
 }
 
-div#eye{
+div.eye{
 	width: 20%;
 	margin: 0 auto;
 	position: absolute;
