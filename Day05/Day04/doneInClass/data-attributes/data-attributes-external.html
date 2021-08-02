@@ -51,44 +51,7 @@
     <div id="image">
       <img src="http://placehold.it/300/ffffff/000000">
   </div>
-   <script> 
-    'use strict';
-    document.querySelector('.button-list').addEventListener('click', function(event){
-      //console.log(event); 
-      //shows us all the properties/objects of the event object
-      //alert(event.target); //tells us what element got clicked
-
-      if(event.target.classList == 'button'){
-        //if it has the class of button do the following:
-        let type = event.target.getAttribute('data-missile-type');
-        let payload = event.target.getAttribute('data-missile-payload');
-        let sound = event.target.getAttribute('data-missile-sound');
-        let action = event.target.getAttribute('data-action-type');
-        let path = event.target.getAttribute('data-path');
-        let soundPath = event.target.getAttribute('data-sound-path');
-
-        //we're going to call an element without storing it in variable because it already is stored in a variable... just not one made by us.
-        // console.log(message.textContent) 
-        console.log(action + ' ' + payload + ' ' + type +"! " + sound);
-
-        //concatenation:
-        message.textContent = action + ' ' + payload + ' ' + type +"! " + sound; 
-
-        console.log(path, soundPath);
-        document.querySelector('#image img').setAttribute('src', path)
-        let mp3 = new Audio(soundPath);
-        mp3.play(); 
-       
-
-      }
-
-
-    })
-
-
-
-
-  </script>
-
+  <!-- external script example -->
+   <script src="scripts/script.js"></script>
 </body>
 </html>

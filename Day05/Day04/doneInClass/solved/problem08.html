@@ -1,0 +1,40 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Problem 8</title>
+</head>
+<body>
+	<h1>Problem 8</h1>
+	<p>What's wrong with this? If the number generated is evenly divisible by 3, it should display a grey background, else black. If it is less than 50 it should be red in color, else white.</p>
+    <div id="output"></div>
+    <button id="myBtn">Display Random Number</button>
+	
+    <script>
+    var output = document.getElementById('output');
+
+    function getRandomInt( min, max ){
+    return Math.floor(Math.random()*(max-min+1) )+min;
+    }    
+
+
+    document.getElementById('myBtn').onclick = function(){
+         var randNum = getRandomInt(1,100);
+            output.innerHTML = randNum;
+
+        if(randNum < 50){
+            output.style.color = 'red';
+        }else{
+            output.style.color = 'white';
+        }
+
+        if(randNum % 3 == 0){
+            output.style.backgroundColor = 'grey';
+        }else{
+          output.style.backgroundColor = 'black';  
+        }
+
+    };
+
+    </script>
+</body>
+</html>

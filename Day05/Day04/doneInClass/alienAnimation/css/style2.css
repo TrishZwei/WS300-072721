@@ -47,11 +47,11 @@ section{
 	margin: 0 auto;
 }
 
-section#object, section#alien{
+section#object, section.alien{
 	position: relative;
 }
 
-div#eye{
+div.eye{
 	width: 20%;
 	margin: 0 auto;
 	position: absolute;
@@ -118,7 +118,7 @@ no-js stylings
 ==============================================
 */
 
-.no-js #theSelect{
+.no-js #the-select{
 	display: none;
 }
 
@@ -405,7 +405,7 @@ MEDIA QUERIES
 		width:auto;
 		height:auto;
 	}
-	section div#eye{
+	section div.eye{
 	margin: 0 auto;
 	position: absolute;
 	top:44.5%;

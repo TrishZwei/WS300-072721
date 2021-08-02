@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js blah bloorp">
 <head>
   <title>Animations and Transitions Example</title>
   <meta charset="utf-8" />
@@ -12,18 +12,18 @@
 		<h1> Animation Playground</h1>
 	</header>
 	<main>
-		<section id="alien">
+		<section class="alien">
 			<img src="images/alienbody.png" >
-			<div  id="eye"><img src="images/eye.png"></div>
+			<div  class="eye"><img src="images/eye.png"></div>
 		</section>
-		<section id="theSelect">
+		<section id="the-select">
 			<h2>Select Your Animation</h2>
 			<div class="container">
-				<a href="#" id="slideUpBtn" class="button">Slide Up</a>
-				<a href="#" id="fadeInBtn" class="button">Fade In</a>
-				<a href="#" id="pulseBtn" class="button">Pulse</a>
-				<a href="#" id="floatBtn" class="button">Floating</a>
-				<a href="#" id="tossingBtn" class="button">Tossing</a>
+				<a href="#" id="slide-up" class="button">Slide Up</a>
+				<a href="#" id="fade-in" class="button">Fade In</a>
+				<a href="#" id="pulse-btn" class="button">Pulse</a>
+				<a href="#" id="float-btn" class="button">Floating</a>
+				<a href="#" id="tossing-btn" class="button">Tossing</a>
 			</div>
 		</section>
 		<p>This CSS animation library can be found at: <a href="http://www.justinaguilar.com/animations/" target="_blank" title="Link will open in new tab.">http://www.justinaguilar.com/animations/</a></p>
@@ -31,7 +31,67 @@
 	<!-- jquery goes here -->
 	
 	<script type="text/javascript">
-//code to go in here.
+	//code to go in here.
+		//console.log(document.querySelector('html').classList[0]);
+		// var str = document.querySelector('html').classList;
+		// str = str.replace('no-js', 'js'); 
+		// console.log(str)
+	document.querySelector('html').classList = 'js'; //shows buttons
+
+	//eye animation:
+	document.addEventListener('mousemove', function(event){
+
+		oneThird = window.innerWidth/3; 
+		eye = document.querySelector('.eye');
+
+		if(event.pageX < oneThird){
+			eye.style.cssText = 'left:38.33333%';
+		}else if (event.pageX < oneThird *2){
+			eye.style.cssText = 'left:40%';			
+		}else{
+			eye.style.cssText = 'left:41.6666%';
+		}
+
+	}) //end eye animation
+
+
+
+	document.querySelector('.container').addEventListener('click', function(event){
+		let alien = document.querySelector('.alien');
+
+		if(event.target.classList == 'button'){
+			console.log(event.target.id);
+			switch(event.target.id){
+
+				case 'slide-up':
+				alien.classList = 'alien slideUp';
+				break;
+
+				case 'fade-in':
+				alien.classList = 'alien fadeIn';
+				break;
+
+				case 'pulse-btn':
+				alien.classList = 'alien pulse';
+				break;
+
+				case 'float-btn':
+				alien.classList = 'alien floating';
+				break;
+
+				case 'tossing-btn':
+				alien.classList = 'alien tossing';
+				break;
+
+				//default like else goes at the end
+
+			}//end switch
+
+		}
+
+	})
+
+
 
 	</script>
 </body>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Problem 4</title>
+    <title>Problem 5</title>
     <style type="text/css">
         #box{
             width: 50px;
@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-    <h1>Problem 4</h1>
+    <h1>Problem 5</h1>
     <p>What's wrong with this? This button should switch colors from blue to red.</p>
     <button id="my-btn">Click Here</button>
     <div id="box" class="box"></div>
@@ -23,15 +23,18 @@
         const box = document.querySelector('#box');
 
         function changeColor(){
-            box.style.backgroundColor = 'red';    
+            
             if( box.style.backgroundColor == 'red'){
                 box.style.backgroundColor = 'blue';
             }else{
-                box.style.backgroundColor = 'red';               
+                box.style.backgroundColor = 'red'               
             }
+
+
+
         }
 
         myBtn.onclick = changeColor; 
     </script>
 </body>
-</html>
+</html>  

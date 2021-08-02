@@ -14,6 +14,19 @@ if (hourNow > 18) {
     greeting = 'Welcome!';
 }
 
-document.write('<h3>' + greeting + '</h3>');
+//document.write is a bad practice. You will see it...
+//document.write('<h3>' + greeting + '</h3>');
 
+var newEl = document.createElement('h3'); 
+newEl.textContent = greeting;
+var ref = document.querySelector('h1');
 
+function insertAfter(el, referenceNode){
+    //el is the element we want to insert
+    //referenceNode is the element we want to have our el insterted into the DOM after
+
+    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+
+}    
+
+insertAfter(newEl, ref);

@@ -60,29 +60,20 @@
 
       if(event.target.classList == 'button'){
         //if it has the class of button do the following:
-        let type = event.target.getAttribute('data-missile-type');
-        let payload = event.target.getAttribute('data-missile-payload');
-        let sound = event.target.getAttribute('data-missile-sound');
-        let action = event.target.getAttribute('data-action-type');
-        let path = event.target.getAttribute('data-path');
-        let soundPath = event.target.getAttribute('data-sound-path');
+        let allData = event.target.dataset; 
+            //console.log(allData);
 
         //we're going to call an element without storing it in variable because it already is stored in a variable... just not one made by us.
-        // console.log(message.textContent) 
-        console.log(action + ' ' + payload + ' ' + type +"! " + sound);
 
-        //concatenation:
-        message.textContent = action + ' ' + payload + ' ' + type +"! " + sound; 
+        //es6 interpolation: takes value and inserts it in the variable space
+        message.textContent = `${allData.actionType} ${allData.missilePayload} ${allData.missileType}! ${allData.missileSound}`;
 
-        console.log(path, soundPath);
-        document.querySelector('#image img').setAttribute('src', path)
-        let mp3 = new Audio(soundPath);
-        mp3.play(); 
-       
+       // let soundPath = allData.soundPath
 
+         document.querySelector('#image img').setAttribute('src', allData.path)
+         let mp3 = new Audio(allData.soundPath);
+         mp3.play(); 
       }
-
-
     })
 
 
