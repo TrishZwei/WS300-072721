@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Intro One</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+
+		.blue{
+			color: blue;
+		}
+
+		.red{
+			color: red;
+		}
+
+	</style>
+</head>
+<body>
+<div id="myDiv">A div with Id</div>
+<p id="para1">A paragraph with id #para1</p>
+<p id="para2">A paragraph with id #para2</p>
+<p class="blue">A paragraph with class blue</p>
+<p class="blue">A paragraph with class blue</p>
+<input type="button" value="Change Class" id="myBtn">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- all jQ plugins go here -->
+<!-- any scripts dependent on jQ or its plugins must follow after -->
+<script>
+//my custom script
+$('#myDiv').css({
+	'background-color':'#41be96',
+	'border':'1px solid black'
+})
+
+$('#myBtn').click( function(){
+	$('#para1').fadeToggle(2000, "linear");
+	if($('p').hasClass('blue')){
+		$('p.blue').removeClass('blue').addClass('red').text('A paragraph with class red');
+		$('#para2').fadeIn(2000, "linear", function(){
+			$(this).html('must be <span class="blue">jelly</span>')
+		});
+	}else{
+		$('p.red').removeClass('red').addClass('blue').text('A paragraph with class blue');
+		$('#para2').fadeOut(2000, "linear");
+	}
+
+
+
+//this does not work....
+//document.getElementById('para2').fadeOut(2000, "linear");
+
+})
+
+</script>
+</body>
+</html>

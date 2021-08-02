@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>mouse follow 1</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+
+		#dot{
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			background-color: purple;
+			position: absolute;
+			top: 100px;
+			left: 100px;
+			pointer-events: none;
+		}
+
+		.target{
+			background-color: red;
+			color: white;
+			height: 100px;
+			width:100px;
+			position: absolute;
+		}
+
+		#target1{
+			top: 50px;
+			left: 50px;
+		}
+
+		#target2{
+			top: 200px;
+			left: 200px;
+		}
+
+
+	</style>
+</head>
+<body>
+<div class="target" id="target1"></div>
+<div class="target" id="target2"></div>
+<div id="dot"></div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+	var dot = $('#dot');
+	var score1 = 0;
+	var score2 = 0;
+
+	$(document).mousemove( function(e){
+	//e for event data
+	//console.log('x:', e.pageX, 'y:', e.pageY );
+	dot.css({top:e.pageY-20, left:e.pageX-20});
+
+	})
+
+	$('.target').click( function(){
+		var theId = $(this).attr('id');
+		if(theId == 'target1'){
+			score1++;
+			$(this).text(score1);
+		}else{
+			score2++;
+			$(this).text(score2);
+
+		}
+
+	})
+	
+</script>
+</body>
+</html>

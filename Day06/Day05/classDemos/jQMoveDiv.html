@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Template</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+
+		#box{
+			width: 50px;
+			height: 50px;
+			background-color: green;
+			position: absolute;
+			top:100px;
+			left: 100px;
+		}
+	</style>
+</head>
+<body>
+<!-- HTML GOES HERE -->
+<div id="box"></div>
+<button id="moveUp">Move Up</button>
+<button id="moveDown">Move Down</button>
+<button id="moveRight">Move Right</button>
+<button id="moveLeft">Move Left</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- all jQ plugins go here -->
+<!-- any scripts dependent on jQ or its plugins must follow after -->
+<script>
+//my custom script
+var box = $('#box');
+
+$('#moveUp').click( function(){
+	box.css({'top':'-=10'});
+});
+
+$('#moveDown').click( function(){
+	box.css({'top':'+=10'});
+});
+
+$('#moveLeft').click( function(){
+	box.css({'left':'-=10'});
+});
+
+$('#moveRight').click( function(){
+	box.css({'left':'+=10'});
+});
+	
+$(document).keyup( function(e){
+//e = event data
+
+//find out which key was pressed:
+console.log(e.which);
+//up:38, down:40, left:37, right:39
+//a:65, s:83, w:87, d:68
+switch(e.which){
+	case 38:
+	case 87:
+	$('#moveUp').trigger('click');
+	break;
+
+	case 40:
+	case 83:
+	$('#moveDown').trigger('click');
+	break;
+
+	case 37:
+	case 65:
+	$('#moveLeft').trigger('click');
+	break;
+
+	case 39:
+	case 68:
+	$('#moveRight').trigger('click');
+	break;
+
+
+}
+
+
+
+// if(e.which == 38 || e.which == 87){
+// 	console.log('moveUp');
+// 	$('#moveUp').trigger('click');
+// } else if(e.which == 40){
+// 	$('#moveDown').trigger('click');
+// 	console.log('moveDown');
+// }else if(e.which == 37){
+// 	$('#moveLeft').trigger('click');	
+// 	console.log('moveLeft');
+// }else if(e.which == 39){
+// 	console.log('moveRight');
+// 	$('#moveRight').trigger('click');
+
+// }
+
+
+
+
+}); //end keyup
+
+
+</script>
+</body>
+</html>

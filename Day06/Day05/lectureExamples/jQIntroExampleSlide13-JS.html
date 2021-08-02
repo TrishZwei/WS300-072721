@@ -42,8 +42,7 @@ if(theOpacity>"0"){
 
 function fadeButton(){
 theButton.style.opacity=1;
-//fadeOutAnimation(theButton);
-fadeOutAnimation();
+fadeOutAnimation(theButton);
 fadeTheObject = setInterval(fadeOutAnimation, 50);
 }
 
@@ -63,9 +62,8 @@ if(theOpacity<1){
 
 theButton.onclick = fadeButton;
 document.querySelector('span').onclick = function() {
-	fadeInAnimation(theButton);
-
-	fadeTheObject = setInterval(fadeInAnimation, 50);
+fadeInAnimation(theButton);
+fadeTheObject = setInterval(fadeInAnimation, 50);
 
 }
 

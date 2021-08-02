@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>binding and unbinding</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+		.box{
+			width: 400px;
+			height: 200px;
+			background-color: cornflowerblue;
+		}
+
+		.highlighted{
+			background-color: red;
+		}
+
+	</style>
+</head>
+<body>
+<h1>Binding and Unbinding</h1>
+<p>An example of an event listener being attached and unattached. Mouseover the div to see the effect. Click it to unbind the mouseover.</p>
+<div class="box" id="evtTarget"></div>
+<div class="box" id="evtTarget2"></div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+
+function highlight(){
+	$(this).toggleClass('highlighted');
+}
+
+$('#evtTarget, #evtTarget2').on('mouseover mouseleave', highlight); //call the highlight function 
+
+$('.box').on('click', function(){
+//if this hasClass highlighted (the listener has not been turned off)	
+if($(this).hasClass('highlighted')){
+	$(this).off('mouseover mouseleave', highlight)
+	       .text('You turned off the highlight')
+	       .removeClass('highlighted');
+}else{
+	$(this).on('mouseover mouseleave', highlight)
+	       .text('You added the hover effect back!')
+	       .addClass('highlighted');
+}
+
+})
+
+	
+</script>
+</body>
+</html>

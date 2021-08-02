@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Events</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+			font-size: 16px;
+		}
+
+		.smallbox{
+			background-color: cornflowerblue;
+			padding: .7em;
+			margin: .7em;
+			min-height: 150px;
+			width: 200px;
+			float: left;
+			border: 2px solid black;
+		}
+
+		#eventDetails{
+			margin: .5em;
+			padding: .1em;
+		}
+
+		.clear{
+			clear: both;
+		}
+
+	</style>
+</head>
+<body>
+<div id="Div1" class="smallbox">
+	This element is tied to a click. Click here and see what happens in the details below	
+</div>
+<div id="Div2" class="smallbox">
+	This element is tied to a mouseenter and mouseleave. Mouse in and out and see what happens in the details below.
+</div>
+<div id="Div3" class="smallbox">
+	This element is tied to a mouseover. Keep moving your mouse over this div to see what happens below
+</div>
+<div class="clear">
+Type some text here: <input type="text" id="input1"><br>
+See what happens in the event details below.	
+</div>
+<div id="eventDetails">
+	<h3>Event Details</h3>
+	<div class="detailLine">
+		<span class="lineitem">Event Type:</span>
+		<span class="lineitem" id="evtType"></span>
+		<span class="lineitem">Key/Button:</span>
+		<span class="lineitem" id="evtWhich"></span>
+	</div>
+	<div class="detailLine">
+		<span class="lineitem">Target:</span>
+		<span class="lineitem" id="evtTarget"></span>
+		<span class="lineitem">Related Target</span>
+		<span class="lineitem" id="evtRelated"></span>
+	</div>
+	<div class="detailLine">
+		<!-- the document info -->
+		<span class="lineitem">pageX:</span>		
+		<span class="lineitem" id="evtPageX"></span>		
+		<span class="lineitem">pageY:</span>		
+		<span class="lineitem" id="evtPageY"></span>		
+	</div>
+	<div class="detailLine">
+		<!-- the browser info -->
+		<span class="lineitem">clientX:</span>
+		<span class="lineitem" id="evtClientX"></span>
+		<span class="lineitem">clientY:</span>
+		<span class="lineitem" id="evtClientY"></span>
+	</div>
+	<div class="detailLine">
+	<!-- if there is a name associated with the event -->
+		<span class="lineitem">Data:</span>
+		<span class="lineitem" id="evtData"></span>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+$('#Div1').on('click dblclick', {name:'wizard'}, function(e){
+	e.stopPropagation(); //stops events from bubbling up or down the DOM. example: prevents parent element(s) from hearing the same event
+	updateEventDetails(e);
+
+})//end click/dblclick
+
+$('#Div2').on('mouseenter mouseleave', {name:'pirate'}, function(e){
+	e.stopPropagation(); //stops events from bubbling up or down the DOM. example: prevents parent element(s) from hearing the same event
+	updateEventDetails(e);
+	
+})//end enter/leave
+
+
+$('#Div3').on('mousemove', {name:'ninja'}, function(e){
+	e.stopPropagation();
+	updateEventDetails(e);
+})
+
+$('#input1').keyup( function(e){
+	e.stopPropagation();
+	updateEventDetails(e);
+	console.log($(this).val()); //value of text box
+	console.log($(this).val().length); //#of characters in textbox
+
+})
+
+function updateEventDetails(e){
+	$('.detailLine span[id]').text('');
+
+	$('#evtType').text(e.type); //tells us what type of event occured
+	$('#evtWhich').text(e.which);
+	$('#evtTarget').text(e.target.id); //id of element that received the event
+	if(e.relatedTarget){
+		$('#evtRelated').text(e.relatedTarget.tagName);
+	}
+	//where on document pointer is
+	$('#evtPageX').text(e.pageX); 
+	$('#evtPageY').text(e.pageY);
+
+	//where in the window the pointer is
+	$('#evtClientX').text(e.clientX);
+	$('#evtClientY').text(e.clientY);
+
+	if(e.data){
+		$('#evtData').text(e.data.name);
+	}
+//end data gathering
+
+}
+	
+</script>
+</body>
+</html>

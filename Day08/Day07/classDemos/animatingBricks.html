@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>Animating Bricks</title>
+<style type="text/css">
+div{
+	width: 40px;
+	height: 10px;
+	background-color: firebrick;
+	border: 1px solid white;
+	float:left;
+}
+
+button{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+#stop{
+	left: 100px;
+}
+
+</style>
+</head>
+<body>
+<button id="start">Start</button>
+<button id="stop">Stop</button>
+
+<!--javascript goes below -->
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>    
+<script type="text/javascript"> 
+var globalId;
+var isAnimating = false;
+var numBricks = 0;
+
+function generateBricks(){
+	numBricks++;
+	$('<div>').appendTo('body').attr('id', numBricks); //creates new div and appends it to the body
+	globalId = requestAnimationFrame(generateBricks);
+
+}
+
+//.click is shorthand
+$('#start').on("click", function(){
+ 
+if(isAnimating == false ){
+globalId = requestAnimationFrame(generateBricks);
+ isAnimating = true;
+}
+
+//shorthand version (same as above)
+// if(!isAnimating){
+
+// }
+
+})
+
+
+$('#stop').on("click", function(){
+//remember cancelAnimationFrame is experimental and may not work --
+	cancelAnimationFrame(globalId);
+	isAnimating = false;
+
+});
+
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

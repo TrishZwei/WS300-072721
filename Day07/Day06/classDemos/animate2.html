@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Animate</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+
+		#myDiv{
+			position: relative;
+			width: 200px;
+			height: 100px;
+			box-sizing: border-box;
+			padding: 20px;
+			background-color: cornflowerblue;
+			border:1px solid black;
+			font-size: 16px;
+		}
+
+		button{
+			margin: 5px;
+		}
+	</style>
+</head>
+<body>
+<div id="myDiv">Animate Me!</div>	
+<button id="right">Grow Right</button>
+<button id="text">Grow Text</button>
+<button id="move">Move Right</button>
+<button id="all">All Properties</button>
+<button id="transit">Transit!</button>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- plugins go here -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js"></script>
+
+<script>
+//my custom script
+
+var theDiv = $('#myDiv');
+
+$('#right').click( function(){
+//syntax for animate: $(selector).animate({property:value}, duration, easing, callback)	
+	theDiv.transition({'width':'+=50px'}, 1000, 'linear', function(){
+		console.log('I\'m done animating!'); // \ is escape character lets JS know that's not an end quote.
+	});
+
+})
+
+$('#text').click( function(){
+	theDiv.transition({'font-size': '+=5px'}, 500);
+})
+
+$('#move').click( function(){
+	theDiv.transition({'x':'+=20px'}, 200);
+})
+
+$('#all').click( function(){
+
+	theDiv.transition({'width':'+=50px', 'font-size': '+=5px', 'x':'+=20px'}, 500);
+
+})
+
+var color1 = 'cornflowerblue';
+var color2 = 'rebeccapurple';
+var isBlue = true;
+
+$('#transit').click( function(){
+	var theColor; //reserving space to assign value later
+	if(isBlue == true){
+		theColor = color2;
+		isBlue = false;
+	}else{
+		theColor = color1;
+		isBlue = true;
+	}
+	theDiv.transition({'perspective':'100px', 'rotateX':'+=180deg', 'background-color':theColor}, 3000, 'snap');
+
+})
+	
+</script>
+</body>
+</html>

@@ -54,7 +54,6 @@
 
    <script> 
     document.querySelector('.button-list').addEventListener('click', function(e){
-     //console.log(e.target.classList == 'button');
      if(e.target.classList == 'button'){
         alldata = e.target.dataset;
         console.log(alldata)
@@ -62,7 +61,6 @@
         soundPath = alldata.soundPath;
           message.textContent = `${alldata.actionType} ${alldata.missilePayload} ${alldata.missileType}!  ${alldata.missileSound}`;
 
-        // message.textContent = action + " " + payload + " " + type + "! " + sound;
         document.querySelector('#image img').setAttribute('src', alldata.path);
         var mp3 = new Audio(soundPath);
         mp3.play();

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Animate</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+
+		#myDiv{
+			position: relative;
+			width: 200px;
+			height: 100px;
+			box-sizing: border-box;
+			padding: 20px;
+			background-color: cornflowerblue;
+			border:1px solid black;
+			font-size: 16px;
+		}
+
+		button{
+			margin: 5px;
+		}
+	</style>
+</head>
+<body>
+<div id="myDiv">Animate Me!</div>	
+<button id="right">Grow Right</button>
+<button id="text">Grow Text</button>
+<button id="move">Move Right</button>
+<button id="all">All Properties</button>
+<button id="transit">Transit!</button>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- plugins go here -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js"></script>
+
+<script>
+//my global variables
+var color1 = 'cornflowerblue';
+var color2 = 'rebeccapurple';
+var isBlue = true;
+var theColor; //reserving space to assign value later
+
+/* example code:
+
+$('#myElement').on('mousedown', function() {
+    timeoutId = setTimeout(myFunction, 1000);
+}).on('mouseup mouseleave', function() {
+    clearTimeout(timeoutId);
+});
+
+*/
+
+var theDiv = $('#myDiv');
+var timeoutId = 0;
+
+function growDiv(){
+	console.log('growDiv');
+	theDiv.css({'width':'+=5px'});
+}
+
+function moveDiv(){
+	console.log('moveDiv');
+	theDiv.css({'x':'+=5px'});
+}
+
+function growText(){
+	theDiv.css({'font-size':'+=1px'});
+}
+
+function aniAll(){
+		theDiv.css({'font-size':'+=1px','x':'+=5px', 'width':'+=5px'});
+}
+
+function transitAni(){
+	theDiv.css({'background-color':'rebeccapurple', 'rotateX':'+=5deg', 'x':'+=5px'})
+
+}
+
+
+$('#right').on('mousedown', function(e){
+	//e stands for event
+	timeoutId = setInterval(growDiv, 100);
+}).on('mouseup mouseleave', function(){
+	clearInterval(timeoutId);
+})
+
+$('#move').on('mousedown', function(e){
+	//e stands for event
+	timeoutId = setInterval(moveDiv, 20);
+}).on('mouseup mouseleave', function(){
+	clearInterval(timeoutId);
+})
+
+$('#text').on('mousedown', function(){
+	timeoutId = setInterval(growText, 20);	
+}).on('mouseup mouseleave', function(){
+	clearInterval(timeoutId);
+})
+
+$('#all').on('mousedown', function(){
+	timeoutId = setInterval(aniAll, 20);	
+}).on('mouseup mouseleave', function(){
+	clearInterval(timeoutId);
+})
+
+$('#transit').on('mousedown', function(){
+	timeoutId = setInterval(transitAni, 20);	
+}).on('mouseup mouseleave', function(){
+	clearInterval(timeoutId);
+})
+
+	
+</script>
+</body>
+</html>

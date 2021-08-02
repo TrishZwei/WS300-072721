@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Dragon Flight V1</title>
+	<style type="text/css">
+		body{
+			font-size: 18px;
+			font-family: Verdana;
+			margin: 0 auto;
+		}
+
+		#dragon{
+			position: absolute;
+			top: 100px;
+			left: 100px;
+			width: 50px;
+			height: 50px;
+			background-color: limegreen;
+		}
+
+		#stage{
+			position: absolute;
+			top: 30px;
+			left: 10px;
+			right: 10px;
+			bottom: 10px;
+			background-color: #add;
+			border: 1px solid black;
+			overflow: hidden;
+		}
+
+		.flame{
+			width: 10px;
+			height: 4px;
+			background-color: red;
+			position: absolute;
+			top: 100px;
+			left: 100px;
+		}
+
+	</style>
+</head>
+<body>
+<div id="stage">
+	<div id="dragon"></div>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+	var dragon = $('#dragon'), //our dragon
+		stage = $('#stage'), //the game stage
+		gameRunning = false, //shows if the game is currently running
+		speed = 6; //number of pixels our dragon will move
+
+	//THIS IS A JSON Object (an object literal)
+	//this represents the direction our player wants to move
+	var dir = {
+				up:false,
+				down:false,
+				left:false,
+				right:false
+			}
+
+//event listeners:
+$(document).keydown( function(e){
+//e = event data
+//e.which tells us which key went down
+//arrows: up:38, down:40, left:37, right: 39
+//aswd: w:87, s: 83, a:65, d:68
+
+if(e.which == 38 || e.which == 87){
+	dir.up = true;
+}
+
+if(e.which == 40 || e.which == 83){
+	dir.down = true;
+}
+
+if(e.which == 37 || e.which == 65){
+	dir.left = true;
+}
+
+if(e.which == 39 || e.which == 68){
+	dir.right = true;
+}
+
+if(e.which == 16){
+//shift key engaged
+	speed = 10;
+}
+
+//spacebar to shoot
+if(e.which == 32){
+//	console.log('woosh');
+	shootFlame();
+}
+
+
+
+}) //end keydown
+
+
+$(document).keyup( function(e){
+//e = event data
+//e.which tells us which key was released
+//arrows: up:38, down:40, left:37, right: 39
+//aswd: w:87, s: 83, a:65, d:68
+
+if(e.which == 38 || e.which == 87){
+	dir.up = false;
+}
+
+if(e.which == 40 || e.which == 83){
+	dir.down = false;
+}
+
+if(e.which == 37 || e.which == 65){
+	dir.left = false;
+}
+
+if(e.which == 39 || e.which == 68){
+	dir.right = false;
+}
+
+if(e.which == 16){
+//shift key engaged
+	speed = 6;
+}
+
+}) //end keyup
+
+
+//gameLoop runs frequently so that the dragon moves around and will let us use our hit detect function later
+function gameLoop(){
+	var newTop = 0; //stores the value of our dragon's current top position
+	var newLeft = 0 //dragon's left
+
+	if(dir.up){
+		//if true do this code:
+		newTop -= speed;
+	}
+
+	if(dir.down){
+		//if true do this code:
+		newTop += speed;
+	}
+
+	if(dir.left){
+		//if true do this code:
+		newLeft -= speed;
+	}
+
+	if(dir.right){
+		//if true do this code:
+		newLeft += speed;
+	}
+
+	var dTop = dragon.position().top;
+	var dLeft = dragon.position().left;
+
+	var dHeight = 50; //static value
+	var dWidth = 50; //static value
+
+	var sHeight = stage.height(); //dynamic value
+	var sWidth = stage.width(); //dynamic value
+
+	//check boundaries BEFORE applying CSS to dragon div
+
+	if(dTop+newTop < 0){
+		newTop = 0;
+		newTop -= dTop;
+	}
+
+	if(dLeft+newLeft < 0){
+		newLeft = 0;
+		newLeft -= dLeft;
+	}	
+
+	if(dTop+newTop+dHeight > sHeight){
+		newTop = 0;
+		newTop+=(sHeight-dHeight-dTop);
+	}
+
+	if(dLeft+dWidth+newLeft > sWidth){
+		newLeft = 0;
+		newLeft+=(sWidth-dWidth-dLeft);
+
+	}
+
+	//apply new values to dragon
+	dragon.css({top:'+='+newTop, left:'+='+newLeft});
+
+	setTimeout(gameLoop, 1000/30); //30fps
+
+}//end gameLoop()
+
+setTimeout(gameLoop, 1000/30); //30fps
+
+
+function shootFlame(){
+	var flame = $('<div>').addClass('flame');
+
+	//add coordinates relative to dragon's current position
+	var dTop = dragon.position().top;
+	var dLeft = dragon.position().left;
+	console.log(dTop, dLeft);
+
+	//position flame top/left 50x50
+	fTop = dTop+23; //mid top/bottom
+	fLeft = dLeft+50; //right hand side
+
+	//apply the css to the flame
+	flame.css({top:fTop, left:fLeft});
+	stage.append(flame); 
+
+	flame.animate({left:stage.width()+100}, 1000, function(){
+		//when animation is complete:
+		$(this).remove();
+	})//end animation
+
+
+}//end shootFlame()
+
+</script>
+</body>
+</html>
