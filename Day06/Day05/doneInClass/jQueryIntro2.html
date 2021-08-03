@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Intro One </title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+
+		.blue{
+			color: blue;
+		}
+
+		.red{
+			color: red;
+		}
+
+		.green{
+			color: green;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="my-div">A div with Id</div>
+	<p id="para-1">A paragraph with id #para-1</p>
+	<p id="para-2">A paragraph with id #para-2</p>
+	<p class="blue">A paragraph with class blue</p>
+	<p class="blue">A paragraph with class blue</p>
+	<button id="my-btn">Change Class</button>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	//vanillaJS
+	//document.querySelector('#my-div').style.cssText = 'background-color: #41be96; border: 1px solid black';
+
+	//jQ established on page I can now use  it
+	$('#my-div').css({'background-color':'cadetblue', 'border': '1px solid black'});
+
+	$('#my-btn').click( function(){
+		//the each function grab all the paragraphs and inspects EACH one to see if they meet the criteria and then handles them accordingly. 
+		$('p').each( function(){
+			let para = $(this); //this is the individual paragraph
+			let theText = para.text();
+			console.log(theText);
+			if(para.hasClass('blue')){
+				para.removeClass('blue').addClass('red').text('A paragraph with class red');
+			}else if(para.hasClass('red')){
+				para.removeClass('red').addClass('blue').text('A paragraph with class blue');
+			}else{
+				para.addClass('green');
+			}
+
+		})
+	})
+
+	</script>
+</body>
+</html>

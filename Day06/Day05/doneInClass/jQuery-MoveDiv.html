@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Move Div</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+
+		.stage{
+			position: absolute;
+			top: 30px;
+			left: 10px;
+			right: 10px;
+			bottom: 10px;
+			border:  1px solid black;
+		}
+
+		.box{
+			width: 50px;
+			height: 50px;
+			background-color: rebeccapurple;
+			position: absolute;
+			top: 100px;
+			left: 100px;
+		}
+
+	</style>
+</head>
+<body>
+	<button id="move-up">Move Up</button>
+	<button id="move-down">Move Down</button>
+	<button id="move-left">Move Left</button>
+	<button id="move-right">Move Right</button>
+	<div class="stage">
+		<div class="box"></div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		const box = $('.box'); // $box brad frost defines jQ variables starting with the $
+
+		$('#move-up').click( function(){
+			let newTop = box.position().top; //stores the value of our box's current top position
+			console.log(newTop);
+			if(newTop-10 < 0){
+				box.css({'top':'0'})
+			}else{
+			//here is where I am moving the box up
+			box.css({'top':'-=10'});
+			}
+		})
+
+		$('#move-down').click( function(){
+			let newTop = box.position().top;
+			let sHeight = $('.stage').height();
+			//console.log(sHeight)
+			
+			if((newTop+50+10) > sHeight){
+
+				box.css({'top': sHeight-50})
+
+			}else{
+			
+			box.css({'top': '+=10'});				
+			}
+
+		}) 
+
+		$('#move-left').click( function(){
+			let newLeft = box.position().left; //stores the value of our box's current top position
+			if(newLeft-10 < 0){
+				box.css({'left':'0'})
+			}else{
+			//here is where I am moving the box left
+			box.css({'left':'-=10'});
+			}
+		}) 
+
+		$('#move-right').click( function(){
+			let newLeft = box.position().left;
+			let sWidth = $('.stage').width();
+
+			if(newLeft+50+10 > sWidth){
+				box.css({'left': sWidth-50});
+			}else{
+				box.css({'left': '+=10'});
+			}
+			
+		})
+
+		$(document).keyup( function(e){
+			//listens for keyup event on document
+			//e stand for event
+			console.log(e.which);
+			//up:38, down:40, left:37, right:39
+
+			// if(e.which == 38 ){
+			// 	$('#move-up').trigger('click')
+
+			// }
+
+			// if(e.which == 40 ){
+			// 	$('#move-down').trigger('click')
+
+			// }
+
+			// if(e.which == 37 ){
+			// 	$('#move-left').trigger('click')
+
+			// }
+
+			// if(e.which == 39 ){
+			// 	$('#move-right').trigger('click')
+
+			// }				
+
+			// if(e.which == 38 ){
+			// 	$('#move-up').trigger('click')
+
+			// }else if(e.which == 40 ){
+			// 	$('#move-down').trigger('click')
+			// }else if(e.which == 37 ){
+			// 	$('#move-left').trigger('click')
+
+			// }else if(e.which == 39 ){
+			// 	//why else if here rather than just else?
+			// 	$('#move-right').trigger('click')
+			// }else{
+			// 	console.log('not an arrow key')
+			// }					
+
+			//if example:
+
+			if(e.which == 38 || e.which == 87){
+				//alert('I am going up!');
+			}	
+
+			//switch example:
+			//a:65, s:83, w:87, d:68
+			switch(e.which){
+				case 38:
+				case 87:
+				$('#move-up').trigger('click');
+				break;
+
+				case 40:
+				case 83:
+				$('#move-down').trigger('click')
+				break;
+
+				case 37:
+				case 65:
+				$('#move-left').trigger('click')
+				break;
+
+				case 39:
+				case 68:
+				$('#move-right').trigger('click')
+				break;
+
+				default:
+				console.log('do nothing');
+
+			}
+
+		})
+	
+	</script>
+</body>
+</html>

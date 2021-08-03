@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Intro One </title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+
+		.blue{
+			color: blue;
+		}
+
+		.red{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="my-div">A div with Id</div>
+	<p id="para-1">A paragraph with id #para-1</p>
+	<p id="para-2">A paragraph with id #para-2</p>
+	<p class="blue">A paragraph with class blue</p>
+	<p class="blue">A paragraph with class blue</p>
+	<button id="my-btn">Change Class</button>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	//vanillaJS
+	//document.querySelector('#my-div').style.cssText = 'background-color: #41be96; border: 1px solid black';
+
+	//jQ established on page I can now use  it
+	$('#my-div').css({'background-color':'cadetblue', 'border': '1px solid black'});
+
+	$('#my-btn').click( function(){
+		$('#para-1').fadeToggle( 2000, 'linear');
+
+		if($('p').hasClass('blue')){
+			$('p.blue').removeClass('blue')
+					   .addClass('red')
+					   .text('A paragraph with class red');
+			$('#para-2').fadeIn(2000,'linear', function(){
+				//call back function happens after animation:
+				$(this).html('must be <span class="red">Jelly</span>.');
+			})		   
+		}else{
+			$('p.red').removeClass('red').addClass('blue').text('A paragraph with class blue');
+			$('#para-2').fadeOut(2000,'linear');
+		} 
+
+
+	})
+
+//does this work? or does it produce an error?
+	//js object /jquery method does not work
+	//document.getElementById('para-2').fadeOut(2000, 'linear');
+	let myText = $('#para-2').innerHTML; //cannot find innerHTML of jquery Object
+	console.log($('#para-2')) //look at the jQuery Object in the console.
+	myText = $('#para-2')[0].innerHTML;
+
+	//declaritive functions
+	function myFunc(){
+		//code runs when called by myFunc()
+		alert('myFunc');
+	}
+
+
+	//expressive functions
+	let myFunc2 = function(){
+		//other code runs....
+		alert('myFunc2');
+	}
+
+/*
+	//anon functions
+	function(){
+		//does stuff. 
+	}
+
+*/
+	</script>
+</body>
+</html>
