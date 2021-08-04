@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.inArray demo</title>
+  <style>
+  div {
+    color: blue;
+  }
+  span {
+    color: red;
+  }
+  </style>
+  <style>
+  div {
+    color: blue;
+  }
+  </style>
+</head>
+<body>
+ 
+<div>"John" found at <span></span></div>
+<div>4 found at <span></span></div>
+<div>"Karl" not found, so <span></span></div>
+<div>"Pete" is in the array, but not at or after index 2, so <span></span></div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+var arr = [ 4, "Pete", 8, "John" ];
+var $spans = $( "span" );
+$spans.eq( 0 ).text( jQuery.inArray( "John", arr ) );
+$spans.eq( 1 ).text( jQuery.inArray( 4, arr ) );
+$spans.eq( 2 ).text( jQuery.inArray( "Karl", arr ) );
+$spans.eq( 3 ).text( jQuery.inArray( "Pete", arr, 2 ) ); 
+
+//this works fine on a standard array like arr:
+console.log(arr.indexOf('Pete'));
+console.log(arr.indexOf('Pete', 2));
+
+</script>
+ 
+</body>
+</html>

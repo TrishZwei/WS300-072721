@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.uniqueSort demo</title>
+  <style>
+  div {
+    color: blue;
+  }
+  </style>
+</head>
+<body>
+ 
+<div>There are 6 divs in this document.</div>
+<div></div>
+<div class="dup"></div>
+<div class="dup"></div>
+<div class="dup"></div>
+<div></div>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+// unique() must take a native array
+
+var divs = $( "div" ).get(); //without a param, get returns an array of all the elements
+ console.log(divs);
+
+// Add 3 elements of class dup too (they are divs)
+divs = divs.concat( $( ".dup" ).get() ); //this duplicates the divs with the class of dup and adds it to the array that had all the divs. SO the div.dup is added twice to the original array. This is how all the elements get stripped out. This might only work with cloneNode and the duplicates are added to an array.
+console.log(divs)
+
+//eq allows you to pass an index for that item.
+$( "div" ).eq( 1 ).text( "Pre-unique there are " + divs.length + " elements." );
+ 
+divs = jQuery.uniqueSort( divs );
+console.log(divs)
+$( "div" ).eq( 2 ).text( "Post-unique there are " + divs.length + " elements." )
+  .css( "color", "red" );
+</script>
+ 
+</body>
+</html>
