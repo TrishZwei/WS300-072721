@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guage</title>
+<style type="text/css">
+body{
+    font-family: Verdana;
+}
+
+h1{
+	text-align: center;
+	padding-top: 1.5em;
+}
+
+#stage{
+ width: 1000px;
+ height: 500px;
+ overflow: hidden;
+ position: relative;
+ border: 1px solid black;
+ margin: 0 auto;
+}
+
+#outer{
+    border-radius: 50%;  
+    height:500px;
+    width: 500px;
+    position: absolute;
+    bottom: -250px;
+    left: 250px;
+    background-color: #fbf9f9;
+    border: 2px solid #9e9e9e;
+} 
+
+
+#inner{
+    border-radius: 50%;  
+    height:300px;
+    width: 300px;
+    position: absolute;
+    bottom: -150px;
+    left: 350px;
+    background-color: red;
+    border: 2px solid #9e9e9e;
+} 
+
+#turret{
+    border-radius: 50%;  
+    height:100px;
+    width: 100px;
+    position: absolute;
+    bottom: -50px;
+    left: 450px;
+    background-color: #666;
+} 
+
+
+#needle{
+width: 200px;
+height: 20px;
+position: absolute;
+bottom: -10px;
+background-color: #999;
+transform:rotate(0deg);
+border-radius: 100% 50% 50% 100%;
+transform-origin: 100% 50%;
+left:300px;
+ 
+}
+
+/*https://codepen.io/iliadraznin/pen/JcqbE*/
+
+.minute-marks li {
+    display: block;
+    width: .2em;
+    height: .6em;
+    background: #929394;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -.4em 0 0 -.1em;
+}
+
+</style>
+</head>
+<body>
+<div id="stage">
+	<h1 id="banner">We've Reached <span></span>% of our Goal!</h1>
+<div id="outer">
+	<ul class="minute-marks"> 
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+</div>    
+<div id="inner"></div>    
+<div id="needle"></div>
+<div id="turret"></div>    
+</div>    
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js"></script> -->
+<script type="text/javascript"> 
+
+var goalAmt = 1000;
+var amt = 675.59;
+var bgColor = 'red';
+var perc = amt/goalAmt;
+
+$('#banner span').text(Math.round(perc*100));
+
+if( perc > .665){
+ bgColor = 'green';
+}else if( perc > .335){
+ bgColor = 'yellow';
+}
+
+if(perc > 1){
+	perc = 1.001;
+	bgColor = '#a570da';
+}
+	$('#inner').css({'background-color':bgColor})
+
+
+$('#needle').css({ 'transform': 'rotate('+ 180*perc+'deg)' });
+
+// manipulating all the tic marks
+var rotateVal = 0;
+//var translateVert = -12.7;
+//example CSS text: transform: rotate(0deg) translate(0px, -12.7em);
+$('.minute-marks li').each( function(i){
+//	$(this).css({'rotate':rotateVal, y:translateVert+'em'}); //with transit plugin
+	console.log('transform:rotate('+rotateVal+'deg) translate(0px, -12.7em);')
+	this.style.cssText = 'transform:rotate('+rotateVal+'deg) translate(0px, -12.7em);'
+
+	rotateVal +=6;
+
+	if(i == 15 ){
+
+	rotateVal += 174;
+
+	}
+
+})
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
