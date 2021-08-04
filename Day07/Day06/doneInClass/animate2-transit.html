@@ -14,7 +14,7 @@
 		height: 100px;
 		box-sizing: border-box;
 		padding: 10px;
-		background-color: cornflowerblue;
+		background-color: rebeccapurple;
 		border: 1px solid black;
 		font-size:16px;
 		pointer-events: none;
@@ -54,14 +54,33 @@ $('.custom').click( function () {
 	myDiv.transition({x:'+=100px'}, 750, 'cubic-bezier(.72,1.26,.22,-0.18)');
 })
 
+//$ = jQuery
+
 jQuery('.ease-in-out-quart').click( function () {
 	myDiv.transition({x:'+=100px'}, 750, 'easeInOutQuart');
 })
-//$ = jQuery
+
+
+var color1 = 'rebeccapurple';
+var color2 = 'cadetblue';
+var isPurple = true; 
+
 
 $('.flip').click( function(){
-	
-	myDiv.transition({'perspective':'100px', 'rotateX':'+=180deg', 'background-color': 'rebeccapurple'}, 2000)
+	let theColor = '';
+
+	if(isPurple){
+		//isPurple is true
+		theColor = color2;
+		isPurple = false;	
+
+	}else{
+		//isPurple is false
+		theColor = color1;
+		isPurple = true;	
+	}
+
+	myDiv.transition({'perspective':'100px', 'rotateX':'+=180deg', 'background-color': theColor}, 2000)
 
 })
 
