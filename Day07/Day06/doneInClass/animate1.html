@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Animate 1</title>
+	<style type="text/css">
+	body{
+		font-family: Verdana;
+	}
+
+	#my-div{
+		position: relative;
+		width: 200px;
+		height: 100px;
+		box-sizing: border-box;
+		padding: 10px;
+		background-color: cornflowerblue;
+		border: 1px solid black;
+		font-size:16px;
+		pointer-events: none;
+	}	
+
+	button{
+		margin: 5px;
+	}	
+	</style>
+</head>
+<body>
+ <div id="my-div">Animate Me!</div>	
+<button class="right" >Grow Right</button>
+<button class="text" >Grow Text</button>
+<button class="move" >Move Right</button>
+<button class="all" >All Properties</button>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	//custom script to work with jQuery
+	const myDiv = $('#my-div');
+
+	//clicking on right button, want width of div to grow
+	$('.right').click( function(){
+		//syntax for animate is: $(selector).animate({property: value}[, duration,] [easing,] [callback]) optional args in [ ]
+		myDiv.animate({'width':'+=50px'}, 1000, 'linear', function(){
+			console.log("I'm done animating!");
+		})
+	})
+
+	$('.text').click( function(){
+		myDiv.animate({'font-size':'+=5px'}, 2000);
+	})
+
+	$('.move').click( function(){
+		myDiv.animate({'left':'+=50px'}, 1000)
+	})
+
+	$('.all').click( function(){
+		myDiv.animate({'width':'+=50px', 'left': '+=50px', 'font-size':'+=5px'}, 1000);
+
+	})
+
+
+</script>
+</body>
+</html>

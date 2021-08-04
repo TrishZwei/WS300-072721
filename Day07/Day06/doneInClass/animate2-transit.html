@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Animate - easing</title>
+	<style type="text/css">
+	body{
+		font-family: Verdana;
+	}
+
+	#my-div{
+		position: relative;
+		width: 200px;
+		height: 100px;
+		box-sizing: border-box;
+		padding: 10px;
+		background-color: cornflowerblue;
+		border: 1px solid black;
+		font-size:16px;
+		pointer-events: none;
+	}	
+
+	button{
+		margin: 5px;
+	}	
+	</style>
+</head>
+<body>
+ <div id="my-div">Animate Me!</div>	
+<button class="linear" >show linear</button>
+<button class="swing" >show swing</button>
+<button class="custom" >show custom</button>
+<button class="ease-in-out-quart" >show easeInOutQuart</button>
+
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="scripts/jquery.transit.min.js"></script>
+
+<script type="text/javascript">
+	//custom script to work with jQuery
+	const myDiv = $('#my-div');
+
+	//clicking on right button, want width of div to grow
+	$('.linear').click( function(){
+		myDiv.animate({'left':'+=100px'}, 750, 'linear')
+	})
+	$('.swing').click( function(){
+		myDiv.animate({'left':'+=100px'}, 750); //swing is the default
+	})
+
+//types of easings available to us via transit: linear ease in out in-out snap easeOutCubic easeInOutCubic easeInCirc easeOutCirc easeInOutCirc easeInExpo easeOutExpo easeInOutExpo easeInQuad easeOutQuad easeInOutQuad easeInQuart easeOutQuart easeInOutQuart easeInQuint easeOutQuint easeInOutQuint easeInSine easeOutSine easeInOutSine easeInBack easeOutBack easeInOutBack cubicbezier
+
+$('.custom').click( function () {
+	myDiv.transition({x:'+=100px'}, 750, 'cubic-bezier(.72,1.26,.22,-0.18)');
+})
+
+$('.ease-in-out-quart').click( function () {
+	myDiv.transition({x:'+=100px'}, 750, 'easeInOutQuart');
+})
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
