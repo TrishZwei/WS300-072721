@@ -31,7 +31,7 @@
 <button class="swing" >show swing</button>
 <button class="custom" >show custom</button>
 <button class="ease-in-out-quart" >show easeInOutQuart</button>
-
+<button class="flip" >Flip</button>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="scripts/jquery.transit.min.js"></script>
@@ -54,15 +54,16 @@ $('.custom').click( function () {
 	myDiv.transition({x:'+=100px'}, 750, 'cubic-bezier(.72,1.26,.22,-0.18)');
 })
 
-$('.ease-in-out-quart').click( function () {
+jQuery('.ease-in-out-quart').click( function () {
 	myDiv.transition({x:'+=100px'}, 750, 'easeInOutQuart');
 })
+//$ = jQuery
 
+$('.flip').click( function(){
+	
+	myDiv.transition({'perspective':'100px', 'rotateX':'+=180deg', 'background-color': 'rebeccapurple'}, 2000)
 
-
-
-
-
+})
 
 
 </script>
