@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Array Slide 14 - jQ Each Example</title>
+<title>Array Slide 19 - jQ Each Example</title>
 <style>
 body{
     font-size: 18px;
@@ -24,13 +24,13 @@ body{
     <li>Item 5</li>
 </ul>
 <p>look in the console to see how jQ gets each item in the list</p>
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
 var itemList = $('#list li');
 //.each is mentioned on slide 8
 itemList.each( function(i){
 	//the i in the function parameter above allows us to capture the index of the item in the array it is iterating over
-	var theLiText =$(this).text(); //gets the text from that item.
+	var theLiText = $(this).text(); //gets the text from that item.
 	console.log('index:', i, theLiText);
 }); //note that the each is a loop
 </script>

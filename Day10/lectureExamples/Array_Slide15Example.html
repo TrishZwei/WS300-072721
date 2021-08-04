@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Array Slide 15 - No jQ Example</title>
+<title>Array Slide 15 Example</title>
 <style>
 body{
     font-size: 18px;
@@ -10,29 +10,42 @@ body{
     margin: 0 auto;
     padding: 0 15px;
 }
-
 </style>
 </head>
 
 <body>
-<h1>A List</h1>
-<ul id="list">
-    <li>Item 1</li>
-    <li>Item 2</li>
-    <li>Item 3</li>
-    <li>Item 4</li>
-    <li>Item 5</li>
-</ul>
-<!-- note no jquery! 
-try to open the console and access items... 
-for example: bodyChildren[0] is what element?
--->
+<p>Look in the console. Then refresh the page. You'll see the proper results.</p>
 <script>
-var itemList = document.getElementById('list').children;
-console.log(itemList);
-var bodyChildren = document.body.children;
-console.log(bodyChildren);
-console.log(itemList[1]);
+//an empty array for a set of numbers:
+numArray = []; 
+
+
+//a for loop to randomly generate some numbers to put into our array for the numeric sort...
+for (var i = 0; i < 10; i++) {
+	numArray.push(randnum(1,100));
+}
+
+console.log(numArray);
+
+var alphaSort = numArray.sort(); //looks at the numbers as if they were strings...
+console.log(alphaSort);
+
+var numSort = numArray.sort(function(a,b){ return a-b}); 
+//this is some kinda magic...
+//this page has the formula for both ascending and descending numeric sort:
+//http://javascript.about.com/library/blsort.htm
+//this page has a good explanation:
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+
+console.log(numSort);
+
+//random number generator:
+    function randnum(min,max){
+        return Math.round(Math.random()* (max - min))+min            
+    }//end randnum
+
+
 </script>
+
 </body>
 </html>

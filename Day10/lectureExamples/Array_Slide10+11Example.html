@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Array Slide 10 Example</title>
+<title>Array Slide 10 & 11 Example</title>
 <style>
 body{
     font-size: 18px;
@@ -17,7 +17,6 @@ body{
 <body>
 <p>Look in the console. Then refresh the page. You'll see the proper results.</p>
 <!-- note no jquery! -->
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script>
 var myArray = ['lettuce', 'item1', 'item2', '', '', '', '', '', 'Milk', 'milk']; 
 //this is the array as we last left it in the previous example. 
@@ -38,8 +37,11 @@ var shift = myArray.shift();
 console.log('the current value of myArray is: ',myArray, 'shifted:'+shift); 
 console.log(myArray[0]);
 
+myArray.splice(2,0,"butter");
+console.log('The current value of myArray is: ',myArray, "spliced in butter. If you don't see the change here, refresh the page.");
 
-myArray.splice(2,1); //removes 1 item from the array starting at the [2] index
+myArray.splice(3,1); //removes 1 item from the array starting at the [3] index. Changed it from the slide so that we can see butter added.
+
 console.log('The current value of myArray is: ', myArray, 'after splice(2,1)');
 
 </script>

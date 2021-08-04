@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array Slide 15 - No jQ Example</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+
+<body>
+<h1>A List</h1>
+<ul id="list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+    <li>Item 5</li>
+</ul>
+<!-- note no jquery! 
+try to open the console and access items... 
+for example: bodyChildren[0] is what element?
+-->
+<script>
+var itemList = document.getElementById('list').children;
+console.log(itemList);
+var bodyChildren = document.body.children;
+console.log(bodyChildren);
+console.log(itemList[1]);
+</script>
+</body>
+</html>
