@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+<style type="text/css">
+	body{
+		font-family: Verdana,sans-serif;
+		font-size: 20px;
+		margin: 0;
+	}
+
+	.strike{
+		text-decoration: line-through;
+	}
+
+	h1{
+		text-align: center;
+	}
+
+	input{
+		display: block;
+		height: 40px;
+		font-size: 1em;
+		margin: 0 auto 5px;
+	}
+
+	.button{
+		background-color: cadetblue;
+		border-radius: 20px;
+		color: white;
+		width: 100px;
+		height: 40px;
+		padding: 5px auto;
+		margin: 5px auto;
+		cursor: pointer;
+		line-height: 2em;
+	}
+
+	.wrapper{
+		margin: 0 auto;
+		width: 500px;
+	}
+
+</style>
+</head>
+<body>
+ <div class="wrapper">
+	<h1>Store List</h1>
+	<ul class="list">
+		<!-- nothing goes in here -->
+	</ul> 	
+	<!-- 
+	what is the name attribute used for? name is a key for the value of this text input in the get or post superglobal array in php  name="my_name"  value="Trish" creates a key/value pair 
+	-->
+	<input type="text" placeholder="item" class="new-item">
+	<input type="number" placeholder="# of items" class="qty">
+	<div class="button add">Add Item</div>
+ </div>
+
+<!-- jquery! -->
+<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<!-- any jQ Plugins go here -->
+<script type="text/javascript">
+ var storeList = []; 
+ //new Array() will also create an array, but this is not the preferred method. The literal [] is preferred.
+//new Array(40) will create an array of 40 empty items, don't do it
+
+$('.add').click( function(){
+	//alert('click');
+
+	//vanilla JS: document.querySelector('.new-item').value;
+
+	var newItem = $('.new-item').val(); //val() is a method used on text inputs in order to get their current value
+
+	if(newItem != ''){
+		//not empty, do stuff!
+		newItem = newItem.toLowerCase(); //to prevent sorting problems
+		var quantity = $('.qty').val(); //gets the value of quantity 
+
+//this is for later, when we add quantity
+		if(quantity == 0 || isNaN(quantity) || quantity == ''){
+			quantity = 1; //ensures validity of quantity, allows user to skip this box if they want to
+
+		}
+		console.log(newItem, quantity);
+		//this adds a - and the value of quantity to the new item
+		newItem += ' - '+quantity
+
+		storeList.push(newItem);
+		console.log(storeList);
+		storeList.sort(); //sorts the order of the array alphabetically and stores the new order in itself
+		console.log(storeList);
+		//take the array and create a new li for every item in the array and append it to the ul
+        
+        console.log(storeList[0])
+
+        //clear out the ul before we add lis
+        $('.list').text('');
+
+        // i <= storelist.length - 1
+        for(let i = 0; i < storeList.length; i++ ){
+        	//because we used let the variable i only exists in memory between the curly braces of the for loop
+
+        	var theItem = storeList[i];
+        	//create a new list item
+
+        	var newLi = $('<li>'); //full <li> makes an element vs li which selects all the lis on the page
+        	newLi.text(theItem);
+        	newLi.appendTo('.list');
+
+        }
+        //i does not exist outside of the for loop. if i was declared with var we would still have access to it out here.
+
+	}else{
+		alert('You need to type what item you want to add.')
+	}
+
+})
+
+
+
+
+
+	
+</script>
+</body>
+</html>

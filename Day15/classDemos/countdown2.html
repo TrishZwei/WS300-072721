@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Countdown to Event</title>
+	<style type="text/css">
+		body, html{
+			font-family: Verdana;
+			text-align: center;
+			background-color: black; 
+			color: white;
+		}
+
+		h1{
+			color: #FF9A00;
+
+		}
+
+		#until{
+			margin: 0 auto;
+		}
+
+		#until div{
+			display: inline-block;
+			background: #881EE4;
+  			padding: 1em;
+  			margin: 0;
+  			min-width: 100px;
+		}
+
+		*, *:before, *:after {
+		  box-sizing: inherit;
+		}
+
+		.cf:before,
+		.cf:after {
+		content: " ";
+		display: table;
+		}
+
+		.cf:after {
+		clear: both;
+		}
+
+	</style>
+</head>
+<body>
+<!-- HTML GOES HERE -->
+<h1>&nbsp;</h1>
+<div id="until" class="cf">
+	<div id="years">
+		<h3>Years:</h3>
+		<span>0</span> 
+	</div> 
+	<div id="months">
+		<h3>Months:</h3>
+		<span>0</span> 
+	</div> 
+	<div id="days">
+		<h3>Days:</h3>
+		<span>0</span> 
+	</div> 
+	<div id="hours">
+		<h3>Hours:</h3>
+		<span>0</span> 		
+	</div> 
+	<div id="mins">
+		<h3>Minutes:</h3>
+		<span>0</span> 		
+	</div> 
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+//establish an end date and time:
+//Halloween: October 31, 2019 6PM
+//var end = new Date("October 31, 2019 18:00:00")
+var message = "Class is Ending in:";
+
+var end = new Date("May 28, 2020 11:59:59")
+endMs = end.getTime(); //gets future date in ms
+var now = new Date()
+nowMs = now.getTime(); //gets now in ms
+var diff = end - now; //gets difference
+
+var days = Math.floor(diff / (1000*60*60*24));
+var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+//the values for days in month of year 
+var DaysInMonth = [
+		31,28,31,
+		30,31,30,
+		31,31,30,
+		31,30,31];
+
+//TODO: write code to change DaysInMonth[1] to 29 on leap years?	
+
+var DaysInMonthYears = [];
+var years = 0;
+
+	if(days > 365){
+		years = parseInt(days/365);
+		console.log(years);
+
+	}
+	
+var currentYear = now.getFullYear();
+	for(let i=0; i <= years; i++ ){
+		//TODO: determine if year being added is a leap year 
+		var isLeapYear = false;
+		var testYear = currentYear + i;
+
+		if(testYear%4 == 0 && testYear%100 != 0){
+
+		}
+
+
+
+		DaysInMonthYears = DaysInMonthYears.concat(DaysInMonth);
+		console.log(DaysInMonthYears);
+	}
+
+ 
+
+//TODO: Concat for each year
+
+
+var currentMonth = now.getMonth();
+
+var months = 0; 
+
+if(days > DaysInMonthYears[now.getMonth()]){
+// alert(days - DaysInMonth[currentMonth]);
+	for(var i = currentMonth; i < DaysInMonthYears.length; i++){
+		if(days > DaysInMonthYears[i]){
+		console.log(days -= DaysInMonthYears[i]);
+		months++;			
+		}else{
+			console.log(days);
+			break;
+		}
+	}
+}
+
+if (months > 11){
+	months %= 12;
+}
+
+if(years == 0){
+	$('#years').hide();	
+}
+if(months == 0){
+	$('#months').hide();	
+}
+
+$('h1').text(message);
+$('#years span').text(years);
+$('#days span').text(days);
+$('#hours span').text(hours);
+$('#mins span').text(minutes);
+$('#months span').text(months);
+
+</script>
+</body>
+</html>

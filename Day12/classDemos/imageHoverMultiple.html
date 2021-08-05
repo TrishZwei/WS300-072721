@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Image Hover</title>
+	<style type="text/css">
+			body{
+				font-size: 18px;
+				font-family: Verdana;
+				margin: 0 auto;
+			}
+
+			.hoverbox{
+				width: 350px;
+				height: 250px;
+				border:1px solid black;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.hoverOverlay{
+				width: 350px;
+				height: 250px;
+				background-color: rgba(0,0,0,.7);
+				position: absolute;
+				top: 200px;
+				left: 0;
+				color: white;
+			}
+
+			.hoverOverlay h3{
+				padding: 0 .5em;
+			}
+
+
+			#box1{
+				background-image: url('images/bunny.jpg');
+			}
+			#box2{
+				background-image: url('images/kitten.jpg');
+			}
+			#box3{
+				background-image: url('images/puppy.jpg');
+			}
+			#box4{
+				background-image: url('images/hamster.jpg');
+			}
+
+
+
+	</style>
+
+</head>
+<body>
+<div class="hoverbox" id="box1">
+	<div class="hoverOverlay">
+		<h3>Bunny</h3>
+		<p>Sooooooo cuuuuuuuuute!</p>
+	</div>	
+</div>
+<div class="hoverbox" id="box2">
+	<div class="hoverOverlay">
+		<h3>Kitten</h3>
+		<p>Sooooooo fluffy I'm gonna die!</p>
+	</div>	
+</div>
+<div class="hoverbox" id="box3">
+	<div class="hoverOverlay">
+		<h3>Puppy</h3>
+		<p>Adorabs!</p>
+	</div>	
+</div>
+<div class="hoverbox" id="box4">
+	<div class="hoverOverlay">
+		<h3>Hamster</h3>
+		<p>Button nose!!</p>
+	</div>	
+</div>
+
+
+<!-- jQuery goes here -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- jQuery plugins go here -->
+<script>
+//when we hover on the hoverbox
+//animate the hoverOverlay to top:0
+
+$('.hoverbox').mouseenter( function(){
+	$(this).children('.hoverOverlay').stop().animate({top:0}, 400);
+
+}).mouseleave( function(){
+	$(this).children('.hoverOverlay').stop().animate({top:200}, 400);
+})
+
+
+
+</script>
+</body>
+</html>

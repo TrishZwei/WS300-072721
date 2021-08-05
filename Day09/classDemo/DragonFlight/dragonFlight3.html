@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Dragon Flight V3</title>
+	<style type="text/css">
+		html, body{
+			font-size: 30px;
+			font-family: Verdana;
+			margin: 0 auto;
+			color: orangered;
+		}
+
+		p{
+			text-align: center;
+			font-weight: bold;
+			text-shadow: 2px 2px rgba(0,0,0,.5);
+		}
+
+		h1{
+			font-size: 2em;
+			text-align: center;
+			width: 100%;
+			text-shadow: 5px 5px rgba(0,0,0,.5)
+		}
+
+		.button{
+			width: 300px;
+			height: 100px;
+			line-height: 100px;
+			font-size: 50px;
+			margin: 0 auto;
+			background-color: orangered;
+			color: white;
+			cursor: pointer;
+			text-align: center;
+			border-radius: 30px;
+		}
+
+		.button:hover{
+			background-color: orange;
+		}
+
+		#dragon{
+			position: absolute;
+			top: 100px;
+			left: 100px;
+			width: 50px;
+			height: 50px;
+			background-color: limegreen;
+			display: none;
+		}
+
+		#stage{
+			position: absolute;
+			top: 30px;
+			left: 10px;
+			right: 10px;
+			bottom: 10px;
+			background-color: #add;
+			border: 1px solid black;
+			overflow: hidden;
+		}
+
+		.flame{
+			width: 10px;
+			height: 4px;
+			background-color: red;
+			position: absolute;
+			top: 100px;
+			left: 100px;
+		}
+
+		.enemy{
+			position: absolute;
+			top: 100px;
+			left: 100px;
+			border: 1px solid black;
+			width: 50px;
+			height: 50px;
+		}
+
+		.enemy.blue{
+			background-color: cadetblue;
+		}
+
+		.enemy.purple{
+			background-color: purple;
+		}
+
+		#lifebar{
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			border: 1px solid black;
+			width: 200px;
+			height: 30px;
+			display: none;
+		}
+
+		.bar{
+			height: 30px;
+			width: 50%;
+			background-color: #ff3f3f;
+		}
+	</style>
+</head>
+<body>
+<div id="stage">
+	<div id="lifebar">
+		<div class="bar"></div>
+	</div>
+	<div id="dragon"></div>
+	<div class="intro">
+		<h1>Dragon Flight</h1>	
+		<p>Kill birds with your flame before they hurt you.</p>
+		<p>Move with arrow keys or ASWD and use spacebar to shoot flame. Shift make you fly faster.</p>
+		<div class="button start">Start Game</div>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+	var dragon = $('#dragon'), //our dragon
+		stage = $('#stage'), //the game stage
+		gameRunning = false, //shows if the game is currently running
+		speed = 6, //number of pixels our dragon will move
+		createEnemyInt, //stores our interval for enemy creation
+		score = 0,
+		lives = 3;
+
+
+	//THIS IS A JSON Object (an object literal)
+	//this represents the direction our player wants to move
+	var dir = {
+				up:false,
+				down:false,
+				left:false,
+				right:false
+			}
+
+//event listeners:
+$(document).keydown( function(e){
+//e = event data
+//e.which tells us which key went down
+//arrows: up:38, down:40, left:37, right: 39
+//aswd: w:87, s: 83, a:65, d:68
+
+if(e.which == 38 || e.which == 87){
+	dir.up = true;
+}
+
+if(e.which == 40 || e.which == 83){
+	dir.down = true;
+}
+
+if(e.which == 37 || e.which == 65){
+	dir.left = true;
+}
+
+if(e.which == 39 || e.which == 68){
+	dir.right = true;
+}
+
+if(e.which == 16){
+//shift key engaged
+	speed = 10;
+}
+
+//spacebar to shoot
+if(e.which == 32){
+//	console.log('woosh');
+	shootFlame();
+}
+
+}) //end keydown
+
+
+$(document).keyup( function(e){
+//e = event data
+//e.which tells us which key was released
+//arrows: up:38, down:40, left:37, right: 39
+//aswd: w:87, s: 83, a:65, d:68
+
+if(e.which == 38 || e.which == 87){
+	dir.up = false;
+}
+
+if(e.which == 40 || e.which == 83){
+	dir.down = false;
+}
+
+if(e.which == 37 || e.which == 65){
+	dir.left = false;
+}
+
+if(e.which == 39 || e.which == 68){
+	dir.right = false;
+}
+
+if(e.which == 16){
+//shift key engaged
+	speed = 6;
+}
+
+}) //end keyup
+
+//function to generate enemies
+
+function createEnemy(){
+	var enemy = $('<div>').addClass('enemy');
+	var randEnemy = Math.random();
+
+	if(randEnemy > .5){
+		enemy.addClass('blue');
+	}else{
+		enemy.addClass('purple');
+	}
+
+//apply a start position for enemy
+	var eLeft = stage.width()+100;
+	var eTop = Math.random() * (stage.height()-50); //enemy height is 50px
+	enemy.css({top:eTop, left:eLeft});
+
+	stage.append(enemy);
+
+	enemy.animate({left: -100}, 2500, 'linear', function(){
+		//when done animating...
+		$(this).remove();
+	})
+
+} //end create enemy
+
+
+
+//gameLoop runs frequently so that the dragon moves around and will let us use our hit detect function later
+function gameLoop(){
+	var newTop = 0; //stores the value of our dragon's current top position
+	var newLeft = 0 //dragon's left
+
+	if(dir.up){
+		//if true do this code:
+		newTop -= speed;
+	}
+
+	if(dir.down){
+		//if true do this code:
+		newTop += speed;
+	}
+
+	if(dir.left){
+		//if true do this code:
+		newLeft -= speed;
+	}
+
+	if(dir.right){
+		//if true do this code:
+		newLeft += speed;
+	}
+
+	var dTop = dragon.position().top;
+	var dLeft = dragon.position().left;
+
+	var dHeight = 50; //static value
+	var dWidth = 50; //static value
+
+	var sHeight = stage.height(); //dynamic value
+	var sWidth = stage.width(); //dynamic value
+
+	//check boundaries BEFORE applying CSS to dragon div
+
+	if(dTop+newTop < 0){
+		newTop = 0;
+		newTop -= dTop;
+	}
+
+	if(dLeft+newLeft < 0){
+		newLeft = 0;
+		newLeft -= dLeft;
+	}	
+
+	if(dTop+newTop+dHeight > sHeight){
+		newTop = 0;
+		newTop+=(sHeight-dHeight-dTop);
+	}
+
+	if(dLeft+dWidth+newLeft > sWidth){
+		newLeft = 0;
+		newLeft+=(sWidth-dWidth-dLeft);
+
+	}
+	var bgColor = '';
+
+	// if(lives == 3){
+	// 	bgColor = 'limegreen';
+	// }else if(lives == 2){
+	// 	bgColor = 'yellow';
+	// }else if(lives == 1){
+	// 	bgColor = 'red';
+	// }else{
+	// 	bgColor = 'transparent';
+	// 	dragon.hide();
+	// 	console.log('game over');
+	// }
+
+	//apply new values to dragon
+	dragon.css({top:'+='+newTop, left:'+='+newLeft, 'background-color':bgColor});
+
+//call recthit to determine if our flame is hitting an enemy
+$('.flame').each( function(){
+//many to many comparison
+var flame = $(this); //THE flame we are looking at
+ $('.enemy').each( function(){
+ 	var enemy = $(this); //the enemy to compare against
+
+ 	if(recthit(flame,enemy)){
+ 		flame.remove();
+ 		enemy.remove();
+ 		score++;
+ 		dragon.text(score);
+ 	}
+
+ })//end enemy each
+
+})//end flame each
+
+//enemy vs character
+$('.enemy').each( function(){
+	if(recthit(dragon, $(this))){
+		//remove enemy not dragon
+		$(this).remove();
+		lives--;
+		console.log(lives);
+		updateLifebar();
+	}
+
+})
+
+
+
+//requestAnimationFrame only calls the next frame to run
+window.requestAnimationFrame(gameLoop);
+
+// old way of doing things:	setTimeout(gameLoop, 1000/30); //30fps
+
+}//end gameLoop()
+
+window.requestAnimationFrame(gameLoop);
+
+
+//old way of doing things: setTimeout(gameLoop, 1000/30); //30fps
+
+
+function shootFlame(){
+	var flame = $('<div>').addClass('flame');
+
+	//add coordinates relative to dragon's current position
+	var dTop = dragon.position().top;
+	var dLeft = dragon.position().left;
+	console.log(dTop, dLeft);
+
+	//position flame top/left 50x50
+	fTop = dTop+23; //mid top/bottom
+	fLeft = dLeft+50; //right hand side
+
+	//apply the css to the flame
+	flame.css({top:fTop, left:fLeft});
+	stage.append(flame); 
+
+	flame.animate({left:stage.width()+100}, 1000, function(){
+		//when animation is complete:
+		$(this).remove();
+	})//end animation
+
+
+}//end shootFlame()
+
+//to work our lifebar
+function updateLifebar(){
+var percent = lives/3; //3 is original number of lives, if we want to increase original no of lives, we need to increase this value or make  new variable to store original lives
+percent *= 100;
+
+$('#lifebar .bar').animate({width:percent+'%'}, 400);
+
+//value of lives?
+if(lives<=0){
+	gameOver();
+}
+
+}
+
+function gameOver(){
+	clearInterval(createEnemyInt); //clears the interval that created our bird enemies
+	$('.enemy').remove(); //removes all with class of enemy
+	$('#dragon, #lifebar').hide();
+	$('.intro').show();
+	$('.intro h1').text('Game Over!');
+	$('.intro p:first').text('Your score was:'+score);
+	$('.intro p:last').text('click the button to play again.');
+	$('.start').text('Play Again?');
+
+
+}
+
+$('.start').click(startGame);
+
+function startGame(){
+	lives = 3;
+	score = 0;
+
+	dragon.show().text('').css({top:100, left:100});
+	$('#lifebar').show();
+	updateLifebar();
+	$('.intro').hide();
+	//start the interval now....
+	createEnemyInt = setInterval(createEnemy, 1000);
+}
+
+
+function recthit(rectone, recttwo){
+console.log('recthit');
+    var r1 = $(rectone);
+    var r2 = $(recttwo);
+    
+    var r1x = r1.offset().left;
+    var r1w = r1.width();
+    var r1y = r1.offset().top;
+    var r1h = r1.height();
+    
+    var r2x = r2.offset().left;
+    var r2w = r2.width();
+    var r2y = r2.offset().top;
+    var r2h = r2.height();
+    
+    if( r1y+r1h < r2y ||
+        r1y > r2y+r2h ||
+        r1x > r2x+r2w ||
+        r1x+r1w < r2x ){
+        return false;
+    }else{
+        return true;   
+    }
+    
+}//end function 
+
+
+</script>
+</body>
+</html>

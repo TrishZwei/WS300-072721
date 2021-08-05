@@ -1,0 +1,50 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HTML Structure Example</title>
+<style type="text/css">
+	*{
+	 background-color: rgba(0,153,153,.1);
+	}
+
+
+</style>
+</head>
+<body>
+	<header>
+		<h1>My Site</h1>
+		<nav>
+			<ul>
+				<li>
+					<a href="#">Link 1</a>
+				</li>
+				<li>
+					<a href="#">Link 2</a>
+				</li>
+				<li>
+					<a href="#">Link 3</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<article id="theArticle">
+		<h2>Article Title</h2>
+		<p>Paragraph 1</p>
+		<p>Paragraph 2</p>
+	</article>
+    <script>
+    	                            //header   // nav       //ul       //li's(0,1,2) //a tag 
+        var linkOne = document.body.children[0].children[1].children[0].children[2].children[0];
+        console.log(linkOne);//this is the anchor tag
+         //document.body.header .nav .ul .li[0] .a  
+        alert(linkOne.childNodes[0].nodeValue); //this gets "Link 1" 
+
+        var myArticleTitle = document.getElementById('theArticle').children[0]; //this gets the h2 inside of theArticle
+         //alert(myArticleTitle.childNodes[0].nodeValue); 
+         //this should get "Article Title" note that .innerHTML also works
+        alert(myArticleTitle.innerHTML); //this should get "Article Title" note that .innerHTML also works
+        myArticleTitle.innerHTML = 'This is a changed title';
+        //this changed the text from Article Title to what is directly above.
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+List of URLs for you to use for images:
+thumb: https://picsum.photos/150/150?image=1051
+full: https://picsum.photos/500/500?image=1051
+
+thumb: https://picsum.photos/150/150?image=1057
+full: https://picsum.photos/500/500?image=1057
+
+thumb: https://picsum.photos/150/150?image=1053
+full: https://picsum.photos/500/500?image=1053
+
+thumb: https://picsum.photos/150/150?image=1050
+full: https://picsum.photos/500/500?image=1050
+
+http://unsplash.it/400/400
+
+https://upload.wikimedia.org/wikipedia/commons/<svg height="200" width="190">
+
+
+<svg height="200" width="190">
+  <polygon points="100,10 40,198 190,78 10,78 160,198" style="fill:#9688B4;stroke:#6670A0;stroke-width:5;fill-rule:evenodd;"></polygon>
+  Sorry, your browser does not support inline SVG.
+</svg>

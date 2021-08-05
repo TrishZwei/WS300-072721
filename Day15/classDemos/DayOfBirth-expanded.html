@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>You were born on....</title>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+	<p>Date: <input type="text" class="date-input" placeholder="MM/DD/YYYY"></p>
+	<div class="message"></div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- jquery ui 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<script type="text/javascript">
+	//$('.date-input').datepicker(); //jQ UI method that creates a month to select dates from. Not necessary for what we are doing - but gives us a basic date format concept and an easy way to input dates. I've removed it from this code since we don't actually need it.
+
+	//Quick note: if you put the wrong date value JS updates the date object to add to the proper value of days. so 04/55/2020 is actually: Mon May 25, 2020.
+
+	$('.date-input').change( function(){
+		let theDate = $(this).val(); //gets the value from date-input
+		let dateMessage = '';
+
+		console.log(theDate, theDate.constructor)
+
+		if(theDate.indexOf('/') > -1){
+		theDate = theDate.split('/'); //converts our day string to an array
+		}else if(theDate.indexOf('.') > -1){
+		theDate = theDate.split('.'); //converts our day string
+		}else if(theDate.indexOf('-') > -1){
+		theDate = theDate.split('-'); //converts our day string
+		}else{
+			dateMessage = 'Use the format requested. Numbers seperted by a slash, dot or dash to seperate month, day and year. Ex: 01/05/2020, 01.05.2020 OR 01-05-2020';
+		}
+		console.log(dateMessage);
+
+		console.log(theDate, theDate.constructor)
+
+		let m = theDate[0]-1; 	
+		let d = parseInt(theDate[1]); //parseInt converts string to number
+		let y = parseInt(theDate[2]);
+		console.log(y,m,d);
+
+		let birthday = new Date(y,m,d);
+		let checkDate = birthday.toString();
+		console.log(checkDate);
+
+		if(checkDate == 'Invalid Date'){
+			$(this).val('');
+
+			if(dateMessage != ''){
+			$('.message').text(checkDate +'. '+dateMessage);
+			return false;				
+			}
+		}
+
+		let dayOfWeek = birthday.getDay(); //gets values of 0 - 6
+		let days = ['Sunday', 'Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+		let theDay = days[dayOfWeek];
+		$('.message').text('you were born on a '+theDay+'.');
+		$('title').text('you were born on a '+theDay+'.')
+
+
+	})
+
+</script>
+</body>
+</html>

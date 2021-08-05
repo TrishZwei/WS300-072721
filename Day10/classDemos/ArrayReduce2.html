@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+<style type="text/css">
+	body{
+		font-family: Verdana,sans-serif;
+	}
+
+</style>
+
+</head>
+<body>
+	<div class="demo"></div>
+	<div class="demo2"></div>
+
+<!-- jquery! -->
+<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<!-- any jQ Plugins go here -->
+<script type="text/javascript">
+var numbers = [45.50, 4.75, 9, 16.60, 25, 55.55];
+var sum = numbers.reduce( sumNumbers); //not calling an arrow function, but a declared one
+
+
+$('.demo').text(" the sum of "+numbers.join(' + ')+ ' is '+ sum);
+
+function sumNumbers(total, value, index, array){
+//these are the args passed with the reduce (higher order) method on array
+
+//JS breaking its own rules. This index starts at 1. 
+//Probably because 0 is the first number (stored in total) and 1 (stored in value) is the second number.
+
+if (index == 1){
+	if(Number.isInteger(total)){
+	total *=100;		
+	}else{
+		total = (total.toFixed(2))*100
+	}
+		
+}
+	//total = parseInt(total*100);
+	value = parseInt(value.toFixed(2)*100);
+	console.log(index, total, value, total+value )
+	if(index == array.length-1){
+		return ((total + value)/100).toFixed(2);
+	}
+	return total + value;
+
+}
+
+	
+</script>
+</body>
+</html>

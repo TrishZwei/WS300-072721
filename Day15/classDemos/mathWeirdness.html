@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Math Weirdness</title>
+	<style type="text/css">
+			body{
+				font-size: 18px;
+				font-family: Verdana;
+				margin: 0 auto;
+			}
+	</style>
+</head>
+<body>
+<h1>Math Weirdness</h1>
+<div id="message"></div>
+<!-- jQuery goes here -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- jQuery plugins go here -->
+<script>
+var total = 0.1+0.2;
+var message1 = 'The total of 0.1 + 0.2 is...'+total+'<br>';
+//why not 0.3??? ans: binary!
+$('#message').html(message1);
+
+var total2 = total.toFixed(2);
+console.log(total2);
+console.log(total.constructor); //number
+console.log(total2.constructor); //string
+
+//a function that rounds to a specific decimal place
+//@params: numberValue, decimalPlaces
+
+function round(value, decimals){
+
+return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+
+}
+
+total = round(total, 2);
+console.log(total, ' ', total.constructor);
+
+var message2 = 'Our new total after using a function to round it properly is: '+total+' and it is still a '+typeof(total)+'.<br>';
+$('#message').append(message2);
+
+//----------floating number points -----------//
+var noSuchNumber = 9999999999999999;
+var message3 = '9999999999999999 does not exist in JavaScript because of the slightly imprecise way that JS stores numbers. This get converted to: '+noSuchNumber+'<br>';
+$('#message').append(message3);
+
+//------NaN------//
+var notANumber = NaN; //numeric data type, not a number format
+var message4 = 'Perhaps the strangest of all is NaN, which stands for Not a Number but is totally a '+typeof(notANumber)+' WTF JS!';
+$('#message').append(message4);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Store List</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+			font-size: 20px;
+			margin: 0 auto;
+		}
+
+		.strike{
+			text-decoration: line-through;
+		}
+
+		h1{
+			text-align: center;
+		}
+
+		input{
+			display: block;
+			height: 40px;
+			font-size: 1em;
+			margin: 0 auto 5px;
+		}
+
+		.button{
+			background-color: grey;
+			border-radius: 20px;
+			color: white;
+			width: 100px;
+			height: 40px;
+			line-height: 40px;
+			padding: 5px;
+			margin: 5px auto; 
+		}
+
+		#wrapper{
+			margin: 0 auto;
+			width: 500px;
+		}
+
+	</style>
+</head>
+<body>
+<div id="wrapper">
+	<h1>Store List</h1>
+	<ul id="list"></ul>
+	<input type="text" id="new-item">
+	<input type="number" id="quantity" min="1" placeholder="#">
+	<div id="add" class="button">Add Item</div>		
+	<div id="clear" class="button">Clear List</div>		
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+
+function init(){
+var storeList = [];
+
+$('#add').click( function(){
+//	alert('clicked!');
+var innerArray = [];
+var newItem = $('#new-item').val();//gets the current value out of new-item when the add button is clicked.
+newItem = newItem.trim(); //removes space from before and at the end
+
+	if(newItem != ''){
+
+	//to prevent user error problems 
+	newItem = newItem.toLowerCase();
+
+	var quantity = parseInt($('#quantity').val());
+
+	if(quantity == 0 || isNaN(quantity) || quantity == ''){
+	quantity = 1;
+	}
+	innerArray.push(newItem); //adds to 0 index
+	innerArray.push(quantity);
+	innerArray.push(false);
+	storeList.push(innerArray);
+	storeList.sort(); //sort the list in alpha order
+
+//	console.log(storeList);
+	$('#list').text('');
+
+	for(var i=0; i<storeList.length; i++){
+		var theText = storeList[i][0];
+		var theQuantity = storeList[i][1];
+		var strike = storeList[i][2]; //true or false
+
+		//create a new list item
+		var newLi = $('<li>');
+		newLi.text(theText+'-'+theQuantity);
+		if(strike){
+			newLi.addClass('strike');
+		}
+
+		newLi.appendTo('#list');
+		//item must be added to the DOM BEFORE event listener can be added to it
+
+		newLi.click( function(){
+			//$(this).addClass('strike');
+			strikeItem(this); 
+		})
+
+		} //end for loop
+
+	}//end if not blank
+
+
+//alert(newItem);
+
+
+})//end add.click
+
+function strikeItem(theItem){
+	//theItem is the newLi when it was created
+	var theItem = $(theItem);
+	theItem.addClass('strike');
+	var theText = theItem.text();
+	theText = theText.split('-');
+	theText = ''+theText[0]
+
+	for(var j=0; j<storeList.length; j++){
+		if(theText == storeList[j][0]){
+			storeList[j][2] = true;
+		}
+
+	}
+
+}
+
+
+/* this does not work... why?
+$('li').click( function(){
+	alert('clicked')
+})
+*/
+
+
+}	
+
+init();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Day of Birth</title>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+	</style>
+</head>
+<body>
+<p>Date: <input type="text" id="date-input"></p>
+<div id="message"></div>	
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$( "#date-input" ).datepicker();
+
+	$('#date-input').change( function(){
+		var today = new Date();
+		var tMonth = today.getMonth();
+		var tDay = today.getDate();
+		var tYear = today.getFullYear();
+
+		var theDate = $(this).val();
+		console.log(theDate);
+		theDate = theDate.split('/');
+		console.log(theDate);
+		var m = parseInt(theDate[0])-1; //for proper month value 
+		var d = parseInt(theDate[1]);
+		var y = parseInt(theDate[2]);
+
+		var compDate = new Date(y,m,d);
+		var checkDate = new Date(compDate.toString());
+
+		if(checkDate == 'Invalid Date'){
+			$(this).val('');
+			$('#message').text('');
+			alert(checkDate);
+			return false;
+		}else{
+			//is a valid date
+			today = new Date(tYear, tMonth, tDay); //today at midnight
+			var message = '';
+			var diff; //store the difference in ms
+
+			if(today.getTime() < compDate.getTime()){
+				//comparison date is in the future
+				diff = compDate.getTime()-today.getTime();
+				diff = Math.floor(diff/(1000*60*60*24));
+				message = 'You have to wait '+diff+' days until '+compDate;
+			}else if(today.getTime() == compDate.getTime()){
+				message = 'Today is the day!';
+			}else{
+				message = 'Too bad. That day has already passed.';
+			}
+		}
+		$('#message').text(message);
+
+	})//end onChange
+
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hover Overlay</title>
+<style type="text/css">
+	body{
+		font-family: Verdana,sans-serif;
+		font-size: 18px;
+		margin: 0 auto;
+	}
+	.hoverbox{
+		width: 350px;
+		height: 250px;
+		border: 1px solid black;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.hover-overlay{
+		width: 350px;
+		height: 250px;
+		background-color: rgba(0,0,0,.7);
+		position: absolute;
+		top:200px;
+		left: 0;
+		color: white;
+	}
+
+	.hover-overlay h3{
+		padding: 0 .5em;
+	}
+
+	.box1{
+		background-image: url('images/bunny.jpg')
+	}
+
+
+</style>
+
+</head>
+<body>
+<!-- stuff to manipulate goes here -->
+<div class="hoverbox box1">
+	<div class="hover-overlay">
+		<h3>Bunny</h3>
+		<p>Sooooo cuuuuuute!</p>
+	</div>
+</div>
+
+
+<!-- jquery! -->
+<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<!-- any jQ Plugins go here -->
+<script type="text/javascript">
+	//my custom script that uses jQuery or jQ plugins
+
+// $('.hoverbox').mouseenter( function(){
+// 	//console.log('i have been entered!');
+// 	// *this* is the hoverbox that called the function to run
+// 	$(this).children('.hover-overlay').stop().animate({top:0}, 400);
+
+// }).mouseleave( function(){
+
+// 	$(this).children('.hover-overlay').stop().animate({top:200}, 400);
+// })
+
+$('.hoverbox').on('mouseenter mouseleave', function(event){	
+	console.log(event.type);
+	if(event.type == 'mouseenter'){
+		$('.hoverbox').children('.hover-overlay').stop().animate({top:0}, 400);
+	}else{
+		$('.hoverbox').children('.hover-overlay').stop().animate({top:200}, 400);
+	}
+
+})
+
+
+
+</script>
+</body>
+</html>

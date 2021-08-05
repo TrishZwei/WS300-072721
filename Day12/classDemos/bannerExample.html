@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JQ Template</title>
+</head>
+<body>
+	<div class="banner">message 1</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	//         [      0           1             2     ] .length = 3
+var messages = ['message 1', 'message 2', 'message 3'];
+var messageIndex = 0;
+
+var myInterval = setInterval( function(){
+	messageIndex++;
+		if(messageIndex == messages.length){
+			messageIndex = 0;
+		}
+	$('.banner').text(messages[messageIndex]);
+}, 5000)
+
+//clearInterval(myInterval)
+
+	
+
+
+</script>
+</body>
+</html>

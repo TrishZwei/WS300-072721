@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lightbox</title>
+<style type="text/css">
+
+	html{
+		min-height: 100%;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	body{
+		background: linear-gradient(to bottom right, #3D4258, #6670A0, #9688B4);
+		line-height: 1.5em;
+		text-align: center;
+		font-family: Verdana, sans-serif; 
+	}
+
+	.overlay{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,.5);
+		opacity: 0;
+		transition: .5s ease;
+		z-index:-1;
+	}
+
+	.overlay.active{
+		opacity: 1;
+		z-index: 2;
+	}
+
+	.modal{
+		max-height: calc(100% - 100px);
+		position: fixed;
+		top:50%;
+		left:50%;
+		max-width: 450px;
+		transform:translate(-50%, -50%);
+		color: #4A5666;
+		background-color: white;
+		z-index: 3;
+		visibility: hidden;
+		opacity: 0;
+		transition: .5s ease;
+	}
+
+	.modal.active {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.modal img{
+		padding-top: 1rem;
+		width: 90%;
+		margin: 0 auto; 
+	}
+
+	.modal p, .site-wrap p{
+		padding: 1rem;
+
+	}
+
+
+
+	.site-wrap p {
+		color: white;
+		text-align: left;
+	}
+
+	button{
+		display: inline-block;
+		background: rgba(10,20,30,.3);
+		color: white;
+		text-decoration: none;
+		font-size: 1.2rem;
+		padding: 1rem 2rem;
+		border-radius: 45px;
+		margin: .25rem 0;
+		vertical-align: middle;
+		line-height: 1;
+		overflow: visible;
+		white-space: nowrap;
+		cursor: pointer;
+		border: 1px solid white;
+	}
+
+
+	button.close{
+		margin: 0 0 1rem;
+		background: #9688B4;
+	}
+
+	.lb-btn{
+		cursor: pointer;
+	}
+
+</style>
+
+</head>
+<body>
+<!-- stuff to manipulate goes here -->
+<h1>Image Lightbox</h1>
+<img src="https://picsum.photos/150/150?image=1051" class="lb-btn" data-content="https://picsum.photos/500/500?image=1051" alt="beautiful lake pier">
+<img src="https://picsum.photos/150/150?image=1057" class="lb-btn" data-content="https://picsum.photos/500/500?image=1057" alt="cliffside over the ocean">
+<img src="https://picsum.photos/150/150?image=1053" class="lb-btn" data-content="https://picsum.photos/500/500?image=1053" alt="seafoam">
+<img src="https://picsum.photos/150/150?image=1050" class="lb-btn" data-content="https://picsum.photos/500/500?image=1050" alt="rocky straights">
+<div class="overlay"></div>
+<div class="modal">
+		<img src="https://picsum.photos/500/500?image=1050">
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+		<button class="close">Close</button>
+</div>
+
+
+<!-- jquery! -->
+<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<!-- any jQ Plugins go here -->
+<script type="text/javascript">
+	//my custom script that uses jQuery or jQ plugins
+	$('.lb-btn').on('click', function(){
+		
+		var theDesc = $(this).attr('alt'); //this gets the value inside the alt attribute
+		var thePath = $(this).attr('data-content'); //gives me the path to the larger image
+		console.log(thePath); 
+		$('.modal img').attr('src', thePath); //setting the value of the src attr
+		$('.modal p').text(theDesc);
+		$('.overlay, .modal').addClass('active');
+	})
+
+	$('.close').click(function(){
+		$('.overlay, .modal').removeClass('active');
+	})
+
+	$(document).keyup( function(event){
+		console.log( event.which);
+		//event.keyCode 
+
+		if(event.which === 27){
+			$('.overlay, .modal').removeClass('active');
+		}
+
+	})
+
+
+</script>
+</body>
+</html>

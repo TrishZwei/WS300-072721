@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Rotating Images</title>
+	<style type="text/css">
+.slider {
+	position: relative;
+}
+
+.slider > div {
+	position: absolute;
+}
+
+
+	</style>
+</head>
+<body>
+<div class="slider">
+	<div><img src="https://picsum.photos/500/500?image=1051"></div>
+	<div><img src="https://picsum.photos/500/500?image=1057"></div>
+	<div><img src="https://picsum.photos/500/500?image=1073"></div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script type="text/javascript">
+$(".slider > div:gt(0)").hide();
+
+setInterval(function() {
+	$('.slider > div:first-child')
+		.fadeOut(1000)
+		.next()
+		.fadeIn(1000)
+		.end()
+		.appendTo('.slider');
+}, 3000);
+
+</script>
+</body>
+</html>

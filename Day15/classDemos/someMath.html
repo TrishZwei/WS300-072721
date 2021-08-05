@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Some Math</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+	</style>
+</head>
+<body>
+<div id="message"></div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+var myDiv = $('#message');
+var message = '';
+
+message = Math.PI; //a value for pi
+
+message = Math.round(4.7);//returns 5
+message = Math.round(4.4);//returns 4
+
+message = Math.pow(8,2); //64
+message = (8**2); //does same as pow
+message = Math.sqrt(message); //8
+message = Math.abs(-4.7);
+
+message = Math.ceil(4.4); //returns 5
+message = Math.floor(4.7); //returns 4
+
+message = Math.random(); //rand decimal 0 - 1
+console.log(message);
+message = message*3;
+
+message = Math.round(message);
+
+
+//always at end:
+myDiv.text(message);
+	
+</script>
+</body>
+</html>

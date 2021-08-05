@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Random Name Generator</title>
+<style type="text/css">
+	body{
+		font-family: Verdana,sans-serif;
+	}
+
+	.full-name{
+		border: 1px solid black;
+	}
+
+	.button{
+		background-color: rebeccapurple;
+		color: white;
+		border-radius: 20px;
+		padding: .5em;
+		width: fit-content;
+		margin-top: 5px;
+		cursor: pointer;
+	}
+
+</style>
+
+</head>
+<body>
+<div class="full-name">Your New Name: <span></span></div>
+<div class="button">Get My New Name!</div>
+
+
+<!-- jquery! -->
+<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<!-- any jQ Plugins go here -->
+<script type="text/javascript">
+$('.button').click( function(){
+
+	var firstNames = ['Andre', 'Leilani', 'Dylan', 'Trish'];
+		firstNames.push('Platt'); //adds to end
+		//firstNames.pop(); //removes last item
+		//firstNames.sort(); //sorts alphabetically
+		//firstNames.reverse(); //reverses order of items
+		//firstNames.shift(); //removes first item
+
+	//console.log(firstNames[2])//gives us the value of Dylan
+	var first = firstNames[getRandomInt(0, firstNames.length-1)]; //gives us a random value
+//	console.log(first)
+
+	var lastNames = ['Stark', 'Baratheon', 'Lannister', 'Tyrel', 'Tully', 'Arryn', 'Greyjoy', 'Targaryen'];
+	var last = lastNames[getRandomInt(0, lastNames.length-1)]; 
+	//	console.log(last);
+
+	var middleInitials = 'abcdefghijklmnopqrstuvwxyz'; //this is a string I can now use string methods on it
+		middleInitials = middleInitials.toUpperCase(); //resets value to be uppercase version of the string
+		middleInitials = middleInitials.split(''); //split at no character makes each character its own item in the array
+	var mid = middleInitials[getRandomInt(0, middleInitials.length-1)]
+	//	console.log(mid);
+
+	//var fullName = first+' '+mid+'. '+last;//concatenation
+	var fullName = `${first} ${mid}. ${last}`;//interpolation, goes and gets the value of the variable and inserts it into the space where the variable was called
+
+	//console.log(fullName);
+
+	$('.full-name span').text(fullName);
+
+
+})
+
+
+
+
+
+
+//randomIntFunction, parameters defined is for default values
+	function getRandomInt(min = 1, max = 100){
+		return Math.floor( Math.random() * (max - min + 1) ) + min;
+	}
+
+
+
+	
+</script>
+</body>
+</html>
