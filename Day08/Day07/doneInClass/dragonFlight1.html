@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Mouse Follow</title>
+	<title>Dragon Flight</title>
 	<style type="text/css">
 	#game-stage{
 		position: absolute;
@@ -22,6 +22,15 @@
 		width: 50px;
 		height: 50px;
 		background-color: limegreen;
+	}
+
+	.flame{
+		width: 10px;
+		height: 4px;
+		background-color: red;
+		position: absolute;
+		top: 100px;
+		left: 100px;
 	}
 
 	</style>
@@ -66,13 +75,16 @@ $(document).keydown( function(e){
 	if(e.which == 39){
 		dir.right = true;
 	}
+//change speed when shift key is pressed
 
-	console.log(e.type, dir)
-
-	//change speed when shift key is pressed
-
-	//spacebar to shoot flame
-
+	if(e.which == 16){
+		speed = 10;
+	}
+	//spacebar to shoot
+	if(e.which == 32){
+		//console.log('wooosh!');
+		shootFlame();
+	}
 })
 
 $(document).keyup( function(e){
@@ -91,12 +103,109 @@ $(document).keyup( function(e){
 	if(e.which == 39){
 		dir.right = false;
 	}
-	console.log(e.type, dir)
+	//console.log(e.type, dir);
 
-	//change speed when shift key is pressed
+	//change speed when shift key is lifted
+	if(e.which == 16){
+		speed = 6;
+	}
 
 })
 
+function gameLoop(){
+	//console.log('gameLoop');
+	let newTop = 0,
+		newLeft = 0; //start top/left value of our dragon
+
+		if(dir.up){
+			//if true do this code:
+			newTop -= speed; 
+			//console.log(newTop);
+		} 
+
+		if(dir.down){
+			newTop += speed;
+		}
+
+		if(dir.left){
+			//if true do this code:
+			newLeft -= speed; 
+		} 
+
+		if(dir.right){
+			newLeft += speed;
+		}		
+
+		let dTop = dragon.position().top,
+			dLeft = dragon.position().left,
+			dHeight = 50, //static value for the height of our dragon
+			dWidth = 50,
+			sHeight = stage.height(), //dynamic value for the height of our stage
+			sWidth = stage.width(); 
+
+		//check the boundaries of the stage BEFORE we apply CSS to the dragon div
+
+		if(dTop+newTop < 0){
+			newTop = 0;
+			newTop -= dTop;
+		}	
+
+		if(dLeft+newLeft < 0){
+			newLeft = 0;
+			newLeft -= dLeft;
+		}
+
+		if(dTop+newTop+dHeight > sHeight){
+			newTop = 0;
+			newTop += (sHeight-dHeight-dTop);
+		}
+
+		if(dLeft+newLeft+dWidth > sWidth){
+			newLeft = 0;
+			newLeft += (sWidth-dWidth-dLeft);
+		}
+
+		//apply new values to dragon:
+		dragon.css({top:'+='+newTop, left:'+='+newLeft})	
+
+		//setTimeout only runs once
+		//setTimeout(gameLoop, 1000/30);
+
+		//requestAnimationFrame only runs once also:
+		window.requestAnimationFrame(gameLoop)
+
+
+}//end gameLoop
+
+gameLoop();
+
+//setInterval example:
+//setInterval(gameLoop, 1000/30); //30fps
+
+
+function shootFlame(){
+	let flame = $('<div>').addClass('flame');
+
+	//add coordinates of the flame relative to the dragon's current position
+	let dTop = dragon.position().top,
+		dLeft = dragon.position().left;
+
+	//position flame top/left 50x50
+	let	fTop = dTop+23,
+		fLeft = dLeft+50; 	
+
+	//apply css to flame
+	flame.css({top:fTop, left:fLeft});
+	stage.append(flame);
+	//other way to do the same: flame.appendTo(stage)
+	flame.animate({left: stage.width()+100}, 1000, function(){
+		//when animation is complete:
+		$(this).remove();
+
+	})
+
+
+}
 
 
 

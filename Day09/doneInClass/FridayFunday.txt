@@ -1,1 +1,4 @@
-Dragon Flight Part 2 - add sprites and sounds
+Dragon Flight Part 2 - add hit detect, sprites and sounds
+
+Find hit detect code here:
+https://gist.githubusercontent.com/TrishZwei/82be6c70b2d87189e118/raw/dd0f4863771a76e96b230b1735256270da974c64/rectHit
