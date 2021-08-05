@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Using the jQuery Event Object</title>
+<style type="text/css">
+body{
+    font-size: 16px;
+    font-family: Verdana;
+}
+
+.smallbox{
+    background-color: cornflowerblue;
+    padding: .7em;
+    margin: .7em;
+    min-height: 150px;
+    width: 200px;
+    float: left;
+    border: 2px solid black;
+}
+
+#eventDetails{
+    margin: .5em;
+    padding: .1em;
+}
+.clear{
+     clear: both;
+}
+
+</style>
+</head>
+<body>
+    <h1>Using the jQuery Event Object</h1>
+    <p>The jQuery Event object contains detailed information about each event that occurs in the page.</p>
+    <p>Interact with each of the DIV elements below to see event-related information for each.</p>
+    <div id="Div1" class="smallbox">This element is tied to a click. Click here (Div1) and see what happens below.</div>
+    <div id="Div2" class="smallbox">This element is tied to a mouseenter and a mouseleave. Mouse over and out and see what happens below (Div2)</div>
+    <div id="Div3" class="smallbox">Mouse over and keep mousing over and see what happens. (Div3)</div>
+    <div class="clear">Type some text here: <input type="text" id="input1"></div>
+    <div id="eventDetails">
+        <h3>Event Details</h3>
+        <div class="detailLine">
+            <span class="lineitem">Event type: </span><span class="lineitem" id="evtType"></span>
+            <span class="lineitem">Key/Button: </span><span class="lineitem" id="evtWhich"></span>
+        </div>
+        <div class="detailLine">
+            <span class="lineitem">Target: </span><span class="lineitem" id="evtTarget"></span>
+            <span class="lineitem">Related Target: </span><span class="lineitem" id="evtRelated"></span>
+        </div>
+        <div class="detailLine">
+            <span class="lineitem">pageX: </span><span class="lineitem" id="evtPageX"></span>
+            <span class="lineitem">pageY: </span><span class="lineitem" id="evtPageY"></span>
+        </div>
+        <div class="detailLine">
+            <span class="lineitem">clientX: </span><span class="lineitem" id="evtClientX"></span>
+            <span class="lineitem">clientY: </span><span class="lineitem" id="evtClientY"></span>
+        </div>
+        <div class="detailLine">
+            <span class="lineitem">Meta Key: </span><span class="lineitem" id="evtMetaKey"></span>
+            <span class="lineitem">data: </span><span class="lineitem" id="evtData"></span>
+        </div>
+    </div>
+       <div id="kbeventDifferences">
+            <h3>keyup vs keypress vs keydown</h3>
+            <div class="detailLine">
+                <span class="lineitem">Key code for keyup: </span><span class="lineitem" id="keyU"></span>
+            </div> 
+            <div class="detailLine">   
+                <span class="lineitem">Key code for keydown: </span><span class="lineitem" id="keyD"></span>
+            </div> 
+            <div class="detailLine">
+                <span class="lineitem">Key code for keypress: </span><span class="lineitem" id="keyP"></span>
+            </div>    
+        </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
+<script type="text/javascript">
+
+
+</script>
+</body>
+</html>
