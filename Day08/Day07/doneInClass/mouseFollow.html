@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Mouse Follow</title>
+	<style type="text/css">
+	.dot{
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background-color: purple;
+		position: absolute;
+		top: 100px;
+		left: 100px;
+		pointer-events: none;
+	}
+		
+
+	</style>
+
+</head>
+<body>
+	<div class="dot"></div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	$(document).mousemove( function(e){
+		$('.dot').css({top: e.clientY-20, left:e.clientX-20});
+
+
+	})
+
+
+</script>
+</body>
+</html>

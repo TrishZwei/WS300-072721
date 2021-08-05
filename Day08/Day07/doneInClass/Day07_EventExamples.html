@@ -29,6 +29,7 @@ body{
 </style>
 </head>
 <body>
+    <!-- get this from GitHub Day08/Day07 folder -->
     <h1>Using the jQuery Event Object</h1>
     <p>The jQuery Event object contains detailed information about each event that occurs in the page.</p>
     <p>Interact with each of the DIV elements below to see event-related information for each.</p>
@@ -73,6 +74,66 @@ body{
         </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
 <script type="text/javascript">
+
+    function updateEventDetails(e){
+        //to visualize the properties of the event object
+        $('.detailLine span[id]').text('') //empties all spans with ids
+        $('#evtType').text(e.type);
+        $('#evtWhich').text(e.which);
+        $('#evtTarget').text(e.target.id)//id of the target that received the event
+        if(e.relatedTarget){
+            $('#evtRelated').text(e.relatedTarget.tagName);
+        } 
+
+        //where on the document the mouse pointer is:
+        $('#evtPageX').text(e.pageX);
+        $('#evtPageY').text(e.pageY);
+
+        //where in the window the mouse pointer is:
+        $('#evtClientX').text(e.clientX);
+        $('#evtClientY').text(e.clientY);       
+
+        if(e.data){
+            $('#evtData').text(e.data.name);
+        }     
+    }//this is the end of updateEventDetails
+
+    $('#Div1').on('click dblclick', {name:'wizard'}, function(e){
+        //e stands for event
+        e.stopPropagation(); //stops events from bubbling up the DOM
+        updateEventDetails(e);
+    })
+
+    $('#Div2').on('mouseenter mouseleave', {name:'pirate'}, function(e){
+        //e stands for event
+        e.stopPropagation(); //stops events from bubbling up the DOM
+        updateEventDetails(e);
+        
+    })
+
+    $('#Div3').on('mousemove', {name:'ninja'}, function(e){
+        //e stands for event
+        e.stopPropagation(); //stops events from bubbling up the DOM
+        updateEventDetails(e);
+        
+    })
+
+    $('#input1').keyup( function(e) {
+        updateEventDetails(e);
+    })
+
+    $(document).on('keyup keydown keypress', function(e) {
+        
+        if(e.type == 'keyup'){
+            $('#keyU').text(e.which);
+            //console.log(e.which);
+        }else if(e.type == 'keypress'){
+            $('#keyP').text(e.which);
+        }else{
+            $('#keyD').text(e.which);
+        }
+    })
+
 
 
 </script>

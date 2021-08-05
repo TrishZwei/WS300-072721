@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Animate Bricks</title>
+	<style type="text/css">
+		div{
+			width: 40px;
+			height: 10px;
+			background-color: firebrick;
+			border: 1px solid white;
+			float: left;
+		}
+
+		button{
+			position: absolute;
+			top: 20px;
+			left: 20px;
+		}
+
+		#stop{
+			left: 100px;
+		}
+
+	</style>
+</head>
+<body>
+	<button id="start">Start</button>
+	<button id="stop">Stop</button>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	let numBricks = 0;
+	let timer;
+	let isAnimating = false;
+
+	function generateBricks(){
+		numBricks++;
+		$('<div>').appendTo('body').attr('id', numBricks);
+		timer = requestAnimationFrame(generateBricks)
+
+	}
+
+	$('#start').on('click', function(){
+		//start adding bricks
+		if(isAnimating == false){
+		timer = requestAnimationFrame(generateBricks)
+		isAnimating = true;			
+		}
+		
+	})
+
+	$('#stop').on('click', function(){
+			//stop adding bricks
+			cancelAnimationFrame(timer);
+			isAnimating = false;
+	})
+
+</script>
+</body>
+</html>

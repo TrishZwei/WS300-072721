@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Mouse Follow</title>
+	<style type="text/css">
+	#game-stage{
+		position: absolute;
+		top: 30px;
+		left: 10px;
+		right: 10px;
+		bottom: 10px;
+		background-color: #add;
+		border: 1px solid black;
+		overflow: hidden;
+	}	
+
+	#my-dragon{
+		position: absolute;
+		top: 100px;
+		left: 100px;
+		width: 50px;
+		height: 50px;
+		background-color: limegreen;
+	}
+
+	</style>
+	
+
+</head>
+<body>
+	<div id="game-stage">
+		<div id="my-dragon"></div>	
+	</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	const dragon = $('#my-dragon'), //our hero
+		  stage = $('#game-stage'); //the stage of the game
+
+	let gameRunning = false, //state of the game 
+	    speed = 6; //number of pixels to move
+
+//this is a JSON Object ( an object literal)
+//this represents which way our player wants to move
+	const dir = {
+					up: false,
+					down: false,
+					left: false,
+					right: false
+				}    	  
+
+//event listeners:
+$(document).keydown( function(e){
+	if(e.which == 38){
+		dir.up = true;
+	}
+
+	if(e.which == 40){
+		dir.down = true;
+	}
+
+	if(e.which == 37){
+		dir.left = true;
+	}
+
+	if(e.which == 39){
+		dir.right = true;
+	}
+
+	console.log(e.type, dir)
+
+	//change speed when shift key is pressed
+
+	//spacebar to shoot flame
+
+})
+
+$(document).keyup( function(e){
+	if(e.which == 38){
+		dir.up = false;
+	}
+
+	if(e.which == 40){
+		dir.down = false;
+	}
+
+	if(e.which == 37){
+		dir.left = false;
+	}
+
+	if(e.which == 39){
+		dir.right = false;
+	}
+	console.log(e.type, dir)
+
+	//change speed when shift key is pressed
+
+})
+
+
+
+
+
+</script>
+</body>
+</html>
