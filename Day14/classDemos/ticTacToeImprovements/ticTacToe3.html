@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simon Game</title>
+<style type="text/css">
+html{
+        font-family: Verdana;
+        font-size: 20px;	
+}
+
+    #gameboard{
+        width: 300px;
+        height:300px;
+        margin: 0 auto;
+    }
+    .square{
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    float:left;
+    border: 2px solid black;
+    font-size: 80px;
+    line-height: 90px;
+    text-align: center;
+    }
+   .button{
+        width: 200px;
+        background-color: grey;
+        height:  50px;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 50px;
+        color:white;
+        display: none;
+        margin: 10px auto;
+    }    
+    
+    #mousediv{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    .end{
+    	width: 100%;
+    	height: 100%;
+    	background-color: cadetblue;
+    	color:white;
+    	text-align: center;
+    	line-height: 300px;
+    	font-weight: bold;
+    	font-size: 2em;
+    }
+
+    
+</style>
+</head>
+<body>
+<div id="gameboard">
+    <div class="square" id="1" ></div>    
+    <div class="square" id="2" ></div>    
+    <div class="square" id="3" ></div>    
+    <div class="square" id="4" ></div>        
+    <div class="square" id="5" ></div>        
+    <div class="square" id="6" ></div>        
+    <div class="square" id="7" ></div>        
+    <div class="square" id="8" ></div>        
+    <div class="square" id="9" ></div>        
+</div> 
+<div class="button">Restart</div>
+<div id="mousediv"></div>
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>    
+<script type="text/javascript"> 
+    //need to store who's turn it is
+    var turn = 'x'; //always starting with x
+    var numsquares = 0; //checks how many squares have been clicked
+    gameboard = $('#gameboard'); //this is the game stage element 
+
+    $('.square').click( function(){
+        $(this).text(turn);
+        numsquares++
+        
+        //who has just gone? switch to other player
+        if(turn == 'x'){
+        turn = 'o';
+        }else{
+        turn = 'x'
+        }
+        //remove click from this square so we can't keep changing it    
+        $(this).unbind('click');
+
+        checkWin();
+
+    }); //end square click
+    
+    function checkWin(){
+    var one = $('#1').text();
+    var two = $('#2').text();
+    var three = $('#3').text();
+    var four = $('#4').text();
+    var five = $('#5').text();
+    var six = $('#6').text();
+    var seven = $('#7').text();
+    var eight = $('#8').text();
+    var nine = $('#9').text();
+        
+    //win cases
+        //ROWS: 1,2,3 || 4,5,6 || 7,8,9
+        //COLS: 1,4,7 || 2,5,8 || 3,6,9
+        //DIAG: 1,5,9 ||  3,5,7   
+    
+    //compare row squares    
+    if(one == two && two == three && one != ''){
+    gameOver(one, true); 
+    }    
+        
+    if(four == five && five == six && four != ''){
+	gameOver(four, true); 
+    }    
+
+    if(seven == eight && eight == nine && seven != ''){
+	gameOver(seven, true); 
+    }    
+
+    //compare column squares
+    if(one == four && four == seven && one != ''){
+    gameOver(four, true); 
+    }    
+
+    if(two == five && five == eight && two != ''){
+    gameOver(two, true); 
+    }    
+
+    if(three == six && six == nine && three != ''){
+	gameOver(three, true); 
+    }    
+    
+    //compare diagonal squares
+    //DIAG: 1,5,9 ||  3,5,7    
+    if(one == five && five == nine && one != ''){
+ 
+	gameOver(one, true); 
+
+    }  
+    if(three == five && five == seven && three != ''){
+	gameOver(three, true); 
+    }  
+ 
+    if(numsquares == 9 && turn != ''){
+		gameOver();
+
+    }
+        
+   if(turn == ''){
+    $('.button').fadeIn().click( function(){
+    location.reload();
+    });
+    
+   }
+         
+        
+    }//end checkWin
+
+$(document).mousemove( function(e){
+    //e.pageX, e.pageY
+    
+    $('#mousediv').css({
+        top: e.pageY - 25,
+        left: e.pageX - 25
+    }).html(turn);  //text and html do similar things -- html allows for tags
+
+
+});
+
+
+function gameOver(who, win){
+turn = '';    
+
+if (win){
+ //alert(one +' wins!'); //the alert is what we originally had
+    gameboard.html('<div class="end">'+who+' wins</div>'); 	
+}else{
+	gameboard.html('<div class="end">Cat\'s game!</div>'); 
+}
+
+}//end gameOver    
+    
+    
+    
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

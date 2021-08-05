@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQ Template</title>
+<style type="text/css">
+	body{
+		font-family: Verdana;
+	}
+
+
+</style>
+
+
+</head>
+<body>
+<!-- stuff to manipulate goes here -->
+<h1>List of Students</h1>
+<p>Xinyue</p>
+<p>Christopher</p>
+<p>Dani</p>
+<p>Eddie</p>
+<p>Janine</p>
+<p class="teacher">Trish</p>
+<div id="message"></div>
+
+<!-- jquery! -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!-- any jQ Plugins go here -->
+<script type="text/javascript">
+	//my custom script that uses jQuery or jQ plugins
+
+var message = [];
+//console.log($('p'));
+//console.log( document.querySelectorAll('p'));
+
+$('p').each( function(i){
+ //i allows me to capture the index of the item
+ if($(this).hasClass('teacher')){
+ 	//do nothing!
+ 	$(this).remove();
+ }else{
+ var name = $(this).text();
+ $(this).text( name +' '+ i); 	
+ }
+
+
+ //alert(name);
+})
+
+
+
+
+</script>
+</body>
+</html>

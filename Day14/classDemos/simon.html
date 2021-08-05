@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>Simon Game</title>
+<style type="text/css">
+body{
+	font-size: 20px;
+	font-family: Verdana;
+	margin: 0 auto;
+	padding: 0 15px;
+}
+
+#gameBoard{
+	width: 408px;
+	height: 408px;
+	margin: 0 auto;
+}
+
+.square{
+	width: 200px;
+	height: 200px;
+	float: left;
+	border: 2px solid black;
+	cursor: pointer;
+}
+
+.red{
+	background-color: red;
+	border-radius: 100% 0 0 0;
+}
+
+.blue{
+	background-color: blue;
+	border-radius: 0 100% 0 0;
+}
+
+.green{
+	background-color: green;
+	border-radius: 0 0 0 100%;
+}
+
+.yellow{
+	background-color: yellow;
+	border-radius: 0 0 100% 0;
+}
+
+.button{
+	width: 200px;
+	background-color: gray;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 10px;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+<div id="gameBoard">
+	<div class="square red" id="1"></div>
+	<div class="square blue" id="2"></div>
+	<div class="square green" id="3"></div>
+	<div class="square yellow" id="4"></div>
+</div>
+<div class="button" id="start">Start</div>
+<!--javascript goes below -->
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>    
+<script type="text/javascript">
+//what do we need?
+ //an array to hold a generated pattern
+ var blinkPattern = [];
+ //an array to compare
+ var clickPattern = [];
+
+//listener for starting game:
+$('#start').click(startGame);
+
+function startGame(){
+	addPattern();
+	addPattern();
+	blinkSquare();
+	//unbind('click') specifies the click function, with no argument says unbind ALL listeners attached to this element
+	$('#start').unbind();
+}
+
+
+
+ //a function to blink squares in the right sequence 
+function blinkSquare(){
+
+//get first item in array of blinkPattern, remove and store its value	
+var squareId = blinkPattern.shift();
+
+//add to clickPattern 
+clickPattern.push(squareId);
+
+//this makes the appropriate square blink
+$('#'+squareId).fadeOut(200).fadeIn(100);
+
+if(blinkPattern.length <= 0){
+//ready for player to be able to click the pattern
+createClicks();
+
+}else{
+	setTimeout(blinkSquare, 500);
+}
+
+
+}//end blinkSquare
+
+ //a function to add a new value to the pattern
+ function addPattern(){
+ 	//gets a random interger 1 - 4
+ 	var patternValue = Math.ceil(Math.random()*4);
+ 	//pushes that random value into the array
+ 	blinkPattern.push(patternValue)
+
+ }//end addPattern
+
+//make squares available for clicking and comparing user input
+function createClicks(){
+//get all the squares, put an event listener on them that does the function	
+$('.square').click( function(){
+//get the first item from the clickPattern array
+var patternId = clickPattern.shift();
+
+//find out which square was clicked
+var squareId = $(this).attr('id'); //this gets its id
+$(this).fadeOut(50).fadeIn(50);
+
+//has the user clicked the right square?
+if(patternId == squareId){
+//user has clicked the proper square in sequence
+//put the patternId back into the blinkPattern array
+blinkPattern.push(patternId);
+
+//check to see if user finished the sequence
+	if(clickPattern.length <= 0){
+		//pattern is complete
+		$('.square').unbind('click');
+		addPattern();
+		setTimeout(blinkSquare,1000);
+	}
+
+}else{
+	//user clicked the wrong square
+	alert('You Lose');
+	blinkPattern = [];
+	clickPattern = [];
+	$('.square').unbind('click')
+	$('#start').click(startGame);
+}
+
+})
+
+}//end of createClicks
+
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

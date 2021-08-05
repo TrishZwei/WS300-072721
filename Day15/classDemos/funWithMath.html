@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Fun With Math</title>
+<style type="text/css">
+body, html{
+	margin: 0;
+	padding: 0;
+	background-color: darkgrey;
+}
+
+.stage{
+	width: 500px;
+	height: 500px;
+	margin: 2em;
+	position: relative;
+	background-color: white;
+	overflow: hidden;
+}
+
+#dot{
+	position: absolute;
+	bottom:0;
+	left: 0;
+	height: 40px;
+	width: 40px;
+	background-color: rebeccapurple;
+	border-radius: 50%;
+}
+
+</style>
+
+</head>
+<body>
+<div class="stage">
+	<div id="dot"></div>
+</div>
+<button id="line">Linear Animate</button> | 
+<button id="pow">Power Animate</button> | 
+<button id="sin">Sine Animate</button> |
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- any jQuery dependent files and scripts go below jQ -->
+<script>
+//my custom JS code	
+//inspired by: http://www.smashingmagazine.com/2011/10/quick-look-math-animations-javascript/
+
+var dot = $('#dot'), //the object we are animating
+	isAnimating = false, //is the object currently being animated?
+	start = 0, //its start value
+	customAnimate, //timer for animation
+	counter = 350; //counter for how many times the sineAnimate has been called.
+
+//animation functions
+function linearAnimate(){
+//animation stays consistant
+var dTop = dot.position().top; //gives me the top value of the dot
+//note that this animation method does not use jQ's .animate()
+var dLeft = dot.position().left;
+
+if(dTop>0 && dLeft<460){
+dot.css({bottom:(start*start), left:(start*start)});
+start +=.5;
+isAnimating = true;
+}else{
+	// clearInterval(customAnimate);
+	// start=0;
+	// dot.delay(1000).fadeOut(500, function(){
+	// 	//callback function
+	// 	dot.css({bottom:0, left:0}).fadeIn(500); 
+	// 	//resets dot's position and visibility
+	// });
+ stopAnimation(0);
+}
+
+} //end linearAnimate
+
+function powAnimate(){
+//animation accelerates through...
+var dTop = dot.position().top;
+var dLeft = dot.position().left;
+
+if(dTop > 0 && dLeft < 460){
+	dot.css({bottom: Math.pow(start, 4), left: Math.pow(start, 4)});
+	start += 0.05;
+}else{
+ stopAnimation(0);
+
+}
+
+} //end powAnimate
+
+
+
+function sineAnimate(){
+//animation is inconsistant
+
+if(counter>0){
+dot.css({bottom: (100*Math.sin(start)+100), left: (100*Math.sin(start)+100) });
+start += 0.05;
+counter --;
+}else{
+clearInterval(customAnimate);	
+counter = 350;
+start = 0;
+isAnimating = false;
+//stopAnimation(0);	
+}
+
+}
+
+
+//helper function:
+//@param new value for start variable
+function stopAnimation(newStart){
+	clearInterval(customAnimate);
+	start=newStart; 
+	//newStart is the value passed through the parameter of the same name
+	dot.delay(1000).fadeOut(500, function(){
+		//callback function
+		dot.css({bottom:0, left:0}).fadeIn(500); 
+		//resets dot's position and visibility
+		isAnimating = false;
+	})
+
+
+}
+
+
+
+
+//click functions
+
+$('#line').click( function(){
+//console.log('line');
+if(!isAnimating){
+//checks to see if it is already animating. 
+//If isAnimating is false then the condition 
+//above evaluates to true!	
+
+customAnimate = setInterval(linearAnimate, 1000/30); //30fps
+isAnimating = true;
+//we set the value to true so that it prevents other buttons from implementing their animations until the value is false - which is set when the animation is complete
+
+}
+});
+
+$('#pow').click( function(){
+//console.log('power');
+if(!isAnimating){
+//checks to see if it is already animating. 
+//If isAnimating is false then the condition 
+//above evaluates to true!	
+
+customAnimate = setInterval(powAnimate, 1000/30); //30fps
+isAnimating = true;
+//we set the value to true so that it prevents other buttons from implementing their animations until the value is false - which is set when the animation is complete
+
+}
+
+});
+
+$('#sin').click( function(){
+//console.log('sine');
+if(!isAnimating){
+//checks to see if it is already animating. 
+//If isAnimating is false then the condition 
+//above evaluates to true!	
+
+customAnimate = setInterval(sineAnimate, 1000/30); //30fps
+isAnimating = true;
+//we set the value to true so that it prevents other buttons from implementing their animations until the value is false - which is set when the animation is complete
+
+}
+
+
+});
+
+</script>
+
+</body>
+</html>

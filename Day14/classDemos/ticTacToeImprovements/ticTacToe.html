@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simon Game</title>
+<style type="text/css">
+    #gameboard{
+        width: 300px;
+        height:300px;
+        margin: 0 auto;
+    }
+    .square{
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    float:left;
+    border: 2px solid black;
+    font-size: 80px;
+    line-height: 90px;
+    text-align: center;
+    }
+   .button{
+        width: 200px;
+        background-color: grey;
+        height:  50px;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 50px;
+        font-family: Verdana;
+        font-size: 20px;
+        color:white;
+        display: none;
+    }    
+    
+    #mousediv{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    
+</style>
+</head>
+<body>
+<div id="gameboard">
+    <div class="square" id="1" ></div>    
+    <div class="square" id="2" ></div>    
+    <div class="square" id="3" ></div>    
+    <div class="square" id="4" ></div>        
+    <div class="square" id="5" ></div>        
+    <div class="square" id="6" ></div>        
+    <div class="square" id="7" ></div>        
+    <div class="square" id="8" ></div>        
+    <div class="square" id="9" ></div>        
+</div> 
+<div class="button">Restart</div>
+<div id="mousediv"></div>
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>    
+<script type="text/javascript"> 
+    //need to store who's turn it is
+    var turn = 'x'; //always starting with x
+    var numsquares = 0; //checks how many squares have been clicked
+
+    $('.square').click( function(){
+        $(this).text(turn);
+        numsquares++
+        
+        //who has just gone? switch to other player
+        if(turn == 'x'){
+        turn = 'o';
+        }else{
+        turn = 'x'
+        }
+        //remove click from this square so we can't keep changing it    
+        $(this).unbind('click');
+
+        checkWin();
+
+    }); //end square click
+    
+    function checkWin(){
+    var one = $('#1').text();
+    var two = $('#2').text();
+    var three = $('#3').text();
+    var four = $('#4').text();
+    var five = $('#5').text();
+    var six = $('#6').text();
+    var seven = $('#7').text();
+    var eight = $('#8').text();
+    var nine = $('#9').text();
+        
+    //win cases
+        //ROWS: 1,2,3 || 4,5,6 || 7,8,9
+        //COLS: 1,4,7 || 2,5,8 || 3,6,9
+        //DIAG: 1,5,9 ||  3,5,7   
+    
+    //compare row squares    
+    if(one == two && two == three && one != ''){
+    turn = '';    
+    alert(one +' wins!');
+    }    
+        
+    if(four == five && five == six && four != ''){
+    turn = '';    
+    alert(four +' wins!');
+    }    
+
+    if(seven == eight && eight == nine && seven != ''){
+    turn = '';    
+    alert(seven +' wins!');
+    }    
+
+    //compare column squares
+    if(one == four && four == seven && one != ''){
+    turn = '';    
+    alert(one +' wins!');
+    }    
+
+    if(two == five && five == eight && two != ''){
+    turn = '';    
+    alert(two +' wins!');
+    }    
+
+    if(three == six && six == nine && three != ''){
+    turn = '';    
+    alert(three +' wins!');
+    }    
+    
+    //compare diagonal squares
+    //DIAG: 1,5,9 ||  3,5,7    
+    if(one == five && five == nine && one != ''){
+    turn = '';    
+    alert(one +' wins!');
+    }  
+    if(three == five && five == seven && three != ''){
+    turn = '';    
+    alert(three +' wins!');
+    }  
+ 
+    if(numsquares == 9 && turn != ''){
+        turn='';
+        alert('draw');
+    }
+        
+   if(turn == ''){
+    $('.button').fadeIn().click( function(){
+    location.reload();
+    });
+    
+   }
+         
+        
+    }//end checkWin
+
+$(document).mousemove( function(e){
+    //e.pageX, e.pageY
+    
+    $('#mousediv').css({
+        top: e.pageY - 25,
+        left: e.pageX - 25
+    }).html(turn);  //text and html do similar things -- html allows for tags
+
+
+})    
+    
+    
+    
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

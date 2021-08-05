@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>Tic Tac Toe</title>
+<style type="text/css">
+*{
+	box-sizing:border-box;
+}
+
+.cf:before,
+.cf:after{
+	content: : " ";
+	display: table;
+}
+
+.cf:after{
+	clear:both;
+}
+
+body{
+	font-size: 20px;
+	font-family: Verdana;
+	margin: 0 auto;
+	padding: 0 15px;
+}
+
+#gameBoard{
+	width: 302px;
+	height: 302px;
+	border: 1px solid black;
+}
+
+.square{
+	width: 100px;
+	height: 100px;
+	float: left;
+	border: 1px solid black;
+	font-size: 80px;
+	line-height: 90px;
+	text-align: center;
+}
+#mouseDiv{
+	width: 20px;
+	height: 20px;
+	font-size: 30px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.button{
+	width: 200px;
+	background-color: gray;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 10px;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+<div id="gameBoard">
+<div class="square" id="1"></div>	
+<div class="square" id="2"></div>	
+<div class="square" id="3"></div>	
+<div class="square" id="4"></div>	
+<div class="square" id="5"></div>	
+<div class="square" id="6"></div>	
+<div class="square" id="7"></div>	
+<div class="square" id="8"></div>	
+<div class="square" id="9"></div>	
+</div>
+<div class="button" id="restart">Restart Game</div>
+<div id="mouseDiv"></div>
+<!--javascript goes below -->
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>    
+<script type="text/javascript"> 
+var turn = 'x'; //stores who's turn it presently is
+var numSquare = 0; //stores number of squares clicked
+
+$('.square').click( function(){
+//place turn into div clicked
+$(this).text(turn);
+numSquare++;
+//switch to other player's turn
+if(turn == 'x'){
+	turn = 'o';
+}else{
+	turn = 'x'
+}
+
+//remove the event from this square so it cannot be changed
+$(this).unbind('click'); //unbinds the click from this square
+
+//did someone win?
+checkWin();
+
+}) //end click .square
+
+function checkWin(){
+var board = $('#gameBoard');
+//win cases are:
+//1,2,3
+//4,5,6
+//7,8,9
+
+//1,4,7
+//2,5,8
+//3,6,9
+
+//1,5,9
+//3,5,7
+
+var one = $('#1').text();
+var two = $('#2').text();
+var three = $('#3').text();
+var four = $('#4').text();
+var five = $('#5').text();
+var six = $('#6').text();
+var seven = $('#7').text();
+var eight = $('#8').text();
+var nine = $('#9').text();
+
+//horizontal conditions:
+if(one == two && two == three && one !=''){
+	turn='';
+	board.html('<div class="win">'+one+ ' wins!</div>');
+
+}
+
+if(four == five && five == six && four !=''){
+	turn='';
+	board.html('<div class="win">'+four+ ' wins!</div>');
+}
+
+if(seven == eight && eight == nine && seven !=''){
+	turn='';
+	board.html('<div class="win">'+seven+ ' wins!</div>');
+
+}
+
+//vertical
+
+if(one == four && four == seven && one !=''){
+	turn='';
+	board.html('<div class="win">'+one+ ' wins!</div>');
+
+}
+
+if(two == five && five == eight && two !=''){
+	turn='';
+	board.html('<div class="win">'+two+ ' wins!</div>');
+
+}
+
+if(three == six && six == nine && three !=''){
+	turn='';
+	board.html('<div class="win">'+three+ ' wins!</div>');
+
+}
+
+//diagonal
+if(one == five && five == nine && one !=''){
+	turn = '';
+	board.html('<div class="win">'+one+ ' wins!</div>');
+
+}
+
+if(three == five && five == seven && three !=''){
+	turn = '';
+	board.html('<div class="win">'+three+ ' wins!</div>');
+
+}
+
+if(numSquare == 9 && turn != ''){
+	turn='';
+	board.html('<div class="win">Cat\'s Game!</div>')
+}
+
+
+}//end checkWin
+
+$(document).mousemove( function(e){
+//e stands for event data
+$('#mouseDiv').css({top:e.pageY-25, left:e.pageX-25}).text(turn);
+})
+
+$('#restart').click( function(){
+	location.reload();
+});
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
