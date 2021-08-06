@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Dragon Flap</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, Sans;
+			font-size:  16px;
+		}	
+
+		#game-stage{
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			bottom: 10px;
+			right: 10px;
+			background-color: #59744B;
+			background-image: url('images/fullbackground.jpg');
+			border: 1px solid black;
+			background-position: 0px 0px;
+			background-repeat: repeat-x;
+			overflow: hidden;
+		}
+
+		#my-dragon{
+			position: absolute;
+			top: 100px;
+			left: 100px;
+			width: 200px;
+			height: 144px;
+			background-position: 0px 0px;
+			background-image: url(images/dragon2.png);
+		}
+
+
+
+	</style>
+</head>
+<body>
+	<div id="game-stage">
+		<div id="my-dragon"></div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+
+	let currFrame = 0; //current frame we are on
+	
+	function dragonFlap(){
+		const frames = [0,1,2,3], //4 frames of animation
+			  frameWidth = 200;
+				
+
+		let bgPosX = -(frameWidth * frames[currFrame]),
+		    bgPosY = 0;
+
+		    if(sDir == 'left'){
+		    	bgPosY = -144;
+		    }else{
+		    	bgPosY = 0;
+		    }
+
+
+		$('#my-dragon').css({'background-position': bgPosX+'px '+bgPosY+'px'});
+		
+		currFrame++;
+		
+		if(currFrame == frames.length){
+			currFrame = 0;
+		}	  
+
+	}//end dragonFlap
+
+	setInterval(dragonFlap, 1000/10);	
+
+
+
+//background animation		
+		var speedX = 0, //tracking our horizontal scroll speed
+			speedY = 0, //for vertical scroll
+			sDir = 'right';
+
+		function panBackground(){
+			if(sDir == 'right'){
+				speedX -= 3; //number of pixels
+			}else{
+				speedX +=3
+			}
+			$('#game-stage').css({'background-position': speedX + 'px ' + speedY + 'px' });
+			//window is the default object
+			requestAnimationFrame(panBackground)
+		} //	
+		panBackground();
+
+//directional toggle
+
+$(document).keydown( function(e){
+	console
+	//e is the event object
+	if(e.which == 32){
+		if(sDir == 'right'){
+			sDir = 'left';
+		}else{
+			sDir = 'right';
+		}
+
+	}
+
+})
+
+
+
+
+
+	</script>
+</body>
+</html>
