@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Random Name Generator</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, sans-serif;
+		}
+
+		#full-name{
+			border: 1px solid black;
+
+		}
+
+		button{
+			background-color: rebeccapurple;
+			color: white;
+			border-radius: 20px;
+			padding: .5em;
+			width: fit-content;
+			margin-top: 5px;
+			cursor: pointer;
+		}
+
+
+
+	</style>
+
+
+</head>
+<body>
+
+	<div id="full-name">Your new name: <span></span></div>
+	<button>Get My New Name!</button>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+//access for window:
+//let myArr;
+
+	$('button').click( function(){
+
+		let firstNames = ['Chloe', 'Joe', 'Miguel'];
+			console.log(firstNames);
+		    firstNames.push('Trish'); //push adds to the end
+		    firstNames.push('Anna');
+		    console.log(firstNames);
+		    //myArr = firstNames; 
+
+/*  //uncomment to see this code in action
+		let lastItem =  firstNames.pop(); //removes last item.
+			console.log(lastItem, firstNames);
+			firstNames.unshift(lastItem)
+		    console.log(firstNames);
+		    firstNames.reverse();
+		    console.log(firstNames)
+		    firstNames.sort()
+		    console.log(firstNames)
+		    firstNames.shift(); //removes from the front of the array
+		    console.log(firstNames)
+		    delete firstNames[2];
+		    console.log(firstNames);
+		    firstNames[2] = 'Miguel'; 
+		    $('#full-name span').text(firstNames.valueOf())
+*/
+			//.length - 1 will always give you the highest index value
+			let first = firstNames[getRandomInt(0,firstNames.length-1)];
+
+			let lastNames = ['Stark', 'Baratheon', 'Lannister', 'Tyrel', 'Tully', 'Arryn', 'Greyjoy', 'Targaryen'];
+			let last = lastNames[getRandomInt(0,lastNames.length-1)];	
+
+			console.log(first, last);	
+
+			let middleInitials = 'abcdefghijklmnopqrstuvwxyz';
+				middleInitials = middleInitials.toUpperCase(); 
+				//makes the entire string upper case
+				middleInitials = middleInitials.split(''); //split at the no-character.
+				console.log(middleInitials); 
+			let mid = middleInitials[getRandomInt(0,25)]; 
+			//we know how long the alphabet is and it's not gonna change.	
+			
+			let fullName = first+' '+mid+'. '+last;
+
+			$('#full-name span').text(fullName);
+			
+	})
+
+
+
+ 	function getRandomInt(min=1, max=100){
+ 		return Math.floor( Math.random() * (max - min + 1))+min;
+ 	}
+
+
+
+</script>
+	
+
+</body>
+</html>

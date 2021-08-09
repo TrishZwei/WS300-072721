@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Random Name Generator</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, sans-serif;
+		}
+	</style>
+
+
+</head>
+<body>
+	<h1>List of Students</h1>
+	<p>Chloe</p>
+	<p>Miguel</p>
+	<p>Joe</p>
+	<p class="teacher">Trish</p>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+//vanilla JS:
+let students = document.querySelectorAll('p')
+console.log(students[0])
+console.log(students[1])
+console.log(students[2])
+//students.sort(); tells me this is not an arry due to the error
+
+//traverse the DOM
+let htmlElement = document.body.children[0]//finds first child of body
+console.log(htmlElement);
+
+$('p').each( function(i){
+//i stands for index
+	if($(this).hasClass('teacher')){
+		$(this).remove();
+	}else{
+		let name = $(this).text();
+		$(this).text(name+' '+i);
+	}
+
+
+
+})
+
+
+
+</script>
+	
+
+</body>
+</html>

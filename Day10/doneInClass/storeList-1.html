@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Store List</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana, Arial, sans-serif;
+			font-size: 120%;
+			margin: 0;
+		}
+
+		h1{
+			text-align: center;
+		}
+
+		input{
+			display: block;
+			height: 40px;
+			font-size: 1em;
+			margin: 0 auto .25em;
+		}
+
+		button{
+			background-color: cadetblue;
+			border-radius: .8em;
+			color: white;
+			padding: .25em;
+			margin: .25em auto;
+			cursor: pointer;
+			line-height: 2em;
+			font-family: inherit;
+			font-size: inherit;
+		}
+
+		.strike{
+			text-decoration: line-through;
+		}
+
+
+		.wrapper{
+			text-align: center;
+			margin: 0 auto;
+			max-width: 500px;
+		}
+
+		.list{
+			list-style: none;
+		}
+
+
+	</style>
+
+</head>
+<body>
+	<div class="wrapper">
+		<h1>Store List</h1>
+		<ul class="list">
+			<!-- nothing goes here -->
+		</ul>
+		<!--
+			the name attribute is a key for the value of this text input in the get or post superglobal array in PHP. example: name="first_name" value="Trish" creates a key/value pair
+		-->	
+		<input type="text" placeholder="item" id="new-item">
+		<input type="number" placeholder="# of items" class="qty">
+		<button>Add Item</button>	
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	'use strict';
+
+	let storeList = []; //this creates an empty array
+	//new Array() will also create an array, but this is not the preferred method. The literal [] is preferred
+	//new Array(40) this will produce 40 empty items and not one item with the value of 40. This method is more confusing
+
+	$('button').click( function(){
+		//as a reminder - .on('click', function(){....})
+		//on works like addEventListener
+		let innerArray = [];
+		//three items in the array: 
+		//text/name of item, quantity, true or false for strike
+
+		let newItem = $('#new-item').val(); //.val() gets the value of the input
+		//vanilla JS looks like:
+		//document.querySelector('#new-item').value; 
+		newItem = newItem.trim(); 
+		//removes space from beginning and end of the string value
+
+
+		if(newItem != '' ){
+			//not empty, do stuff!
+			newItem = newItem.toLowerCase(); //to prevent sorting problems
+			let quantity = $('.qty').val(); 
+
+			if(quantity == 0 || isNaN(quantity) || quantity == ''){
+				quantity = 1; //creates a default value for quantity
+			}
+
+			innerArray.push(newItem); //at [0]
+			innerArray.push(quantity); //at [1]
+			innerArray.push(false);//at [2], this indicates if the class of strike needs to be added
+			storeList.push(innerArray);
+			storeList.sort();
+			//sorts alphabetically based on character value on unicode table
+			
+			console.log(storeList);
+
+			//empty out the ul first
+			$('.list').text('');
+
+			//create a new li for every item in the array and append it to the ul
+
+			for(let i = 0; i < storeList.length; i++){
+				//because we used let for the variable i, it only exists in the memory between the curly braces of the for loop.
+
+				let theText = storeList[i][0];
+				let theQty = storeList[i][1];
+				let strike = storeList[i][2]; //true/false	
+
+				//this is the output based on the current value
+
+				//create a new list item
+				let newLi = $('<li>')
+					newLi.text(theText+' - '+theQty);
+					if(strike){
+						newLi.addClass('strike');
+					}
+					newLi.appendTo('.list'); 
+					//must be appended to dom before listener can be added
+					newLi.click( function(){
+						//$(this).addClass('strike');
+						strikeItem(this)
+					})
+
+			}
+
+
+		}else{
+			alert('You need to type what you want to add to the list');
+		}
+
+	})
+
+
+	function strikeItem(ele){
+		console.log(ele)
+		//ele is the newLi
+		ele = $(ele); //making ele into jQuery object
+		ele.addClass('strike');
+		let theText = ele.text(); //gets the text that already exists in that element
+		theText = theText.split(' - ')
+		theText = ''+theText[0];
+
+		for(let i = 0; i<storeList.length; i++){
+			if(theText == storeList[i][0]){
+				storeList[i][2] = true;
+			}
+
+		}
+
+
+	}
+
+
+// does not work since there are no lis on the page
+// $('li').click(function(){
+// 	alert('hi');
+
+// })
+
+
+</script>
+	
+
+</body>
+</html>
