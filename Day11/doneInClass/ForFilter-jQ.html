@@ -8,9 +8,6 @@
 	}
 
 #my-input {
-  /* TODO:  Add a search icon to input */
-  background-position: 10px 12px; /* Position the search icon */
-  background-repeat: no-repeat; /* Do not repeat the icon image */
   width: 100%; /* Full-width */
   font-size: 16px; 
   padding: 12px 20px 12px 40px; /* Add some padding */
@@ -26,7 +23,7 @@
   margin: 0;
 }
 
-.list li{
+.list li, li.message{
   border: 1px solid #ddd; /* Add a border to all links */
   margin-top: -1px; /* Prevent double borders */
   background-color: #f6f6f6; /* Grey background color */
@@ -37,9 +34,15 @@
   display: block; /* Make it into a block element to fill the whole list */
 }
 
-.list li:hover:not(.header) {
-  background-color: #eee; /* Add a hover effect to all links, except for headers */
+li.message{
+	display: none;
+	list-style-type: none;
 }
+
+.list li:hover:not(.message) {
+  background-color: #eee; /* Add a hover effect to all links, except for the message */
+}
+
 </style>
 
 </head>
@@ -47,6 +50,7 @@
 <input type="text" id="my-input" placeholder="Search for names..">
 
 <h3>Top 100 Names</h3>
+<li class="message">Message goes here</li>
 <ul class="list">
 	<li data-gender="boy">Liam</li>
 	<li data-gender="girl">Emma</li>
@@ -249,31 +253,10 @@
 	<li data-gender="boy">Jason</li>
 	<li data-gender="girl">Madeline</li>
 </ul>
-
+<!-- jquery! -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- any jQ Plugins go here -->
 <script type="text/javascript">
-function myFilter() {
-  // Declare variables
-  var input, filter, ul, li, a, i, txtValue;
-  input = document.querySelector('#my-input');
-  filter = input.value.toUpperCase();
-  ul = document.querySelector(".list");
-  li = ul.getElementsByTagName('li');
-
-  // Loop through all list items, and hide those who don't match the search query
-  for (i = 0; i < li.length; i++) {
-    a = li[i];
-
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-
-document.querySelector('#my-input').addEventListener('keyup', myFilter)
-</script>
 </script>
 </body>
 </html>

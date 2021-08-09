@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sock Game</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+
+		.sock{
+			height: 220px;
+			width:  121px;
+			float: left;
+		}
+
+		.sock.pink{
+			background-image: url('socks/pinksock.png');
+		}
+
+		.sock.blue{
+			background-image: url('socks/bluesock.png');
+		}
+
+		.sock.red{
+			background-image: url('socks/redsock.png');
+		}
+
+		.sock.purple{
+			background-image: url('socks/purplesock.png');
+		}
+
+	</style>
+
+</head>
+<body>
+<!-- stuff to manipulate goes here -->
+	<h1>Find the Pink Sock</h1>
+	<div id="game">
+		<div class="sock">
+			<img src="socks/background.png">
+		</div>
+
+		<div class="sock">
+			<img src="socks/background.png">
+		</div>
+
+		<div class="sock">
+			<img src="socks/background.png">
+		</div>
+
+		<div class="sock">
+			<img src="socks/background.png">
+		</div>
+
+		<div class="sock">
+			<img src="socks/background.png">
+		</div>
+
+		<div class="sock">
+			<img src="socks/background.png">
+		</div>
+
+		<div class="sock">
+			<img src="socks/background.png">
+		</div>
+	</div>
+
+
+
+
+<!-- jquery! -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- any jQ Plugins go here -->
+<script type="text/javascript">
+var classArray = ['blue', 'red', 'purple', 'pink', 'blue', 'red', 'purple'];
+
+	//my custom script that uses jQuery or jQ plugins
+//sets up our game space
+	$('.sock').each( function(){
+	//get each sock and do something with it...
+	  var theClass = ''+classArray.splice( getRandomInt(0, classArray.length-1), 1)
+	  console.log(classArray, theClass);
+		$(this).addClass( theClass);
+
+	})
+
+$('img').click( function(){
+	var theParent = $(this).parent();
+	$(this).fadeOut(1000);
+
+	if(theParent.hasClass('pink')){
+		alert('You Win!');
+	}
+
+})
+
+
+	function getRandomInt(min = 1, max = 100){
+		return Math.floor( Math.random() * (max - min + 1) ) + min;
+	}
+
+</script>
+</body>
+</html>
