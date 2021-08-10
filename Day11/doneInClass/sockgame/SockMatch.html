@@ -287,13 +287,33 @@
 				sock2 = theColor;
 				sock2Id = theCard.parent().attr('id');
 				console.log(sock1, sock1Id, sock2, sock2Id)
+				checkMatch();
 			} 
-
-
 		}
 
-
 	})
+
+	function checkMatch(){
+		if(sock1 == sock2 && sock1Id != sock2Id){
+			console.log('match')
+			$('.'+sock2+'.flipped').parent().off().addClass('matched');
+			$('.'+sock2+'.flipped .front img').attr('src', 'socks/match.png');
+			$('.'+sock2+'.flipped .back').removeClass('back face');
+			$('.'+sock2+'.flipped .front').css({'background-color': 'transparent'})
+		}
+
+		setTimeout(flipBack, 800);
+	} //end checkMatch
+
+
+	function flipBack(){
+		$('.flipped').removeClass('flipped');
+		sock1 = undefined;
+		sock2 = undefined;
+		sock1Id = undefined;
+		sock2Id = undefined;
+	}
+
 
 
 
