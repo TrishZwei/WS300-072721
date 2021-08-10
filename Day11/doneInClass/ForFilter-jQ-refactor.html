@@ -257,15 +257,17 @@ li.message{
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- any jQ Plugins go here -->
 <script type="text/javascript">
+	'use strict';
+	let input = $('#my-input');
 
-$('#my-input').on('keyup', function(){
-	let input = $('#my-input'),
-		  filter = input.val().trim().toUpperCase(),
-		  li = $('.list li');
+input.on('keyup', function(){
+
+		  let filter = input.val().trim().toUpperCase(),
+		  		li = $('.list li');
 
 		  li.each( function(i){
-		  	let a = $(this);
-		  	txtValue = a.text();
+		  	let a = $(this),
+		  		  txtValue = a.text();
 		  	if(txtValue.toUpperCase().indexOf(filter) > -1){
 		  		a.show();
 		  	}else{
@@ -274,14 +276,16 @@ $('#my-input').on('keyup', function(){
 
 		  })
 
+		  let message = $('.message');
+
 //if no elements are shown: show a message to the user
 	//:visible will tell us if the element is visible or not
 	if( $('.list li:visible').length == 0){
 		//no lis are visible
-		$('.message').text(filter+' was not found in the top 100 names list').show();
+		message.text(filter+' was not found in the top 100 names list').show();
 
 	}else{
-		$('.message').hide();
+		message.hide();
 	}
 
 

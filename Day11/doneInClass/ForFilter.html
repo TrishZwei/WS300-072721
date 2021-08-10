@@ -251,6 +251,32 @@
 </ul>
 
 <script type="text/javascript">
+	function myFilter(){
+		//declare variables
+		let input = document.querySelector('#my-input'), 
+		filter = input.value.toUpperCase(), 
+		ul = document.querySelector('.list'), //accessing the ul
+		li = ul.getElementsByTagName('li'), //to access the children with the oldschool method: getElementsByTagName
+		a, i, txtValue;
+
+		//loop through all the list items and hide those that don't match the query
+		for(i = 0; i<li.length; i++){
+			 a = li[i];
+
+			 txtValue = a.textContent || a.innerText;
+
+			 if(txtValue.toUpperCase().indexOf(filter) > -1){
+			 	li[i].style.display = '';
+			 }else{
+			 	li[i].style.display = 'none';
+			 }
+
+		}
+
+	} //end myFilter
+
+	document.querySelector('#my-input').addEventListener('keyup', myFilter);
+
 
 </script>
 </script>

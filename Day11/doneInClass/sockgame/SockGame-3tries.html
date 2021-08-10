@@ -7,6 +7,19 @@
 			font-family: Verdana;
 		}
 
+		.message{
+			text-align: center;
+		}
+
+		.win{
+			color: pink;
+			font-size: 3em;
+		}
+
+		.lose{
+			color: red;
+		}
+
 		.sock{
 			height: 220px;
 			width:  121px;
@@ -36,6 +49,7 @@
 <!-- stuff to manipulate goes here -->
 	<h1>Find the Pink Sock</h1>
 	<div id="game">
+		<div class="message">You have <span>three tries</span> to find the pink sock.</div>
 		<div class="sock">
 			<img src="socks/background.png">
 		</div>
@@ -74,7 +88,8 @@
 <script type="text/javascript">
 	'use strict';
 
-	let classArray = ['blue', 'red', 'purple', 'pink', 'blue', 'red', 'purple'];
+	let classArray = ['blue', 'red', 'purple', 'pink', 'blue', 'red', 'purple'],
+	    count = 0;
 
 	//game set up:
 	$('.sock').each( function(){
@@ -85,13 +100,39 @@
 	})
 
 	$('img').click( function(){
-		let parent = $(this).parent();
+		count++;
+		let tries = 3 - count;
+		console.log(tries);
+
+		let parent = $(this).parent(),
+		    messageBox = $('.message');
 		$(this).fadeOut(500);
+		parent.css({'border':'3px solid red'});
+		let num = '';
 
-		if(parent.hasClass('pink')){
-			alert('You Win!');
+			switch(tries){
+				case 2:
+				num = 'two tries';
+				break;
+
+				case 1:
+				num = 'one more try';
+				break;
+			}
+
+
+			messageBox.find('span').text(num)
+
+
+		if(parent.hasClass('pink') && count < 4){
+			messageBox.text('You Win!').addClass('win');
+			parent.css({border:'3px solid pink'})
+			$('img').fadeOut(200);
+
+		}else if(count >= 3){
+			messageBox.text('You Lose').addClass('lose');
+			$('img').fadeOut(200);
 		}
-
 
 	})
 
