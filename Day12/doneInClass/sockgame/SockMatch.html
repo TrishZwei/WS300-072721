@@ -273,6 +273,7 @@
 		//allow only two flipped cards at a time
 
 		if($('.flipped').length < 2){
+
 			theCard.addClass('flipped');
 			let classList = theCard.attr('class');
 			classList = classList.split(' ');
@@ -302,7 +303,8 @@
 			$('.'+sock2+'.flipped .front').css({'background-color': 'transparent'})
 		}
 
-		setTimeout(flipBack, 800);
+		setTimeout(flipBack, 500);
+		checkWin();
 	} //end checkMatch
 
 
@@ -314,6 +316,12 @@
 		sock2Id = undefined;
 	}
 
+	function checkWin(){
+		if($('.matched').length == $('.flip').length){
+			let message = '<h2>You have matched all the socks!</h2>';
+			$('#game').prepend(message);
+		}
+	}
 
 
 

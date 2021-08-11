@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Rotating Images</title>
+</head>
+<body>
+	<img src="images/1050-500x500.jpg">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	//got images from: https://picsum.photos/500/500?image=1051
+	let imgArray = ['images/1050-500x500.jpg','images/1051-500x500.jpg', 'images/1053-500x500.jpg', 'images/1057-500x500.jpg'];
+
+	let currImg = 0;
+
+	let myInterval = setInterval( function(){
+		currImg++;
+		if(currImg == imgArray.length){
+			currImg = 0;
+		}
+
+	$('img').attr('src', imgArray[currImg]);	
+
+	}, 5000)
+
+
+
+</script>
+</body>
+</html>

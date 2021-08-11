@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Magic Wand</title>
+	<style type="text/css">
+	body{
+		position: relative;
+		margin: 0;
+		height: 100vh;
+		background: white;
+		cursor:  url(images/wand2.png), auto; 
+		/*can be any type of image, check the size as you really don't want an image larger than30px*/
+	}	
+
+	.star{
+		pointer-events: none;
+		position: absolute;
+		width:10px;
+		height: 10px;
+		border-radius: 50%;
+		background: gray;
+		animation:  implode 1s ease-in-out;
+		animation-fill-mode: both;
+		opacity: .5;
+		/*clip-path: found at https://bennettfeely.com/clippy/ */
+		clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);	
+	}
+
+	@keyframes implode{
+		100% {transform: scale(0)}
+	}
+
+	</style>	
+
+</head>
+<body>
+<div class="star"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	let mousePos = {}; //empty object will store my mouse values for x and y
+
+	//keeping this here for ease
+	function getRandomInt(min = 1, max = 100){
+		return Math.floor( Math.random() * (max - min + 1) ) + min;
+	}
+
+
+	$(window).on('mousemove mouseleave', function(e){
+		//want all functions to have access to mouse position
+
+		if(e.type == 'mousemove'){
+			mousePos.x = e.pageX;
+			mousePos.y = e.pageY;
+		}else{
+			mousePos.x = -1;
+			mousePos.y = -1;			
+		}
+	}) //end of window mousemove/leave
+
+	//example of expression
+	let draw = setInterval( function(){
+		if(mousePos.x > 0 && mousePos.y > 0){
+
+			let range = 15;
+			let color = "background: rgb("+getRandomInt(0,255)+","+getRandomInt(0,255)+","+getRandomInt(0,255)+");";
+			let sizeInt = getRandomInt(10,30);
+			let size = "height: "+sizeInt+"px; width: "+sizeInt+'px;';
+			let left = "left: "+getRandomInt(mousePos.x-range-sizeInt, mousePos.x+range)+"px;";
+			let top = "top: "+getRandomInt(mousePos.y-range-sizeInt, mousePos.y+range)+"px;";
+
+			let style = left+top+color+size;
+			$('<div class="star" style="'+style+'"></div>').appendTo('body').one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function(){ $(this).remove()})
+		}
+
+	}, 20);
+
+
+</script>
+</body>
+</html>
