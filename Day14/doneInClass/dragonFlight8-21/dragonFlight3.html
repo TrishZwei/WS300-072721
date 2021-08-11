@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Dragon Flight</title>
+	<style type="text/css">
+	body{
+		font-family:Verdana ;
+	}
+
+	h1{
+		width: 100%;
+		text-align: center;
+	}
+
+	#game-stage{
+		position: absolute;
+		top: 30px;
+		left: 10px;
+		right: 10px;
+		bottom: 10px;
+		background-color: #59744B;
+		background-image: url(images/fullbackground.jpg);
+		background-position: 0px 0px;
+		background-repeat: repeat-x;
+		border: 1px solid black;
+		overflow: hidden;
+	}	
+
+	#my-dragon{
+		position: absolute;
+		top: 100px;
+		left: 100px;
+		width: 200px;
+		height: 144px;
+		background-image: url(images/dragon2.png);
+		background-position: 0px 0px;
+	}
+
+	.flame{
+		width: 49px;
+		height: 24px;
+/*		background-color: red;*/
+		background-image: url(images/flame2.png);
+		background-position: -49px 0px;
+		position: absolute;
+		top: 100px;
+		left: 100px;
+	}
+
+
+	.enemy{
+		position: absolute;
+		top: 100px;
+		left: 100px;
+/*		border: 1px solid black;*/		
+		width: 72px;
+		height: 44px;
+	}
+
+
+	.enemy.blue{
+		background-image: url(images/bluebird.png);
+	}
+
+	.enemy.purple{
+		background-image: url(images/purplebird.png);
+	}
+
+	.enemy.red{
+		background-image: url(images/redbird.png);
+	}
+
+	.enemy.green{
+		background-image: url(images/greenbird.png);
+	}
+
+	.enemy.pink{
+		background-image: url(images/pinkbird.png);
+	}
+
+	#life-bar{
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		border: 1px solid black;
+		width: 200px;
+		height: 30px;
+	}
+
+	.bar{
+		height: 30px;
+		width: 50%;
+		background-color: #ff3f3f;
+	}
+
+
+	</style>	
+
+</head>
+<body>
+	<div id="game-stage">
+	<div id="life-bar">
+		<div class="bar"></div>
+	</div>
+		<div id="my-dragon"></div>
+		<!-- <div class="enemy blue"></div> -->	
+	</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	const dragon = $('#my-dragon'), //our hero
+		  stage = $('#game-stage'); //the stage of the game
+
+	let gameRunning = false, //state of the game 
+	    speed = 6, //number of pixels to move
+	    score = 0, //tracks the score
+	    lives = 3, //tracks the lives of our dragon
+		speedX = 0, //tracking our horizontal scroll speed of background
+		speedY = 0, //for vertical scroll
+		sDir = 'right';
+
+//this is a JSON Object ( an object literal)
+//this represents which way our player wants to move
+	const dir = {
+					up: false,
+					down: false,
+					left: false,
+					right: false
+				}    	  
+
+//event listeners:
+$(document).keydown( function(e){
+	if(e.which == 38){
+		dir.up = true;
+	}
+
+	if(e.which == 40){
+		dir.down = true;
+	}
+
+	if(e.which == 37){
+		dir.left = true;
+	}
+
+	if(e.which == 39){
+		dir.right = true;
+	}
+//change speed when shift key is pressed
+
+	if(e.which == 16){
+		speed = 10;
+	}
+	//spacebar to shoot
+	if(e.which == 32 && $('#my-dragon').length == 1){
+		//console.log('wooosh!');
+		shootFlame();
+	}
+})
+
+$(document).keyup( function(e){
+	if(e.which == 38){
+		dir.up = false;
+	}
+
+	if(e.which == 40){
+		dir.down = false;
+	}
+
+	if(e.which == 37){
+		dir.left = false;
+	}
+
+	if(e.which == 39){
+		dir.right = false;
+	}
+	//console.log(e.type, dir);
+
+	//change speed when shift key is lifted
+	if(e.which == 16){
+		speed = 6;
+	}
+
+})
+
+function gameLoop(){
+	//console.log('gameLoop');
+	let newTop = 0,
+		newLeft = 0; //start top/left value of our dragon
+
+		if(dir.up){
+			//if true do this code:
+			newTop -= speed; 
+			//console.log(newTop);
+		} 
+
+		if(dir.down){
+			newTop += speed;
+		}
+
+		if(dir.left){
+			//if true do this code:
+			newLeft -= speed; 
+		} 
+
+		if(dir.right){
+			newLeft += speed;
+		}		
+
+		let dTop = dragon.position().top,
+			dLeft = dragon.position().left,
+			dHeight = 144, //static value for the height of our dragon
+			dWidth = 200,
+			sHeight = stage.height(), //dynamic value for the height of our stage
+			sWidth = stage.width(); 
+
+		//check the boundaries of the stage BEFORE we apply CSS to the dragon div
+
+		if(dTop+newTop < 0){
+			newTop = 0;
+			newTop -= dTop;
+		}	
+
+		if(dLeft+newLeft < 0){
+			newLeft = 0;
+			newLeft -= dLeft;
+		}
+
+		if(dTop+newTop+dHeight > sHeight){
+			newTop = 0;
+			newTop += (sHeight-dHeight-dTop);
+		}
+
+		if(dLeft+newLeft+dWidth > sWidth){
+			newLeft = 0;
+			newLeft += (sWidth-dWidth-dLeft);
+		}
+
+		//apply new values to dragon:
+		dragon.css({top:'+='+newTop, left:'+='+newLeft})
+
+//hit detect gets called on all elements in every frame of the browser
+
+//many to many comparison
+		$('.flame').each( function(){
+			let flame = $(this); //THE flame we are currently evaluating
+				$('.enemy').each( function(){
+					let enemy = $(this);
+
+					if(rectHit(flame, enemy)){
+						flame.remove();
+						enemy.remove();
+						score++;
+						dragon.text(score);
+					}
+
+				})
+		})
+
+//compare many to one
+	$('.enemy').each( function(){
+		if(rectHit(dragon, $(this))){
+			//remove enemy not dragon
+			$(this).remove();
+			  lives--; //removes one life from the lives
+			  updateLifebar();
+			console.log(lives);
+			if(lives == 0){
+//				dragon.remove();
+				clearInterval(enemyInt);
+				stage.html('<h1>Game Over! Your score was '+score+'</h1>');
+
+			}
+		}
+
+
+	})
+
+
+
+
+/*
+//add operator example
+let myNum = 3+2; //5
+	myNum += 5; //10
+*/
+		//setTimeout only runs once
+		//setTimeout(gameLoop, 1000/30);
+
+		panBackground(); //calls panBackground to run while the gameLoop is running
+
+		//requestAnimationFrame only runs once also:
+		window.requestAnimationFrame(gameLoop);
+
+}//end gameLoop
+
+gameLoop(); //calls the gameLoop to run 
+
+//setInterval example:
+//setInterval(gameLoop, 1000/30); //30fps
+
+
+	function panBackground(){
+		if(sDir == 'right'){
+			speedX -= 3; //number of pixels
+		}else{
+			speedX +=3
+		}
+		$('#game-stage').css({'background-position': speedX + 'px ' + speedY + 'px' });
+
+	} //end panBackground	
+
+let currFrame = 0; //current frame we are on
+	
+	function dragonFlap(){
+		const frames = [0,1,2,3], //4 frames of animation
+			  frameWidth = 200;
+				
+		let bgPosX = -(frameWidth * frames[currFrame]),
+		    bgPosY = 0;
+
+		    if(sDir == 'left'){
+		    	bgPosY = -144;
+		    }else{
+		    	bgPosY = 0;
+		    }
+
+		$('#my-dragon').css({'background-position': bgPosX+'px '+bgPosY+'px'});
+		
+		currFrame++;
+		
+		if(currFrame == frames.length){
+			currFrame = 0;
+		}	  
+
+	}//end dragonFlap
+
+	setInterval(dragonFlap, 1000/10);	
+
+
+function shootFlame(){
+	let flame = $('<div>').addClass('flame');
+
+	//add coordinates of the flame relative to the dragon's current position
+	let dTop = dragon.position().top,
+		dLeft = dragon.position().left;
+
+	//position flame top/left 50x50
+	let	fTop = dTop+90,
+		fLeft = dLeft+200; 	
+
+	//apply css to flame
+	flame.css({top:fTop, left:fLeft});
+	stage.append(flame);
+	//other way to do the same: flame.appendTo(stage)
+	flame.animate({left: stage.width()+100}, 1000, function(){
+		//when animation is complete:
+		$(this).remove();
+
+	})
+
+
+}//end shoot flame
+
+function createEnemy(){
+	let enemy = $('<div>').addClass('enemy');
+	let randClass = Math.random(); 
+	//Math.random() creates a random decimal value from 0 to almost 1
+	console.log(randClass)
+
+	if(randClass > .9){
+		enemy.addClass('blue');
+
+	}else if(randClass > .75){
+		enemy.addClass('purple');
+	
+	}else if(randClass > .55){
+		enemy.addClass('green');
+
+	}else if(randClass > .35){
+		enemy.addClass('red')
+	
+	}else{
+		enemy.addClass('pink')
+	}
+
+	//apply a start position to our enemy
+	let eLeft = stage.width()+100,
+		eTop = Math.random() * (stage.height()-50); //enemy height is 50px 
+
+		enemy.css({top:eTop, left:eLeft});
+
+		stage.append(enemy);
+
+		enemy.animate({left:-100}, 2500, 'linear', function(){
+			$(this).remove();
+		})
+}
+
+//var makes this variable be stored in memory at the top
+var enemyInt = setInterval(createEnemy, 1500);
+
+//updates the lifebar
+	function updateLifebar(){
+		let percent = lives/3; //3 is the value of lives
+			percent *= 100;
+			$('#life-bar .bar').animate({width:percent+'%'}, 400);
+	}
+
+	updateLifebar();
+
+function rectHit(rectone, recttwo){
+    //console.log('recthit called');
+    var r1 = $(rectone);
+    var r2 = $(recttwo);
+    
+    var r1x = r1.offset().left;
+    var r1w = r1.width();
+    var r1y = r1.offset().top;
+    var r1h = r1.height();
+    
+    var r2x = r2.offset().left;
+    var r2w = r2.width();
+    var r2y = r2.offset().top;
+    var r2h = r2.height();
+    
+    if( r1y+r1h < r2y ||
+        r1y > r2y+r2h ||
+        r1x > r2x+r2w ||
+        r1x+r1w < r2x ){
+      //  console.log('recthit-false')
+        return false;
+    }else{
+      //console.log('recthit-true')
+        return true;   
+    }
+    
+}//end function 
+
+
+
+
+
+</script>
+</body>
+</html>

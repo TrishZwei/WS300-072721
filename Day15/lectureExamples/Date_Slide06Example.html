@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Date Slide 6 Example</title>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="message">Look at the console</div>
+<script>
+let timeIsNow = new Date(); //gets the current moment
+let dateString = timeIsNow.toDateString();
+let timeString = timeIsNow.toTimeString();
+
+//setting values:
+timeIsNow.setHours(0);
+timeIsNow.setMinutes(0);
+timeIsNow.setSeconds(0);
+timeIsNow.setMonth(7); 
+//passing it august's value because I don't want to reset it for this example
+timeIsNow.setFullYear(2021) //same reason
+
+console.log('Date String:',dateString, ' / Time String:',timeString, ' / Reset Value of Date:',timeIsNow, 'The date has been reset to midnight of today\'s day')
+
+</script>
+
+
+
+
+
+</body>
+</html>
