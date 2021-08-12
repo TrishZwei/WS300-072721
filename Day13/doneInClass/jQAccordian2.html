@@ -6,7 +6,7 @@
 	<style type="text/css">
 		html {
 	min-height: 100%;
-	font-family: 'Nunito', sans-serif;
+	font-family: Verdana, sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -84,8 +84,18 @@ h1 {
 </div>
 
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
+		$('.accordion').on('click', '.accordion-header', function(){
+		
+		if($('.active').length > 0 && !($(this).hasClass('active'))){
+			//there is an item that has the class of active and it is not this one
+			$('.active').toggleClass('active').next().slideToggle();
+
+		}
+
+		$(this).toggleClass('active').next().slideToggle();
+	})
 	
 
 </script>

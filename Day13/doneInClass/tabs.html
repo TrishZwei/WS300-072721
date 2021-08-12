@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Accordian</title>
+	<style type="text/css">
+	html {
+	min-height: 100%;
+	font-family: Verdana, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	}
+
+	body {
+		background: linear-gradient(to bottom right, #3D4258, #6670A0, #9688B4);
+		line-height: 1.5;
+	}
+
+	h1 {
+		font-weight: 200;
+		font-size: 3rem;
+		color: white;
+		text-align: center;
+	}
+
+	.tabs{
+		max-width: 600px;
+	}
+
+	.tab-list{
+		padding-bottom: 1rem;
+	}
+
+	.tab{
+		border: 1px solid transparent;
+		border-radius: 40px;
+		display: inline-block;
+		text-decoration: none;
+		padding: .5rem 1rem;
+		color: rgba(255,255,255, .6);
+	}
+
+	.tab.active{
+		color: white;
+		border: 1px solid white;
+
+	}
+
+	.tab-content{
+		background: linear-gradient(to bottom right, white, #f8f8f8);
+		display: none;
+		padding: 1.5rem;
+		color: #4a5666;
+	}
+
+	.show{
+		display: block;
+	}
+
+
+
+	</style>
+</head>
+<body>
+
+	<h1>Tabs Demo</h1>
+	<nav class="tab-list">
+		<a class="tab active" href="#one">One</a>
+		<a class="tab" href="#two">Two</a>
+		<a class="tab" href="#three">Three</a>		
+	</nav>
+	<div id="one" class="tab-content show">
+		One lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.		
+	</div>
+	<div id="two" class="tab-content">
+		Two lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.		
+	</div>
+	<div id="three" class="tab-content show">
+		Three lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.		
+	</div>	
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+		$('.tab-list').on('click', '.tab', function (e) {
+			e.preventDefault(); //don't go to href like normal
+			$('.tab').removeClass('active');
+			$('.tab-content').removeClass('show')
+			let tab = $(this);
+			tab.addClass('active');
+			$(tab.attr('href')).addClass('show');
+		})
+
+</script>
+</body>
+</html>

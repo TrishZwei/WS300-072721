@@ -5,9 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Robust Slider</title>
 	<style type="text/css">
-		body{
-			font-family: verdana;
-		}
+	body{
+		font-family: verdana;
+	}
 
 
 	/*	styles for the handcrafted slider */
@@ -23,109 +23,109 @@
 		max-height: 400px;
 		overflow: hidden;
 	}
-		.slide-container{
-			width: 100%;
-			height: 0;
-			max-width: 600px;
-			max-height: 400px;
-			padding-bottom: 66.666666%;
-			/*this is a 1.5 aspect-ratio
-			giving us a 66.66666666% bottom padding
-			*/
-			margin: 0 auto;
-			position: relative;
-			border: 1px solid black;
-			overflow: hidden;
-			line-height: 1rem;
+	.slide-container{
+		width: 100%;
+		height: 0;
+		max-width: 600px;
+		max-height: 400px;
+		padding-bottom: 66.666666%;
+		/*this is a 1.5 aspect-ratio
+		giving us a 66.66666666% bottom padding
+		*/
+		margin: 0 auto;
+		position: relative;
+		border: 1px solid black;
+		overflow: hidden;
+		line-height: 1rem;
 
-		}
+	}
 
-		.slide-container div.slide{
-			width: 100%;
-			line-height: 1rem;
-			font-size: 16px;
-			padding: 0;
-			margin: 0;
-			position: absolute;
-			top: 0;
-			left: 0;
-		}
-
-		.slide-container div.slide img{
-			width: 100%;
-			max-width: 100%;
-			padding: 0px;
-
-		}
-
-		.button.auto{
-			display: inline-block;
-			width: 150px;
-			margin: 6px;
-			background-color: cadetblue;
-			border-radius: 5px;
-			padding: 5px;
-			text-align: center;
-			color: white;
-			display: block;
-			width: 90%; 
-			max-width: 350px;
-			margin: 6px auto; 
-		}		
-
-		.mouse-click{
-			cursor: pointer;
-		}
-
-		.slide-arrow-container{
-			position: absolute;
-			width: 100%;
-			height: 32px;
-		}
-
-		.slide-arrow-container .prev.button{
+	.slide-container div.slide{
+		width: 100%;
+		line-height: 1rem;
+		font-size: 16px;
+		padding: 0;
+		margin: 0;
 		position: absolute;
-    	top:0;
-    	outline: 0;
-    	width: 32px;
-    	height: 32px;
-    	text-indent: -9999px;
-    	z-index: 9999;
-		left: 10px;
-    	background: url(images/controls.png) no-repeat 0 -32px;
-		}
+		top: 0;
+		left: 0;
+	}
 
+	.slide-container div.slide img{
+		width: 100%;
+		max-width: 100%;
+		padding: 0px;
 
-		.slide-arrow-container .next.button{
+	}
+
+	.button.auto{
+		display: inline-block;
+		width: 150px;
+		margin: 6px;
+		background-color: cadetblue;
+		border-radius: 5px;
+		padding: 5px;
+		text-align: center;
+		color: white;
+		display: block;
+		width: 90%; 
+		max-width: 350px;
+		margin: 6px auto; 
+	}		
+
+	.mouse-click{
+		cursor: pointer;
+	}
+
+	.slide-arrow-container{
 		position: absolute;
-    	top: 0;
- /*   	margin-top: -16px;
- */   	outline: 0;
-    	width: 32px;
-    	height: 32px;
-    	text-indent: -9999px;
-    	z-index: 9999;
-		right: 10px;
-    	background: url(images/controls.png) no-repeat -43px -32px;
-		}
+		width: 100%;
+		height: 32px;
+	}
 
-		.pager-container{
-			text-align: center;
-		}
+	.slide-arrow-container .prev.button{
+	position: absolute;
+	top:0;
+	outline: 0;
+	width: 32px;
+	height: 32px;
+	text-indent: -9999px;
+	z-index: 9999;
+	left: 10px;
+	background: url(images/controls.png) no-repeat 0 -32px;
+	}
 
-		span.pager{
-			width: 32px;
-			height: 32px;
-			line-height:32px;
-			border-radius: 50%;
-			margin: 1%;
-			display: inline-block;
-			background-color: grey;
-			color: white;
-		}
-		span.pager.active{
-			background-color: cadetblue;
-		}
+
+	.slide-arrow-container .next.button{
+	position: absolute;
+	top: 0;
+/*   	margin-top: -16px;
+*/   	outline: 0;
+	width: 32px;
+	height: 32px;
+	text-indent: -9999px;
+	z-index: 9999;
+	right: 10px;
+	background: url(images/controls.png) no-repeat -43px -32px;
+	}
+
+	.pager-container{
+		text-align: center;
+	}
+
+	span.pager{
+		width: 32px;
+		height: 32px;
+		line-height:32px;
+		border-radius: 50%;
+		margin: 1%;
+		display: inline-block;
+		background-color: grey;
+		color: white;
+	}
+	span.pager.active{
+		background-color: cadetblue;
+	}
 
 /* ghost css to help me find where the padding is going astray...*/
 *{
@@ -183,6 +183,8 @@ let currentSlide  = 1;
 let slideCount = 0;
 let sContainer = $('.slide-container');
 let sNav = $('.slide-arrow-container');
+let timeSlides; //undefined, will be defined later
+let auto = true; //true starts auto
 
 $('.slide').each( function(i){
 
@@ -211,7 +213,21 @@ function adjustSlider(){
 $(window).on('resize', adjustSlider)
 
 
-function showNextSlide(){
+function showNextSlide(e){
+	//captures event object
+		console.log('next')
+//		console.log(e.type)
+		if(e == undefined){
+			auto = true;
+		}else{
+			auto = false
+		}
+
+		if(!auto){
+			clearInterval(timeSlides)
+		}
+
+	
 	removeClicks();
 	let nextSlide = currentSlide+1
 
@@ -222,10 +238,14 @@ function showNextSlide(){
 	$('#'+currentSlide).removeClass("current").animate({left: -sContainer.width()}, 300, addClicks)
 	$('#'+nextSlide).css({left:sContainer.width()}).animate({left:0}, 300).addClass('current')
 	currentSlide = nextSlide
-}
+}//end showNextSlide
 
 
 function  showPrevSlide(){
+		console.log('prev')
+
+	auto = false;
+	clearInterval(timeSlides)
 	removeClicks();
 	let prevSlide = currentSlide-1;
 
@@ -238,6 +258,30 @@ function  showPrevSlide(){
 	currentSlide = prevSlide;
 
 }
+
+
+function autoSlides(){
+	console.log('auto slides')
+
+	//sets the value of the timer interval
+	auto = true;
+	timeSlides = setInterval( function(e){
+		showNextSlide(e);
+		//setInterval is not an event so e will be undefined
+	}, 3000 );
+}
+
+autoSlides();
+
+$('.auto').on('click', function(){
+	console.log('auto')
+	if(!auto){
+		showNextSlide();
+		autoSlides();
+	}
+
+})
+
 
 
 function removeClicks(){
