@@ -182,6 +182,7 @@
 let currentSlide  = 1;
 let slideCount = 0;
 let sContainer = $('.slide-container');
+let sNav = $('.slide-arrow-container');
 
 $('.slide').each( function(i){
 
@@ -193,6 +194,22 @@ $('.slide').each( function(i){
 	$(this).attr('id', i+1);
 	slideCount++;
 })
+
+//adjusts  slider nav, and images when page grows
+function adjustSlider(){
+	let sNavH = sNav.height();
+	let sBoxH = sContainer.outerHeight();
+	let sBoxW = sContainer.width();
+
+	sNav.css({top: (sBoxH/2)-(sNavH/2)});
+	$('.slide:not(".current")').css({left:sBoxW});
+
+}
+
+
+
+$(window).on('resize', adjustSlider)
+
 
 function showNextSlide(){
 	removeClicks();
@@ -243,7 +260,7 @@ $('.prev').click( function(e){
 
 addClicks();
 
-
+adjustSlider()
 
 
 
