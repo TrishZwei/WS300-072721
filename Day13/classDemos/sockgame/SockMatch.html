@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sock Game</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+
+		.cf:before,
+		.cf:after{
+			content: " ";
+			display: table;
+		}
+
+		.cf:after{
+			clear: both;
+		}
+
+
+		h1{
+			width: 100%;
+			text-align: center;
+		}
+
+		#game{
+			margin: 0 auto;
+			width: 524px;
+			text-align: center;
+		}
+
+		.flip{
+			perspective: 800;
+			position: relative;
+			height: 220px;
+			width: 121px;
+			float: left;
+			margin: 5px;
+		}
+
+		.flip .card.flipped{
+			transform: rotateY(-180deg);
+		}
+
+		.flip .card{
+			width: 100%;
+			height: 100%;
+			transform-style: preserve-3d;
+			transition:  0.5s;
+		}
+
+		.flip .card .face{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			backface-visibility: hidden;
+			z-index: 2;
+		}
+
+		.flip .card .front{
+			position: absolute;
+			z-index: 1;
+			cursor: pointer;
+		}
+
+		.flip .card .back{
+			transform: rotateY(-180deg);
+		}
+
+		.button{
+			text-align: center;
+			background-color: cadetblue;
+			font-size: 2.25em;
+			width: 220px;
+			margin: 0 auto;
+			margin-top: 30px;
+			color: white;
+			font-weight: bold;
+			border-radius: 1em;
+			cursor: pointer;
+		}
+
+		.green{
+			background-color: lightgreen;
+			border: solid 5px lightgreen;
+		}
+
+		.pink{
+			background-color: pink;
+			border: solid 5px pink;
+		}
+
+		.blue{
+			background-color: skyblue;
+			border: 5px solid skyblue;
+		}
+
+		.gray{
+			background-color: lightgray;
+			border: solid 5px lightgray;
+		}
+
+		.red{
+			background-color: lightsalmon;
+			border: solid 5px lightsalmon;
+		}
+
+		.purple{
+			background-color: thistle;
+			border:  5px solid thistle;
+		}
+
+	</style>
+
+</head>
+<body>
+<!-- stuff to manipulate goes here -->
+	<h1>Match the Socks</h1>
+	<div id="game">
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>		
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>		
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>		
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>		
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>		
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>		
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>		
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>		
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>
+		<div class="flip">
+			<div class="card">
+				<div class="face front">
+					<img src="socks/background.png">
+				</div>
+				<div class="face back">
+					<img src="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!-- jquery! -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- any jQ Plugins go here -->
+<script type="text/javascript">
+	'use strict';
+	let socks = ['blue', 'gray', 'green', 'pink', 'purple', 'red', 'blue', 'gray', 'green', 'pink', 'purple', 'red'];
+
+	let clicks = 0;
+
+	//variables to hold the 2 clicked socks
+	let sock1, sock2, sock1Id, sock2Id;
+
+	//put unique ids on each card on the board
+	$('.flip').each( function(i){
+		$(this).attr('id', i+1);
+
+	})
+
+	//set images into the back portion of the card
+	$('.back img').each( function(i){
+		let theSock = ''+socks.splice(getRandomInt(0,socks.length-1), 1);
+		let theCard = $(this).parents('.card')
+		theCard.addClass(theSock);
+		$(this).attr('src', 'socks/'+theSock+'sock.png');
+	})
+
+	$('.flip').click( function(e){
+		//access to event listener object
+		let theCard = $(this).find('.card');
+
+		//allow only two flipped cards at a time
+
+		if($('.flipped').length < 2){
+			theCard.addClass('flipped');
+			let classList = theCard.attr('class');
+			classList = classList.split(' ');
+
+			let theColor = classList[1];
+			console.log(classList, theColor);
+
+			if(sock1 == undefined){
+				sock1 = theColor;
+				sock1Id = theCard.parent().attr('id');
+			}else{
+				sock2 = theColor;
+				sock2Id = theCard.parent().attr('id');
+				console.log(sock1, sock1Id, sock2, sock2Id)
+				checkMatch();
+			} 
+		}
+
+	})
+
+	function checkMatch(){
+		if(sock1 == sock2 && sock1Id != sock2Id){
+			console.log('match')
+			$('.'+sock2+'.flipped').parent().off().addClass('matched');
+			$('.'+sock2+'.flipped .front img').attr('src', 'socks/match.png');
+			$('.'+sock2+'.flipped .back').removeClass('back face');
+			$('.'+sock2+'.flipped .front').css({'background-color': 'transparent'})
+		}
+
+		setTimeout(flipBack, 500);
+		checkWin();
+	} //end checkMatch
+
+
+	function flipBack(){
+		$('.flipped').removeClass('flipped');
+		sock1 = undefined;
+		sock2 = undefined;
+		sock1Id = undefined;
+		sock2Id = undefined;
+	}
+
+	function checkWin(){
+		if($('.matched').length == $('.flip').length){
+			let message = '<h2>You have matched all the socks!</h2>';
+			$('#game').prepend('div').html(message);
+		}
+
+
+	}
+
+
+//keeping this here for ease
+	function getRandomInt(min = 1, max = 100){
+		return Math.floor( Math.random() * (max - min + 1) ) + min;
+	}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Robust Slider</title>
+	<style type="text/css">
+		body{
+			font-family: verdana;
+		}
+
+
+	/*	styles for the handcrafted slider */
+
+	.outer-container{
+		position: relative;
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.inner-container{
+		position: relative;
+		max-height: 400px;
+		overflow: hidden;
+	}
+		.slide-container{
+			width: 100%;
+			height: 0;
+			max-width: 600px;
+			max-height: 400px;
+			padding-bottom: 66.666666%;
+			/*this is a 1.5 aspect-ratio
+			giving us a 66.66666666% bottom padding
+			*/
+			margin: 0 auto;
+			position: relative;
+			border: 1px solid black;
+			overflow: hidden;
+			line-height: 1rem;
+
+		}
+
+		.slide-container div.slide{
+			width: 100%;
+			line-height: 1rem;
+			font-size: 16px;
+			padding: 0;
+			margin: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		.slide-container div.slide img{
+			width: 100%;
+			max-width: 100%;
+			padding: 0px;
+
+		}
+
+		.button.auto{
+			display: inline-block;
+			width: 150px;
+			margin: 6px;
+			background-color: cadetblue;
+			border-radius: 5px;
+			padding: 5px;
+			text-align: center;
+			color: white;
+			display: block;
+			width: 90%; 
+			max-width: 350px;
+			margin: 6px auto; 
+		}		
+
+		.mouse-click{
+			cursor: pointer;
+		}
+
+		.slide-arrow-container{
+			position: absolute;
+			width: 100%;
+			height: 32px;
+		}
+
+		.slide-arrow-container .prev.button{
+		position: absolute;
+    	top:0;
+    	outline: 0;
+    	width: 32px;
+    	height: 32px;
+    	text-indent: -9999px;
+    	z-index: 9999;
+		left: 10px;
+    	background: url(images/controls.png) no-repeat 0 -32px;
+		}
+
+
+		.slide-arrow-container .next.button{
+		position: absolute;
+    	top: 0;
+ /*   	margin-top: -16px;
+ */   	outline: 0;
+    	width: 32px;
+    	height: 32px;
+    	text-indent: -9999px;
+    	z-index: 9999;
+		right: 10px;
+    	background: url(images/controls.png) no-repeat -43px -32px;
+		}
+
+		.pager-container{
+			text-align: center;
+		}
+
+		span.pager{
+			width: 32px;
+			height: 32px;
+			line-height:32px;
+			border-radius: 50%;
+			margin: 1%;
+			display: inline-block;
+			background-color: grey;
+			color: white;
+		}
+		span.pager.active{
+			background-color: cadetblue;
+		}
+
+/* ghost css to help me find where the padding is going astray...*/
+*{
+/*	background-color: black;
+	color: green;	
+	border: 1px solid red;
+*/
+}
+
+
+	</style>
+</head>
+<body>
+<h1>Robust Slider</h1>
+<div class="outer-container">
+	<div class="inner-container">
+	<div class="slide-container">
+		<div class="slide">
+			<img src="images/slides/coffee1.jpg" title="best part of waking up" alt="delicious coffee">
+		</div>
+		<div class="slide">
+			<img src="images/slides/coffee2.jpg" title="sharing is caring" alt="delicious coffee">
+		</div>
+		<div class="slide">
+			<img src="images/slides/coffee3.jpg" title="coffee is love" alt="delicious coffee">
+		</div>
+		<div class="slide">
+			<img src="images/slides/coffee4.jpg" title="you snooze you lose" alt="delicious coffee">	
+		</div>
+	</div>
+</div>
+<div class="slide-arrow-container">	
+	<div class="prev button mouse-click">Prev</div>
+	<div class="next button mouse-click">Next</div>
+</div>	
+	<div class="auto button mouse-click">Auto</div>
+	<div class="pager-container"></div>
+</div>
+<p>
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+	//set up slider
+
+//move all slides but 1 to the side (slides are hidden by overflow)
+//keep track of all individual slides by giving them a unique id
+//count the total number of slides
+
+	let slideCount = 0; //this will hold out total number of slides
+	let currentSlide = 1; //keeps track of which slide is currently showing;
+	let slidebox = $('.slide-container');
+	let auto = true; 
+
+	let slideNav = $('.slide-arrow-container');
+
+
+	$('.slide').each( function(index){
+		activeSlide();
+		if(index != 0){
+			//this is not the first slide
+			//moves all the slides to the left of the slidebox
+			$(this).css({left: slidebox.width()});
+		}else{
+			$(this).addClass('current');
+		} //end if
+
+		$(this).attr('id', index+1);
+		slideCount++;
+		//create divs  to go into pager:
+		let pager = $('<span>').addClass('pager mouse-click').text(index+1);
+
+		pager.appendTo('.pager-container');
+		pager.on('click', function(){
+			if(! $(this).hasClass('active'))
+			goToSlide(this);
+		})
+
+	}) //end slide.each
+
+	adjustSlider();
+
+	function adjustSlider(){
+		sNavH = slideNav.height();
+		sBoxH = slidebox.outerHeight();
+		sBoxW = slidebox.width();
+
+		console.log(sNavH, sBoxH)
+		slideNav.css({top:(sBoxH/2)-(sNavH/2)})
+		$('.slide:not(".current")').css({left:sBoxW})
+
+
+	}
+
+	$(window).on('resize', adjustSlider);
+
+	function goToSlide(slide){
+		//console.log(slide);
+		let slideNum = $(slide).text()*1; //is the slide we want to animate in
+		auto = false
+		clearInterval(timeSlides);			
+
+		removeClicks();
+
+		//slideNum;
+		$('#'+currentSlide).animate({left: -slidebox.width()}, 300).removeClass('current');
+		$('#'+slideNum).css({left:slidebox.width()}).animate({left:0}, 300, addClicks).addClass('current');
+		currentSlide = slideNum;
+		activeSlide();
+	}
+
+
+	function nextSlide(event){
+		removeClicks(); 
+
+		if(event == undefined){
+		 auto = true;	
+		 }else{
+		 	auto = false;
+		 }
+		
+		if(auto == false){
+		clearInterval(timeSlides);			
+		}
+
+		let incomingSlide = currentSlide+1;
+		//console.log(event, currentSlide, incomingSlide)
+
+		if(incomingSlide > slideCount){
+			//reset to first slide
+			incomingSlide = 1;
+		}
+		$('#'+currentSlide).animate({left: -slidebox.width()}, 300).removeClass('current');
+		$('#'+incomingSlide).css({left:slidebox.width()}).animate({left:0}, 300, addClicks).addClass('current');
+		currentSlide = incomingSlide;
+
+		activeSlide()
+
+	} //end nextSlide
+
+
+	function prevSlide(){
+		auto = false
+		clearInterval(timeSlides);	
+				
+		removeClicks();
+		clearInterval(timeSlides);		
+		let incomingSlide = currentSlide-1;	
+		if(incomingSlide < 1 ){
+			incomingSlide = slideCount; //sets calue back to highest slide
+		}
+		//animate out the currentSlide
+		$('#'+currentSlide).animate({left: slidebox.width()}, 300);
+		//animate in the incoming slide
+		$('#'+incomingSlide).css({left: -slidebox.width()}).animate({left:0}, 300, addClicks);
+		//set the new value of the current slide
+		currentSlide = incomingSlide;
+		activeSlide()
+
+	}
+
+var timeSlides; //stores our timer interval
+
+$('.auto').on('click', function(){
+	if(!auto){
+	nextSlide();
+	autoSlides();
+	}
+
+} );
+
+function autoSlides(){
+	//sets the value of the timer interval
+	auto = true;
+	activeSlide();
+	timeSlides = setInterval( function(event){
+		//setInterval has no event data since it is not an event. so the value of event here is undefined.
+		//the second argument has a default of click but if nextSlide is called from here it has a value of fromAuto instead.
+		nextSlide(event);
+	}, 3000);
+}	
+
+autoSlides();
+
+function addClicks(){
+//event listeners
+$('.next').on('click', function(event){
+	nextSlide(event);
+});
+$('.prev').on('click', prevSlide);
+}
+
+function removeClicks(){
+$('.next, .prev').off('click');	
+
+}
+
+//calls addClicks to run immediately so that our event listeners are active upon page load
+addClicks();
+
+function activeSlide(){
+	$('.pager.active').removeClass('active');
+	let pager = document.querySelectorAll('.pager')[currentSlide-1];
+	//console.log(pager);
+	$(pager).addClass('active');
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>

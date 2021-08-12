@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Rotating Images with a fadeout</title>
+	<style type="text/css">
+.slider {
+	position: relative;
+}
+
+.slider > div {
+	position: absolute;
+}
+
+
+	</style>
+</head>
+<body>
+<div class="slider">
+	<div><img src="images/1051-500x500.jpg"></div>
+	<div><img src="images/1057-500x500.jpg"></div>
+	<div><img src="images/1053-500x500.jpg"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+$(".slider > div:gt(0)").hide();
+
+setInterval(function() {
+	console.log($('.slider > div:first-child')[0])
+	$('.slider > div:first-child')
+		.fadeOut(5000) 
+		.next() 
+	    .fadeIn(5000) 
+		.end()
+		.appendTo('.slider');
+
+}, 5000);
+
+</script>
+</body>
+</html>
