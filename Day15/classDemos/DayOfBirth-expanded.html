@@ -3,16 +3,19 @@
 <head>
 	<meta charset="utf-8">
 	<title>You were born on....</title>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
 	<p>Date: <input type="text" class="date-input" placeholder="MM/DD/YYYY"></p>
 	<div class="message"></div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- jquery ui 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+ -->
+
 <script type="text/javascript">
-	//$('.date-input').datepicker(); //jQ UI method that creates a month to select dates from. Not necessary for what we are doing - but gives us a basic date format concept and an easy way to input dates. I've removed it from this code since we don't actually need it.
+	//$('.date-input').datepicker(); 
+	//jQ UI method that creates a month to select dates from. Not necessary for what we are doing - but gives us a basic date format concept and an easy way to input dates. I've removed it from this code since we don't actually need it.
 
 	//Quick note: if you put the wrong date value JS updates the date object to add to the proper value of days. so 04/55/2020 is actually: Mon May 25, 2020.
 

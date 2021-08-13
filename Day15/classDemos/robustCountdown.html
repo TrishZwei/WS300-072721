@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Countdown to Event</title>
+	<style type="text/css">
+		body, html{
+			font-family: Verdana;
+			text-align: center;
+			background-color: black; 
+			color: white;
+		}
+
+		h1{
+			color: #FF9A00;
+
+		}
+	</style>
+</head>
+<body>
+<!-- HTML GOES HERE -->
+<h1>Another Countdown</h1>
+<div id="clock-div"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+
+//modified from here: https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/
+
+const deadline = '2023-8-31';
+
+function getTimeRemaining(){
+  let today = new Date();
+  let later = new Date(deadline);
+
+  const total = later - today;
+  const seconds = Math.floor( (total/1000) % 60 );
+  const minutes = Math.floor( (total/1000/60) % 60 );
+  const hours = Math.floor( (total/(1000*60*60)) % 24 );
+  let days = Math.floor( total/(1000*60*60*24) );
+  let months = monthDiff(today, later)
+  let years = Math.floor(months/12);
+  if(years > 0){
+  	//at least one year
+  	months %= 12 //finds the remainder of months after months/12
+  	days -= 365*years;
+  	//TODO: figure out if leap years are involved later... 
+  }
+
+  //the values for days in month of year 
+	const DaysInMonth = [
+		31,28,31,
+		30,31,30,
+		31,31,30,
+		31,30,31];
+
+	//TODO: update 28 to 29 for feb on leap years	
+
+  if(months > 0){
+  	//we have at least 1 month... which months remain?
+  	let currentMonth = today.getMonth();
+  	//console.log(currentMonth);
+  	let deadlineMonth = later.getMonth();
+  	if(currentMonth < deadlineMonth){
+  		//deadline month is later in the year than current month
+  		
+  		for(let i = currentMonth; i < currentMonth+months; i++){
+  			console.log(i, DaysInMonth[i])
+  			days -= DaysInMonth[i];
+  			console.log(days);
+  		}
+
+  	}else{
+  		console.log(days);
+  		for(let i = deadlineMonth; i < deadlineMonth+months; i++){
+  			days -= DaysInMonth[i];
+  			console.log(days);
+  		}
+  	}
+
+  } //nothing for 0 months.
+
+  return {
+    total,
+    years,
+    months,
+    days,
+    hours,
+    minutes,
+    seconds
+  }; //returns an object literal with the properties seen here
+}
+
+function initializeClock(id) {
+
+  const clock = document.getElementById(id);
+  const nextFrame = requestAnimationFrame( ()  => {
+  	initializeClock(id);
+    const t = getTimeRemaining();
+    //console.log( t );
+    clock.innerHTML = 'years: ' + t.years + '<br>' +
+    				  'months: ' + t.months + '<br>' + 
+    				  'days: ' + t.days + '<br>' +
+                      'hours: '+ t.hours + '<br>' +
+                      'minutes: ' + t.minutes + '<br>' +
+                      'seconds: ' + t.seconds;
+    
+  } )
+
+}
+
+// code from here: https://www.codegrepper.com/code-examples/javascript/javascript+calculate+months+between+two+dates
+
+function monthDiff(d1, d2) {
+	//d1 is today and d2 is the end date
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+}
+
+initializeClock('clock-div', deadline);
+
+</script>
+</body>
+</html>

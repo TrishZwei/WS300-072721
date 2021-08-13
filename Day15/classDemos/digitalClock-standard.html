@@ -53,6 +53,7 @@
 		<div id="minutes">00</div>
 		<div class="colon">:</div>
 		<div id="seconds">00</div>
+		<div id="meridiem"></div>
 	</div>
 	<div class="date">
 		<div id="day">MONDAY</div>
@@ -71,10 +72,31 @@
 
 	var today = new Date();
 //clock stuff
+	//setting the hours value:
+	//today.setHours(17)
+
 	var currentHour = today.getHours(); //0-23
 	var currentMins = today.getMinutes();
 	var currentSecs = today.getSeconds();
+	let ampm;
 
+	// testing - setting the variable afterwards: 
+	//currentHour = 8;
+
+
+//ternary operator:
+	ampm = currentHour > 11 ? 'P.M.' : 'A.M.'
+
+console.log(ampm);
+	if(currentHour > 11){
+	 	currentHour -= 12;
+	 }
+
+
+
+if(currentHour < 10){
+	currentHour = '0'+currentHour;
+}
 
 if(currentMins < 10){
 	currentMins = '0'+currentMins;
@@ -97,6 +119,7 @@ if(currentSecs < 10){
 	$('#hours').text(currentHour);
 	$('#minutes').text(currentMins);
 	$('#seconds').text(currentSecs);
+	$('#meridiem').text(ampm);
 	$('#day').text(dayArray[theDay]);
 	$('#month').text(monthArray[theMonth]);
 	$('#theDay').text(theDate);

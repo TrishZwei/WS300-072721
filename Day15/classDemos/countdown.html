@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Countdown to Event</title>
+	<style type="text/css">
+		body, html{
+			font-family: Verdana;
+			text-align: center;
+			background-color: black; 
+			color: white;
+		}
+
+		h1{
+			color: #FF9A00;
+
+		}
+
+		#until{
+			margin: 0 auto;
+		}
+
+		#until div{
+			display: inline-block;
+			background: #881EE4;
+  			padding: 1em;
+  			margin: 0;
+  			min-width: 100px;
+		}
+
+		*, *:before, *:after {
+		  box-sizing: inherit;
+		}
+
+		.cf:before,
+		.cf:after {
+		content: " ";
+		display: table;
+		}
+
+		.cf:after {
+		clear: both;
+		}
+
+	</style>
+</head>
+<body>
+<!-- HTML GOES HERE -->
+<h1>&nbsp;</h1>
+<div id="until" class="cf">
+	<div id="years">
+		<h3>Years:</h3>
+		<span>0</span> 
+	</div>  
+	<div id="days">
+		<h3>Days:</h3>
+		<span>0</span> 
+	</div> 
+	<div id="hours">
+		<h3>Hours:</h3>
+		<span>0</span> 		
+	</div> 
+	<div id="mins">
+		<h3>Minutes:</h3>
+		<span>0</span> 		
+	</div> 
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+//establish an end date and time:
+var message = "Class is Ending in:";
+
+var end = new Date("August 30, 2021 12:00:00")
+var now = new Date()
+var diff = end - now; //gets difference
+
+var days = Math.floor(diff / (1000*60*60*24));
+var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+var years = 0;
+
+	if(days > 365){
+		years = parseInt(days/365);
+		console.log(years);
+	}
+	
+
+var currentMonth = now.getMonth();
+
+if(years == 0){
+	$('#years').hide();	
+}else{
+	days -= (years*365)
+}
+
+
+$('h1').text(message);
+$('#years span').text(years);
+$('#days span').text(days);
+$('#hours span').text(hours);
+$('#mins span').text(minutes);
+
+</script>
+</body>
+</html>
