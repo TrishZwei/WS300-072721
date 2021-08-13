@@ -37,14 +37,14 @@
 
 	}
 
-	.button:hover{
+	.button:hover, .ui:hover{
 		background-color: orange;
 	}
 
 
 	#game-stage{
 		position: absolute;
-		top: 30px;
+		top: 45px;
 		left: 10px;
 		right: 10px;
 		bottom: 10px;
@@ -137,10 +137,25 @@
 		position: absolute;
 	}
 
+	.ui{
+		text-align: right;
+		font-size: 16px;
+		color: white;
+		width: fit-content;
+		padding: .5em;
+		background-color: orangered;
+		float: right;
+		margin: .5em;
+		border-radius: 10px;
+		cursor: pointer;
+
+	}
+
 	</style>	
 
 </head>
 <body>
+	<div class="ui">Sound <span>On</span></div>
 	<div id="game-stage">
 	<div id="life-bar">
 		<div class="bar"></div>
@@ -168,8 +183,8 @@
 		  speedY = 0, //for vertical scroll
 		  sDir = 'right',
 		  dragonFlying, //timer for dragon flap
-		  enemyInt; //stores the timer for generating enemies
-
+		  enemyInt, //stores the timer for generating enemies
+		  sound = true;
 
 //this is a JSON Object ( an object literal)
 //this represents which way our player wants to move
@@ -453,6 +468,7 @@ function createExplosion(exObj, color = 'red'){
 let currFrame = 0; //current frame we are on
 	
 	function dragonFlap(){
+
 		const frames = [0,1,2,3], //4 frames of animation
 			  frameWidth = 200;
 				
@@ -475,21 +491,63 @@ let currFrame = 0; //current frame we are on
 
 	}//end dragonFlap
 
+function birdFlight(theBird){
+	//this is the enemy bird that gets passed from createEnemy()
+	if(theBird.frameNum == undefined){
+		//the bird does not have this property
+		theBird.frameNum = 0;
+	}else{
+		theBird.frameNum++;
+	}
+
+	let frames = [0,1];
+	let frameWidth = 72;
+
+	if(theBird.frameNum > 1){
+			theBird.frameNum = 0;
+	}
+
+	let bgPos = frameWidth * frames[theBird.frameNum];
+	$(theBird).css({'background-position': bgPos+'px 0px'});
+
+	setTimeout( function(){
+		birdFlight(theBird);
+	}, 200)
+
+
+}
+
+
+
+
 var woosh = new Audio('sounds/short-fireball-woosh.mp3');
 var pop = new Audio('sounds/pop.mp3')
 	  
 	  woosh.volume = 0.2;
 	  pop.volume = 1;
 	
-
-
-
 //plays sounds multiple times good for short sounds in rapid succession
 function playSound(track, vol=1){
+	if(sound){
+	//if sound is currently true
 	let tempSound = track.cloneNode(); //duplicates any object (html objects)
 			tempSound.volume = vol;
-			tempSound.play();
+			tempSound.play();		
+		}
 }
+
+$('.ui').click( function(){
+	if(sound){
+		sound = false;
+		$(this).find('span').text('Off');
+	}else{
+		$(this).find('span').text('On');
+		sound = true;
+	}
+
+
+})
+
 
 
 function shootFlame(){
@@ -537,7 +595,7 @@ function createEnemy(){
 		enemy.addClass('red')
 	
 	}else{
-		enemy.addClass('pink')
+		enemy.addClass('pink');
 	}
 
 	//apply a start position to our enemy
@@ -547,7 +605,7 @@ function createEnemy(){
 		enemy.css({top:eTop, left:eLeft});
 
 		stage.append(enemy);
-
+		birdFlight(enemy); //enemy is theBird
 		enemy.animate({left:-100}, 2500, 'linear', function(){
 			$(this).remove();
 		})
