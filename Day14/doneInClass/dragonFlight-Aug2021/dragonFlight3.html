@@ -58,6 +58,7 @@
 
 	#my-dragon{
 		position: absolute;
+		text-align: left;
 		top: 100px;
 		left: 100px;
 		width: 200px;
@@ -125,6 +126,17 @@
 		background-color: #ff3f3f;
 	}
 
+
+	.explosion{
+		position: absolute;
+		width: 1px;
+		height: 1px;
+	}
+
+	.char{
+		position: absolute;
+	}
+
 	</style>	
 
 </head>
@@ -172,7 +184,7 @@ function startGame(){
 	//all of the stuff that starts the game goes here:
 	gameRunning = true;
 	//1. hide the info box
-	$('.info').hide();
+	$('.intro').hide();
 	//2. set the value of lives
 		score = 0; //set the value of score
 	  lives = 3; //set the value of lives
@@ -190,36 +202,54 @@ function startGame(){
 
 }//end startGame				
 
-
+function gameOver(){
+	clearInterval(enemyInt); //stops enemies from generating
+	$('.enemy').remove(); //removes errant birds
+	$('#my-dragon, #life-bar').hide();
+	$('.intro').show();
+	$('.intro h1').text('Game Over!');
+	$('.intro p:first').text('Your score was: '+score);
+	$('.intro p:last').text('click the button to play again.')
+	$('.start').text('Play Again?');
+	dragon.text('');
+	gameRunning = false;
+	clearInterval(dragonFlying);
+}
 
 
 //game event listeners:
 $(document).keydown( function(e){
-	if(e.which == 38){
-		dir.up = true;
-	}
 
-	if(e.which == 40){
-		dir.down = true;
-	}
+	if(gameRunning){
 
-	if(e.which == 37){
-		dir.left = true;
-	}
+		if(e.which == 38){
+			dir.up = true;
+		}
 
-	if(e.which == 39){
-		dir.right = true;
-	}
-//change speed when shift key is pressed
+		if(e.which == 40){
+			dir.down = true;
+		}
 
-	if(e.which == 16){
-		speed = 10;
-	}
-	//spacebar to shoot
-	if(e.which == 32 && $('#my-dragon').length == 1){
-		//console.log('wooosh!');
-		shootFlame();
-	}
+		if(e.which == 37){
+			dir.left = true;
+		}
+
+		if(e.which == 39){
+			dir.right = true;
+		}
+	//change speed when shift key is pressed
+
+		if(e.which == 16){
+			speed = 10;
+		}
+		//spacebar to shoot
+		if(e.which == 32 && $('#my-dragon').length == 1){
+			//console.log('wooosh!');
+			shootFlame();
+		}
+
+	}//end if gameRunning
+
 })
 
 $(document).keyup( function(e){
@@ -312,10 +342,23 @@ function gameLoop(){
 					let enemy = $(this);
 
 					if(rectHit(flame, enemy)){
+						let points = 1; //default value of points
+
+						if(enemy.hasClass('blue')){
+							points = 8;
+						}else if (enemy.hasClass('purple') || enemy.hasClass('green') || enemy.hasClass('red')){
+							points = 3;
+						}
+
+
 						flame.remove();
+						createExplosion(enemy);
 						enemy.remove();
-						score++;
+//						score++;
+						score+=points;
+
 						dragon.text(score);
+						playSound(pop);
 					}
 
 				})
@@ -330,10 +373,7 @@ function gameLoop(){
 			  updateLifebar();
 			console.log(lives);
 			if(lives == 0){
-//				dragon.remove();
-				clearInterval(enemyInt);
-				stage.html('<h1>Game Over! Your score was '+score+'</h1>');
-
+				gameOver();				
 			}
 		}
 
@@ -360,7 +400,41 @@ let myNum = 3+2; //5
 
 }//end gameLoop
 
+function createExplosion(exObj, color = 'red'){
 
+	let eTop = exObj.offset().top-10;
+	let eLeft = exObj.offset().left;
+	let zBody = exObj.parent();
+	//		exObj.remove();
+
+	//create explosion box
+	let newExpBox = $('<div>').addClass('explosion').css({ top: eTop+40, left:eLeft+40})
+
+		stage.append(newExpBox);
+
+		let charArray = 'kfopishkmsfh[]sorhst,';
+		charArray = charArray.split(''); 
+
+		for(let i = 0; i < charArray.length; i++){
+			let randChar = charArray[ Math.floor(Math.random() * charArray.length) ]
+			let randX = Math.floor(Math.random() * 300 ) - 150; 
+			let randY = Math.floor(Math.random() * 300 ) - 150; 
+
+			let newExpChar = $('<div>').addClass('char').text(randChar).css({
+				top: 5,
+				left:5,
+				color: color
+			});
+
+			newExpBox.append(newExpChar);
+
+			newExpChar.animate({opacity: .0, top:randY, left:randX}, 600, function(){
+				$(this).remove();
+			})
+
+		}//end for loop
+
+}//end createExplosion
 
 //setInterval example:
 //setInterval(gameLoop, 1000/30); //30fps
@@ -401,7 +475,21 @@ let currFrame = 0; //current frame we are on
 
 	}//end dragonFlap
 
+var woosh = new Audio('sounds/short-fireball-woosh.mp3');
+var pop = new Audio('sounds/pop.mp3')
+	  
+	  woosh.volume = 0.2;
+	  pop.volume = 1;
 	
+
+
+
+//plays sounds multiple times good for short sounds in rapid succession
+function playSound(track, vol=1){
+	let tempSound = track.cloneNode(); //duplicates any object (html objects)
+			tempSound.volume = vol;
+			tempSound.play();
+}
 
 
 function shootFlame(){
@@ -419,6 +507,8 @@ function shootFlame(){
 	flame.css({top:fTop, left:fLeft});
 	stage.append(flame);
 	//other way to do the same: flame.appendTo(stage)
+	playSound(woosh, 0.2);
+
 	flame.animate({left: stage.width()+100}, 1000, function(){
 		//when animation is complete:
 		$(this).remove();
