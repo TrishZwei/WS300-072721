@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Viking Platform Game</title>
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+<style type="text/css">
+	.cf:before,
+	.cf:after {
+	    content: "";
+	    display: block;
+	}
+	.cf:after {
+	    clear: both;
+	}
+	.cf {
+	    zoom: 1; /*for old ie (trigger has layout) ie sucks it */
+	}
+	body {
+		font-size: 20px;
+		font-family: verdana;
+		margin: 0 auto;
+		padding: 0 15px;
+	}
+	.gameStage {
+		width: 1200px;
+		height: 700px;
+		top: 50px;
+		bottom: 50px;
+		right: 10px;
+		left: 10px;
+		position: absolute;
+		margin: 0 auto;
+		background-image: url(images/background2.svg);
+		box-shadow: 0px 0px 30px 5px rgba(0,0,0,0.5);
+		z-index: -1;
+	}
+	.player {
+		position: absolute;
+		top: 525px;
+		left: 50px;
+		width: 46px;
+		height: 50px;
+	}
+/*	.player2 {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 46px;
+		height: 50px;
+		display: none;
+	}*/
+	.ghost {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 46px;
+		height: 55px;
+		background-image: url(images/playerghost.svg);
+		background-repeat: no-repeat;
+		display: none;
+		z-index: 10;
+	}
+	.box1 {
+		position: absolute;
+		bottom: 0px;
+		left: 0;
+		width: 300px;
+		height: 75px;
+		padding-bottom: 34px;
+		background-image: url(images/grass.svg), url(images/dirt.jpg);
+		background-repeat: no-repeat, repeat;
+		background-size: 100%, auto;
+	}
+	.box2 {
+		position: absolute;
+		bottom: 0px;
+		left: 300px;
+		width: 300px;
+		height: 75px;
+		padding-bottom: 34px;
+		background-image: url(images/grass.svg), url(images/dirt.jpg);
+		background-repeat: no-repeat, repeat;
+		background-size: 100%, auto;
+	}
+	.box3 {
+		position: absolute;
+		bottom: 0px;
+		left: 600px;
+		width: 300px;
+		height: 75px;
+		padding-bottom: 34px;
+		background-image: url(images/grass.svg), url(images/dirt.jpg);
+		background-repeat: no-repeat, repeat;
+		background-size: 100%, auto;
+	}
+	.box4 {
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		width: 300px;
+		height: 75px;
+		padding-bottom: 34px;
+		background-image: url(images/grass.svg), url(images/dirt.jpg);
+		background-repeat: no-repeat, repeat;
+		background-size: 100%, auto;
+	}
+	.box5 {
+		position: absolute;
+		bottom: 200px;
+		left: 100px;
+		height: 25px;
+		width: 200px;
+		padding-bottom: 34px;
+		background-image: url(images/grass.svg), url(images/dirt.jpg);
+		background-repeat: no-repeat, repeat;
+		background-size: 100%, auto;
+		border-radius: 15px;
+	} 
+	.box6 {
+		position: absolute;
+		bottom: 300px;
+		left: 400px;
+		height: 25px;
+		width: 200px;
+		padding-bottom: 34px;
+		background-image: url(images/grass.svg), url(images/dirt.jpg);
+		background-repeat: no-repeat, repeat;
+		background-size: 100%, auto;
+		border-radius: 15px;
+	}
+	.box7 {
+		position: absolute;
+		bottom: 400px;
+		left: 700px;
+		height: 25px;
+		width: 200px;
+		padding-bottom: 34px;
+		background-image: url(images/grass.svg), url(images/dirt.jpg);
+		background-repeat: no-repeat, repeat;
+		background-size: 100%, auto;
+		border-radius: 15px;
+	}
+	.box8 {
+		position: absolute;
+		bottom: 500px;
+		right: 0px;
+		height: 25px;
+		width: 200px;
+		padding-bottom: 34px;
+		background-image: url(images/grass.svg), url(images/dirt.jpg);
+		background-repeat: no-repeat, repeat;
+		background-size: 100%, auto;
+		border-radius: 15px 0 0 15px;
+	}
+	.wallL {
+		height: 95%;
+		width: 1px;
+		float: left;
+		margin-bottom: 17px;
+	}
+	.wallR {
+		height: 95%;
+		width: 1px;
+		float: right;
+	}
+	.top {
+		height: 1px;
+		width: 95%;
+		margin: 0 auto;
+		margin-bottom: 17px;
+	}
+	.bottom {
+		width: 95%;
+		margin: 0 auto;
+		height: 1px;
+		clear: both;
+	}
+	#spike1 {
+		height: 50px;
+		width: 900px;
+		position: absolute;
+		bottom: 108px;
+		left: 300px;
+		background-image: url(images/spikes.svg);
+	}
+	#spike2 {
+		height: 50px;
+		width: 150px;
+		position: absolute;
+		bottom: 0;
+		left: 800px;
+		background-image: url(images/spikes.svg);
+	}
+	#spike3 {
+		height: 50px;
+		width: 150px;
+		position: absolute;
+		bottom: 250px;
+		left: 800px;
+		background-image: url(images/spikesdown.svg);
+	}
+	#spike4 {
+		height: 80px;
+		width: 80px;
+		position: absolute;
+		left: 620px;
+		bottom: 200px;
+		background-image: url(images/spikeblock.svg);
+
+	}
+	#goal {
+		height: 50px;
+		width: 45px;
+		background-image: url(images/chest.svg);
+		background-repeat: no-repeat;
+		position: absolute;
+		bottom: 556px;
+		right: 10px;
+	}
+	#lifecounter {
+		font-family: 'pieces_of_eightregular';
+		color: white;
+		font-size: 2em;
+		padding: 0.5em;
+		float: left;
+	}
+	#level {
+		float: right;
+		font-family: 'pieces_of_eightregular';
+		color: white;
+		font-size: 2em;
+		padding: 0.5em;
+	}
+	#complete {
+		width: 1200px;
+		height: 700px;
+		margin: 0 auto;
+		margin-top: 50px;
+		background-color: rgba(250,250,250,0.75);
+		display: none;
+	}
+	#gameover {
+		width: 1200px;
+		height: 700px;
+		margin: 0 auto;
+		margin-top: 50px;
+		background-color: rgba(250,250,250,0.75);
+		display: none;
+	}
+	h1 {
+		text-align: center;
+		color: black;
+		font-size: 6em;
+		font-family: 'pieces_of_eightregular';
+		margin: 50px;
+		padding-top: 100px;
+		letter-spacing: 20px;
+	}
+	a {
+		display: block;
+		background-color: rgba(100,100,100,0.7);
+		font-family: 'pieces_of_eightregular';
+		text-decoration: none;
+		font-size: 2.25em;
+		padding: 0.25em;
+		width: 220px;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 30px;
+		color: white;
+		font-weight: bold;
+		border-radius: 15px;
+	}
+	a:hover {
+		background-color: rgba(100,100,100,0.9);
+	}
+</style>
+</head>
+<body>
+<div id="complete">
+	<h1>Level Complete</h1>
+	<div><a href="level2.html" class="button">Next Level</a></div>
+</div>
+<div id="gameover">
+	<h1>Game Over</h1>
+	<div><a href="index.html" class="button">Play Again?</a></div>
+</div>
+<div class="gameStage">
+<div id="lifecounter">Lives:<span>3</span></div>
+<div id="level">Level 1</div>
+	<div class="player"></div>
+	<!-- <div class="player2"></div> -->
+	<div class="ghost"></div>
+	<div class="box1">
+		<div class="top wall"></div>
+		<div class="wallL wall"></div>
+		<div class="wallR wall"></div>
+		<div class="bottom wall"></div>
+	</div>
+	<div class="box2">
+		<div class="top wall"></div>
+		<div class="wallL wall"></div>
+		<div class="wallR wall"></div>
+		<div class="bottom wall"></div>
+	</div>
+	<div class="box3" >
+		<div class="top wall"></div>
+		<div class="wallL wall"></div>
+		<div class="wallR wall"></div>
+		<div class="bottom wall"></div>
+	</div>
+	<div class="box4">
+		<div class="top wall"></div>
+		<div class="wallL wall"></div>
+		<div class="wallR wall"></div>
+		<div class="bottom wall"></div>
+	</div>
+	<div class="box5">
+		<div class="top wall"></div>
+		<div class="wallL wall"></div>
+		<div class="wallR wall"></div>
+		<div class="bottom wall"></div>
+	</div>
+	<div class="box6">
+		<div class="top wall"></div>
+		<div class="wallL wall"></div>
+		<div class="wallR wall"></div>
+		<div class="bottom wall"></div>
+	</div>
+	<div class="box7">
+		<div class="top wall"></div>
+		<div class="wallL wall"></div>
+		<div class="wallR wall"></div>
+		<div class="bottom wall"></div>
+	</div>
+	<div class="box8">
+		<div class="top wall"></div>
+		<div class="wallL wall"></div>
+		<div class="wallR wall"></div>
+		<div class="bottom wall"></div>
+	</div>
+	<div class="spike" id="spike1"></div>
+	<div id="goal"></div>
+</div>
+<!--jQ at the bottom of the page -->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+
+//directional object
+var dir = {
+	up: false,
+	down: true,
+	left: false,
+	right: false
+},
+	leftspeed = 10;
+	rightspeed = 10; //pixels per frame
+	upspeed = 16;
+	downspeed = 14;
+
+var player = $('.player'),
+//	player2 = $('.player2'),//eliminated player2. Not sure why it was necessary.
+	stage = $('.gameStage');
+
+var lives = 3;
+var stageOffL;
+var facing = 1;
+var jumping = 0;
+var nextlevel = false;
+
+function playersprite(){
+	//player backgroundimage
+	// 1 = right
+	// 2 = left
+	if(facing == 1){
+		player.css('background', 'url(images/player.svg) no-repeat');
+		//player2.css('background', 'url(images/player.svg) no-repeat');
+	}
+	if(facing == 2){
+		player.css('background', 'url(images/player2.svg) no-repeat');
+		//player2.css('background', 'url(images/player2.svg) no-repeat');
+	}
+	if (facing == 1 && jumping == 1){
+		player.css('background', 'url(images/player3.svg) no-repeat');
+		//player2.css('background', 'url(images/player3.svg) no-repeat');
+	}
+	if (facing == 2 && jumping == 1){
+		player.css('background', 'url(images/player4.svg) no-repeat');
+		//player2.css('background', 'url(images/player4.svg) no-repeat');
+	}
+//	window.requestAnimationFrame(playersprite);
+};
+//setInterval(playersprite, 1);
+//window.requestAnimationFrame(playersprite);
+
+//ghost animation
+function ghost(){
+	var ghostX = player.offset().left - $('.gameStage').offset().left;
+	var ghostY = player.offset().top - $('.gameStage').offset().top;
+	player.hide(); 
+	$('.ghost').show()
+			   .css({left: ghostX, top: ghostY})
+			   .animate({top: 525, left: 50}, 2000);
+	
+	setTimeout(showPlayer, 2500);
+}
+function showPlayer(){
+	$('.ghost').hide();
+	$('.player').css({top: 525, left: 50});
+	player.show();
+}
+
+//create gameLoop to run with browser framerate
+function gameLoop(){
+	var newTop = 0;
+	var newLeft = 0;
+	stageOffL = $('.gameStage').offset().left;
+	if(dir.up){
+		newTop -= upspeed;
+	}
+	if(dir.down){
+		newTop += downspeed;
+	}
+	if(dir.left){
+		newLeft -= leftspeed;
+	}
+	if(dir.right){
+		newLeft += rightspeed;
+	}
+	var dTop = player.position().top,
+		dLeft = player.position().left,
+		dHeight = 46 //player.outerHeight(), //do these ever change? No.
+		dWidth = 50 //player.outerWidth();
+	var stageH = 700 //stage.height(); 
+	var stageW = 1200 //stage.width();
+
+	//check to see if we are going to go past stage bounds
+	if(dTop + newTop < 0){
+		//top border
+		newTop = 0;
+		newTop -= dTop; //remaining distance from the top of the outer div and the player
+	}
+	if(dTop + newTop + dHeight > stageH){
+		//bottom border
+		newTop = 0;
+		newTop += (stageH - dTop - dHeight);
+	}
+	if(dLeft + newLeft < 0){
+		newLeft = 0;
+		newLeft -= dLeft;
+	}
+	if(dLeft + newLeft + dWidth > stageW){
+		newLeft = 0;
+		newLeft += (stageW - dLeft - dWidth);
+	}
+
+	player.css({top: '+=' + newTop, left: '+=' + newLeft});
+	
+
+	$('.gameStage').each(function(){
+		if(recthit(player, $(this))){
+			//stop left / right movement
+			leftspeed = 10;
+			rightspeed = 10;
+			downspeed = 14;
+		}
+	});
+	$('.wallL').each(function(){
+		if(recthit(player, $(this))){
+			//stop left / right movement
+			// rightspeed = 0;
+			currLeft = $(this).offset().left - $('.gameStage').offset().left;
+			$('.player').css({left: currLeft - player.width()})
+		}
+	});
+	$('.wallR').each(function(){
+		if(recthit(player, $(this))){
+			//stop left / right movement
+			// leftspeed = 0;
+			currLeft = ($(this).offset().left) - $('.gameStage').offset().left;
+			$('.player').css({left: currLeft})
+		}
+	});
+	$('.top').each(function(){
+		if(recthit(player, $(this))){
+			currTop = $(this).offset().top;
+			//console.log(currTop);
+			//stop down
+			clearInterval(jumpInterval);
+			dir.up = false;
+			dir.down = true;
+			upspeed = 0;
+			jumping = 0;
+			i = true;
+			$('.player').css({top: currTop-(player.height()*2)})
+		}
+	});
+	$('.bottom').each(function(){
+		if(recthit(player, $(this))){
+			//stop up
+			upspeed = 0;
+		}
+	});
+	$('.spike').each(function(){
+		if(recthit(player, $(this))){
+			lives--;
+			updateLives();
+			ghost();
+		}
+	});
+	$('#goal').each(function(){
+		if(recthit(player, $(this))){
+			$(this).remove();
+			$('#complete').show();
+			var playerX = player.offset().left - $('.gameStage').offset().left;
+			var playerY = player.offset().top - $('.gameStage').offset().top;
+			//player.hide();
+			//player2.show();
+			player.css({top: playerY, left: playerX});
+			$(document).unbind();
+		}
+	});
+	if(lives == 0){
+		$('#gameover').show();
+		var playerX = player.offset().left - $('.gameStage').offset().left;
+		var playerY = player.offset().top - $('.gameStage').offset().top;
+		player.hide();
+		playerghost.hide();
+		$(document).unbind();
+	}
+
+	checkspeed();
+	playersprite(); 
+	window.requestAnimationFrame(gameLoop);
+
+};// end game loop
+window.requestAnimationFrame(gameLoop);
+
+function updateLives(){
+	$('#lifecounter span').text(lives);
+}
+
+
+$(document).keydown(function(e){
+
+	if(e.which == 37 || e.which == 65){
+		dir.left = true;
+		facing = 2;
+	}
+	if(e.which == 39 || e.which == 68){
+		dir.right = true;
+		facing = 1;
+	}
+});
+$(document).keyup(function(e){
+
+	if(e.which == 37 || e.which == 65){
+		dir.left = false;
+	}
+	if(e.which == 39 || e.which == 68){
+		dir.right = false;
+	}
+});
+
+//JUMP STUFF
+
+var jumpInterval;
+var i = true;
+
+
+function jumpspeed(){
+	upspeed = upspeed - 2;
+	//decreases upspeed every 40 MS.
+};
+
+function jump(){
+	dir.up = true;
+	dir.down = false;
+	upspeed = 16;
+	jumpInterval = setInterval(jumpspeed, 40);
+};
+
+$(document).keydown(function(e){
+	//console.log('i is:',i);
+	if(e.which == 32){
+		jumping = 1;
+		if(i != false){
+			jump();
+			i = false;
+		}
+	};
+});
+
+function checkspeed(){
+	// console.log(upspeed);
+	if(upspeed < -14){
+		clearInterval(jumpInterval);
+		upspeed = 0;
+		dir.down = true;
+		dir.up = false;
+	}
+	//window.requestAnimationFrame(checkspeed);
+}
+
+//window.requestAnimationFrame(checkspeed)
+
+
+
+//hit detection
+function recthit(rectone, recttwo){
+    var r1 = $(rectone);
+    var r2 = $(recttwo);
+    
+    var r1x = r1.offset().left;
+    var r1w = r1.width();
+    var r1y = r1.offset().top;
+    var r1h = r1.height();
+    
+    var r2x = r2.offset().left;
+    var r2w = r2.width();
+    var r2y = r2.offset().top;
+    var r2h = r2.height();
+    
+    if( r1y+r1h < r2y ||
+        r1y > r2y+r2h ||
+        r1x > r2x+r2w ||
+        r1x+r1w < r2x ){
+    	//console.log('false');
+        return false;
+    }else{
+        return true;   
+    }
+    
+}//end function 
+
+</script>
+</body>
+</html>
