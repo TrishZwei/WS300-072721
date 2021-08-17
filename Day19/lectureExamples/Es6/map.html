@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Array Map - Slide 11</title>
+	<style type="text/css">
+	body{
+		font-size: 20px;
+		font-family: Verdana;
+		margin: 0 auto;
+		padding: 1em;
+	}
+
+	#content{
+		padding: 5px;
+		border: 2px dashed lightgray;
+	}
+
+	</style>
+</head>
+<body>
+	<p>view the console</p>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+const participants = ["John", "Bill", "Joe", "Clair"];
+const announcements = participants.map(member => {
+	return member+ " joined the contest";
+});
+
+console.log(announcements);
+//alters and stores the items from participants into a new array called announcements.
+console.log(participants); //participants is unaltered
+	
+</script>
+</body>
+</html>

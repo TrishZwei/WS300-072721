@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Block Level Scope - Slide 6</title>
+	<style type="text/css">
+	body{
+		font-size: 20px;
+		font-family: Verdana;
+		margin: 0 auto;
+		padding: 1em;
+	}
+
+	#content{
+		padding: 5px;
+		border: 2px dashed lightgray;
+	}
+
+	</style>
+</head>
+<body>
+	<p>view the console.</p>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+function foo(){
+	if(true){
+		var fruit = 'apple';
+		const fruit2 = 'banana';
+		let fruit3 = 'strawberry';
+	} //end curly bracket (end of block scope)
+
+console.log(fruit); //apple gets hoisted to the top of the function and we have access to it only within the function
+//comment out the lines below one at a time to see what happens. Copy the code from here into the if statement within the curly braces, see what happens. See what happens when you put that before or after the declaration of the variable. There is a difference between undefined and not defined.
+console.log(fruit2); //error: not defined
+console.log(fruit3); //Never gets to try to interpret fruit3, but if you comment out fruit2, for the same reason it also has the same error: not defined
+
+}
+
+foo();
+
+console.log(fruit); //not defined
+	
+</script>
+</body>
+</html>

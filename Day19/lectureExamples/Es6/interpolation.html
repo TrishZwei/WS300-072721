@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Interpolation - Slide 8</title>
+	<style type="text/css">
+	body{
+		font-size: 20px;
+		font-family: Verdana;
+		margin: 0 auto;
+		padding: 1em;
+	}
+
+	#content{
+		padding: 5px;
+		border: 2px dashed lightgray;
+	}
+
+	</style>
+</head>
+<body>
+	<p>view the console.</p>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+//Back-tics Syntax
+let text = `Hello World`;
+
+//Interpolation
+let fName = "John";
+let lName = "Doe";
+
+let text2 = `Welcome ${fName} ${lName}`;
+//Welcome John Doe
+
+document.querySelector('p').textContent = text2;
+	
+</script>
+</body>
+</html>
