@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Digital Clock - Standard</title>
+	<style type="text/css">
+		body, html{
+			font-family: Verdana;
+			height: 100%;
+			width:100%;
+			margin: 0;
+			padding: 0;
+			background-color: #f65041;
+		}
+
+		*{
+			box-sizing: border-box;
+		}
+
+		#clock-display{
+			color: white;
+			text-align: center;
+			background-color: #3C2527;
+			border-radius: 20px;
+			width: 30%;
+			padding: 1em;
+			font-size: 1.8em;
+			min-width: 483px;
+			margin: 1em auto;
+		}
+
+
+		.clock, .date{
+			margin: 1em auto;
+		}
+
+		.clock div, .date div{
+			display: inline-block;
+		}
+
+		.date div.colon{
+			margin-right:5px;
+			margin-left: -5px;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="clock-display">
+		<div class="clock">
+			<div class="hours">00</div>
+			<div class="colon">:</div>
+			<div class="minutes">00</div>
+			<div class="colon">:</div>
+			<div class="seconds">00</div>
+			<div class="meridiem">AM</div>
+		</div>
+		<div class="date">
+			<div class="day">MONDAY</div>
+			<div class="colon">,</div>
+			<div class="month">AUGUST</div>
+			<div class="the-date">1</div>
+			<div class="colon">,</div>
+			<div class="year">1999</div>
+		</div>
+
+
+
+	</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+	let today = new Date(); //date gets set once.
+
+	function displayClock(){
+		today = new Date(); //resetting the value of today
+//testing PM:
+		today.setHours(17);
+
+
+	//clock stuff
+		let cHour = today.getHours(),
+			cMins = today.getMinutes(),
+			cSecs = today.getSeconds(),
+			ampm = '';
+
+			if(cHour < 12){
+				ampm = 'AM';
+			}else{
+
+				cHour-=12;
+				ampm = 'PM';
+			}
+
+			if(cHour == 0){
+				cHour = 12;
+			}
+
+			if(cHour < 10){
+				cHour = '0'+cHour;
+			}
+
+			if(cMins < 10){
+				cMins = '0'+cMins;
+			}
+
+			if(cSecs < 10){
+				cSecs = '0'+cSecs;
+			}
+
+	//clock display:		
+
+		$('.hours').text(cHour);
+		$('.minutes').text(cMins);
+		$('.seconds').text(cSecs);
+		$('.meridiem').text(ampm)
+
+		window.requestAnimationFrame(displayClock);
+	
+	}
+
+displayClock();
+
+
+
+//date stuff
+let theDay = today.getDay(), //0-6
+	theMonth = today.getMonth(), //0-11
+	theDate = today.getDate(), //date of month 1 - 31
+	theYear = today.getFullYear(); //4 digit year: 2021
+console.log(theDay, theMonth, theDate, theYear);
+
+const dayArray =  ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+	  monthArray = ['January', 'February','March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+
+//date display:
+	$('.day').text(dayArray[theDay]);
+	$('.month').text(monthArray[theMonth]);
+	$('.the-date').text(theDate);
+	$('.year').text(theYear);	  
+
+
+
+
+
+
+</script>
+</body>
+</html>

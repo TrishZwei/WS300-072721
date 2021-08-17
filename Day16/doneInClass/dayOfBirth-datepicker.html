@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Day of Birth</title>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+		}
+	</style>
+</head>
+<body>
+<p>Date: <input type="text" class="date-input" placeholder="MM/DD/YYYY"></p>
+<div id="message"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script>
+	$('.date-input').datepicker().change( function(){
+		//will happen when value of input box is updated when the user exits the box
+		let theDate = $(this).val(); //gets the value from the input
+		let dateMessage = '';
+
+		console.log(theDate, theDate.constructor); 
+		//convert format of: 8/17/2021 to 2021,7,17
+
+		if(theDate.indexOf('/') > -1){
+			//indexOf returns -1 when the searched for item is not found
+			theDate = theDate.split('/');
+		}else if(theDate.indexOf('.') > -1 ){
+			theDate = theDate.split('.');
+		}else if(theDate.indexOf('-') > -1){
+			theDate = theDate.split('-');
+		}else{
+			dateMessage = 'Use the format requested. Numbers separated by slash, dot or dash between month, day and year. Ex: 01/05/2021, 01.05.2021 OR 01-05-2021';
+		}
+
+		let m = theDate[0]-1;
+		let d = parseInt(theDate[1]);
+		let y = parseInt(theDate[2]);
+		console.log(y,m,d);
+
+	let birthday = new Date(y,m,d);
+	let checkDate = birthday.toString();
+	console.log(checkDate)
+
+		if(checkDate == 'Invalid Date'){
+		$(this).val('');
+		$('#message').text(checkDate+'. '+dateMessage);
+			return false;
+		}
+
+		//we have a good date!
+		let dayOfWeek = birthday.getDay(); //gets a value of 0 - 6
+		let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+		let theDay = days[dayOfWeek];
+		$('#message').text('You were born on a '+theDay+'.');
+		$('title').text('You were born on a '+theDay+'.');
+
+	})
+
+
+</script>
+</body>
+</html>
