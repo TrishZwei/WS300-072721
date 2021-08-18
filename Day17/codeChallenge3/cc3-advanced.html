@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery Accordian</title>
+	<style type="text/css">
+	html {
+	min-height: 100%;
+	font-family: Verdana, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	}
+
+	body {
+		background: linear-gradient(to bottom right, #3D4258, #6670A0, #9688B4);
+		line-height: 1.5;
+	}
+	</style>
+</head>
+<body>
+	<input type="text" id="my-input">
+	<div class="message"></div>
+	<div class="length"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+$('#my-input').on('input', function(){
+	//console.log('test');
+	let text = $('#my-input').val();
+	$('.message').text(text);
+	$('.length').text(text.length);
+
+
+})
+
+
+
+
+</script>
+</body>
+</html>

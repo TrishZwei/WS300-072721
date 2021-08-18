@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Countdown with IIFE</title>
+	<style type="text/css">
+		body{
+			font-family: Verdana;
+			text-align: center;
+			background-color: black;
+			color: white;
+		}
+
+		h1{
+			color: #ff9A00;
+		}
+
+		#until{
+			margin: 0 auto;
+		}
+
+
+		#until div{
+			display: inline-block;
+			background: #881EE4;
+			padding: 1em;
+			margin: 0;
+			min-width: 100px;
+		}
+
+	</style>
+
+</head>
+<body>
+	
+	<h1>&nbsp;</h1>
+	<div id="until">
+		<div id="years">
+			<h3>Years:</h3>
+			<span>0</span>
+		</div>
+		<div id="days">
+			<h3>Days:</h3>
+			<span>0</span>
+		</div>
+		<div id="hours">
+			<h3>Hours:</h3>
+			<span>0</span>
+		</div>
+		<div id="mins">
+			<h3>Minutes:</h3>
+			<span>0</span>
+		</div>
+	</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+//encase working code in an IIFE "iffy"
+//immediate invoking function expression
+
+(function(){
+	
+	let message = "Class is ending in:";
+	let end = new Date("August 30, 2021 12:00:00");
+
+
+function countdown(){
+	let now = new Date();
+	let diff = end - now; //number value in here
+
+	let days = Math.floor(diff / (1000*60*60*24)); //how many whole days
+	let hours = Math.floor(diff % (1000*60*60*24) / (1000*60*60) ) //number of hours
+	let minutes = Math.floor(diff % (1000*60*60) / (1000*60) ) //number of minutes
+
+	let years = 0;
+
+	if(days > 365){
+		years = parseInt(days/365);
+	}
+
+	if(years == 0){
+		$('#years').hide();
+	}else{
+		days -= (years * 365)
+	}
+
+	//console.log(days, hours, minutes);
+
+	$('h1').text(message);
+	$('#years span').text(years)
+	$('#days span').text(days)
+	$('#hours span').text(hours)
+	$('#mins span').text(minutes)
+	console.log('countdown');
+	window.requestAnimationFrame(countdown);
+};
+countdown();
+
+})();
+
+
+	
+	
+
+
+</script>
+
+</body>
+</html>

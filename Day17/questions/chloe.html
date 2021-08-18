@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>Simon Game</title>
+<style type="text/css">
+body{
+	font-size: 20px;
+	font-family: Verdana;
+	margin: 0 auto;
+	padding: 0 15px;
+}
+
+#gameBoard{
+	width: 408px;
+	height: 408px;
+	margin: 0 auto;
+}
+
+.square{
+	width: 200px;
+	height: 200px;
+	float: left;
+	border: 2px solid black;
+	cursor: pointer;
+}
+
+.red{
+	background-color: red;
+	border-radius: 100% 0 0 0;
+}
+
+.blue{
+	background-color: blue;
+	border-radius: 0 100% 0 0;
+}
+
+.green{
+	background-color: green;
+	border-radius: 0 0 0 100%;
+}
+
+.yellow{
+	background-color: yellow;
+	border-radius: 0 0 100% 0;
+}
+
+.button{
+	width: 200px;
+	background-color: gray;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 10px;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+<script type="text/javascript">
+
+today = new Date()
+today.setMinutes(25);
+console.log(today.getMinutes());
+
+today = new Date().setMinutes(25)
+//is the value returned: 1629296732416
+
+new Date(1629296732416)
+//This is the result: Wed Aug 18 2021 07:25:32 GMT-0700 (Pacific Daylight Time)
+
+new Date().setMinutes()
+//NaN
+
+new Date().getMinutes()
+//1-59
+
+
+
+//today.getMinutes()
+//this error occurs because it is a number and no longer a date object.
+// VM280:1 Uncaught TypeError: today.getMinutes is not a function
+//     at <anonymous>:1:7
+// (anonymous) @ VM280:1
+
+
+//console.log(new Date().setMinutes(25).getMinutes())
+//technically same error as above
+// VM454:1 Uncaught TypeError: (intermediate value).setMinutes(...).getMinutes is not a function
+//     at <anonymous>:1:39
+// (anonymous) @ VM454:1
+
+
+// today.toString()
+//returns: "1629296732416"
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
