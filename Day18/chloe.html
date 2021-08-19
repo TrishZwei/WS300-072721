@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Functions inside of Functions</title>
+</head>
+<body>
+
+
+
+<script type="text/javascript">
+//IIFE
+( function(){
+	console.log('hi');
+
+	function sayHello(){
+		console.log('Hi again!');
+	}
+
+	sayHello();
+
+})();
+
+function sayHello(){
+	console.log('I am in a different scope.');
+}
+
+sayHello();
+
+</script>
+</body>
+</html>
