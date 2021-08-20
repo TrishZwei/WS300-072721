@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Firefly Trivia</title>
+<style type="text/css">
+	html{
+		background-color: #2b3e50;
+	}	
+
+body{
+	font-size: 16px;
+	font-family: Verdana;
+	background-color: white;
+	text-align: center;
+	width: 80%;
+	min-width: 600px;
+	margin: 10px auto;
+	padding: 20px;
+	border-radius: 1em;
+}
+
+h1{
+	color: cadetblue;
+}
+
+h3.question{
+	font-size: 2em;
+}
+
+.info{
+	font-size: 1.5em;
+}
+
+#start{
+	width: 300px;
+	margin: 10px auto;
+}
+
+.answer{
+	background-color: #df691a;
+	color: white;
+	border-radius: 10px;
+	padding: 1em;
+	cursor: pointer;
+	width: 60%;
+	font-size: 1.5em;
+	margin: 10px auto 0;
+
+}
+
+.button{
+	background-color: cadetblue;
+	color: white;
+	border-radius: 10px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+</style>
+
+</head>
+<body>
+<h1>How Well Do You Know Firefly?</h1>
+
+<section class="info">
+<p>Answer the questions as they come up by clicking on the answer.</p>
+<div class="button" id="start">Start!</div>
+</section>
+
+<div id="quizArea"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- any jQuery dependent files and scripts go below jQ -->
+
+<script>
+//the trivia game
+
+var qArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13]; //list of question numbers
+var score = 0; //holds the value of the score
+
+//rand number function
+
+function randNum(min, max){
+	return Math.round(Math.random()*(max-min))+min;
+
+}
+
+function getData(){
+//check to see if there are more questions in the array
+if(qArray.length > 0){
+//get one if there are any
+var theQuestion = randNum(0, qArray.length-1);
+var qSelect = Number(qArray.splice(theQuestion, 1));
+$('#quizArea').html('').load('data/questions.html section#q'+qSelect);
+
+//call that portion of the questions.html to show up in the content div
+}else{
+$('#quizArea').text('Your score was: '+score);
+
+}
+
+}//end getData()
+
+
+$('#start').click( function(){
+//hide info and call the getData function
+	$('.info').hide();
+	getData();
+})
+
+$('#quizArea').click( function(e){
+//var theText = $(e.target).text();
+//alert(theText);
+
+var ansChosen = $(e.target).data('value');
+	e.stopPropagation(); //prevents events from bubbling up or down the DOM
+if(ansChosen == 1){
+//we know we have the right answer
+score++;
+alert('Shiny!');
+getData();
+}else if(ansChosen == 0){
+//we know user clicked on wrong answer
+alert('Gorram it!');
+getData();
+}else{
+//no answer was clicked (clicked div, but no child elements)
+
+}
+
+//alert(ansChosen); //shows us what the ansChosen value looks like
+
+})
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

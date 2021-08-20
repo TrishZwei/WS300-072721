@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Using the AJAX Function</title>
+	<style type="text/css">
+		body{
+			font-size: 20px;
+			font-family: Verdana;
+			margin: 0 auto;
+			padding: 1em;
+		}
+
+		#content{
+			padding: 5px;
+			border: 2px dashed lightgray;
+		}
+
+	</style>
+</head>
+<body>
+<p>If successful, the returned data will appear below.</p>
+<div id="content"></div>
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<!-- any jQuery dependent files and scripts go below jQ -->
+<script>
+
+function getData(){
+var flickrAPI = 'https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?';
+
+ $.getJSON( flickrAPI, {
+ 	tags: 'cat',
+ 	tagmode: 'any',
+ 	format:'json'
+ }, successFn);
+
+}//end getData()
+
+function successFn(d){
+console.log(d); //what does your data look like?
+
+$.each(d.items, function(i, item){
+	$('<img>').attr('src', item.media.m).appendTo('#content');
+
+	if(i === 4){
+		return false;
+		//tells the function to stop running at this point
+	}
+
+})
+
+}
+
+
+getData();
+
+
+
+
+
+</script>
+
+</body>
+</html>

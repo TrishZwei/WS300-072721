@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Using the AJAX Function</title>
+	<style type="text/css">
+		body{
+			font-size: 20px;
+			font-family: Verdana;
+			margin: 0 auto;
+			padding: 1em;
+		}
+
+		#content{
+			padding: 5px;
+			border: 2px dashed lightgray;
+		}
+
+	</style>
+</head>
+<body>
+<p>If successful, the returned data will appear below.</p>
+<div id="content"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- any jQuery dependent files and scripts go below jQ -->
+<script>
+//$ = jQuery (we are calling jQ directly in this instance)
+
+$.ajax({
+	url: 'data/testdata.txt', //path to get my data
+	type: 'GET', //gets data, does not send data
+	dataType: 'text', //type of data we are getting back
+	success: successFn, //run the successFn when successful
+	error: errorFn, //run the errorFn if there is a problem
+	complete: function(xhr, status){
+		//when the ajax function is complete, run this:
+		console.log("the request is complete");
+	}
+
+})	
+
+function successFn(data){
+console.log(data); //this shows us what the data looks like if we do not know already
+$('#content').text(data);
+
+}
+
+function errorFn(xhr, status, strErr){
+console.log('There was an error: '+status+':'+strErr);
+//status = number of error (404)
+//strErr = description of number ('page not found')
+
+}
+
+
+
+</script>
+
+</body>
+</html>

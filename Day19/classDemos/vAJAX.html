@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Vanilla AJAX Demo</title>
+
+	<!-- https://www.youtube.com/watch?v=rJesac0_Ftw -->	
+	<style type="text/css">
+		html, body {
+		  padding: 0;
+		  margin: 0;
+		}
+
+		.hide-me {
+		  visibility: hidden;
+		  opacity: 0;
+		  transform: scale(.75);
+		}
+
+		h1 {
+		  margin-top: 0;
+		  font-size: 2.4em;
+		  font-weight: normal;
+		  display: inline-block;
+		}
+
+		body {
+		  font-family: Verdana, sans-serif;
+		  padding: 50px 10%;
+		}
+
+		button {
+		  background-color: #046380;
+		  color: #FFF;
+		  border: none;
+		  padding: 10px 15px;
+		  font-size: 15px;
+		  border-radius: 4px;
+		  cursor: pointer;
+		  outline: none;
+		  box-shadow: 2px 2px 0 #034154;
+		  margin-bottom: 10px;
+		  margin-left: 18px;
+		  transition: opacity .4s ease-out, transform .4s ease-out, visibility .4s ease-out;
+		  position: relative;
+		  top: -10px;
+		}
+
+		button:hover {
+		  background-color: #034F66;
+		}
+
+		button:active {
+		  background-color: #034154;
+		  box-shadow: none;
+		  position: relative;
+		  top: -8px;
+		  left: 2px;
+		}
+
+		p {
+		  padding: 4px 0 2px 8px;
+		  line-height: 1.7;
+		  border-bottom: 1px dotted #DDD;
+		  list-style: none;
+		  margin: 0;
+		}
+
+	</style>
+</head>
+<body>
+<header>
+<h1>JSON and AJAX</h1>
+  <button id="btn">Fetch Info for 3 New Animals</button>
+</header>
+
+<div id="animal-info"></div>
+<!-- no jQuery here -->
+<script>
+
+/*
+//example of object literal demo has properties in strings proper JSON needs this
+let felix = {
+	"name": "Felix",
+	"species": "cat",
+	"color": "orange tabby",
+	"favFood": "chicken"
+}
+
+
+let myFavColors = ["blue", "green", "purple"]
+
+
+let thePets = [ 
+{
+	"name": "Felix",
+	"species": "cat",
+	"color": "orange tabby",
+	"favFood": "chicken"
+},
+{
+	"name": "Gatsby",
+	"species": "cat",
+	"color": "grey",
+	"favFood": "wet food"
+},
+{
+	"name": "Barky",
+	"species": "dog",
+	"color": "tawny",
+	"favFood": "hot dogs"
+}
+  ]
+
+  let food = thePets[1].favFood //returns wet food
+*/
+//https://learnwebcode.github.io/json-example/animals-1.json
+
+let btn = document.getElementById('btn');
+let animalContainer = document.getElementById("animal-info");
+
+let clicks = 1;
+
+btn.addEventListener('click', function(){
+	
+	const url = 'https://learnwebcode.github.io/json-example/animals-'+clicks+'.json'
+	let ourRequest = new XMLHttpRequest();
+	//send or recieve data (GET tells us to receive data)
+	ourRequest.open('GET', url)
+
+	ourRequest.onload = function(){
+	//console.log(ourRequest.responseText); //gets the data from the file we are requesting
+	//	let ourData = ourRequest.responseText;
+	//	console.log(ourData[0]) //this comes back as a string... so 0 is [
+
+//error handling:
+
+
+
+	let ourData = JSON.parse(ourRequest.responseText);
+	console.log(ourData[0])
+	renderHTML(ourData);
+	
+
+	}
+	ourRequest.send();
+	clicks++;
+
+	if(clicks > 3){
+		//hide the button
+		btn.classList.add("hide-me");
+
+	}
+
+}) //end listener
+//google fill text JSON
+
+function renderHTML(data){
+	//adds HTML to empty div element
+//	let htmlString = 'This is a test';
+	let htmlString = '';
+
+	for(let i = 0; i < data.length; i++){
+
+		htmlString += `<p> ${data[i].name} is a ${data[i].species} that likes to eat `;
+		htmlString += data[i].foods.likes.join(' and ')
+
+		// for(let j = 0; j < data[i].foods.likes.length; j++){
+				// if(j == 0){
+				// htmlString += `${data[i].foods.likes[j]}`	
+				// }else{
+				//  htmlString += ` and ${data[i].foods.likes[j]}`	
+				// }
+		// 	
+		// }
+
+		htmlString += ' and dislikes '
+		htmlString += data[i].foods.dislikes.join(' and ')
+		htmlString += '.</p>';
+		console.log(htmlString);
+	}
+	animalContainer.insertAdjacentHTML('beforeend', htmlString )
+
+
+
+}
+</script>
+
+</body>
+</html>

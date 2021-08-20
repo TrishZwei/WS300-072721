@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Using the AJAX Function</title>
+	<style type="text/css">
+		body{
+			font-size: 20px;
+			font-family: Verdana;
+			margin: 0 auto;
+			padding: 1em;
+		}
+
+		#content{
+			padding: 5px;
+			border: 2px dashed lightgray;
+		}
+
+	</style>
+</head>
+<body>
+<p>If successful, the returned data will appear below.</p>
+<div id="content"></div>
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<!-- any jQuery dependent files and scripts go below jQ -->
+<script>
+//$ = jQuery (we are calling jQ directly in this instance)
+
+function getData(){
+	$('#content').load('data/testdata.txt'); //only non optional argument
+		
+}
+
+
+getData();
+
+
+</script>
+
+</body>
+</html>

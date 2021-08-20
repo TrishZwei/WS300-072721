@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Using the AJAX Function</title>
+	<style type="text/css">
+		body{
+			font-size: 20px;
+			font-family: Verdana;
+			margin: 0 auto;
+			padding: 1em;
+		}
+
+		#content{
+			padding: 5px;
+			border: 2px dashed lightgray;
+		}
+
+	</style>
+</head>
+<body>
+<p>If successful, the returned data will appear below.</p>
+<div id="content"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- any jQuery dependent files and scripts go below jQ -->
+<script>
+
+$.get('data/testxmldata.xml', function(d){
+//anon function 
+//need to capture the data to process it
+//d represents data
+//console.log(d);
+
+$(d).find('class').each( function(){
+	//find each class tag and do the following:
+	var plattClass = $(this);
+	var title = plattClass.find('title').text();
+	var term = plattClass.find('title').attr('term');
+	var teacher = plattClass.find('teacher').text();
+	var theText = '<p class="class">Term '+term+' - '+title+' with '+teacher+'</p>';
+	$('#content').append(theText);
+
+}) //end each
+
+});
+
+
+</script>
+
+</body>
+</html>
