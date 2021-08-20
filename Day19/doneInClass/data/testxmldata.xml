@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data>
+    <class>
+    	<teacher>Tiziana d'Agostino</teacher>
+		<title term="5">RWD 300 - Responsive Web Design</title>
+    </class>
+    <class>	
+		<teacher>Trish Ladd</teacher>
+		<title term="5">WS 300 - JavaScript and jQuery</title>
+    </class>
+    <class>
+		<teacher>Fred Winton</teacher>
+		<title term="5">WC 300 - Web Campaign</title>
+    </class>        
+    <class>
+		<teacher>Melissa Cabral</teacher>
+		<title term="6">WIP 400 - Programming for Designers</title>
+    </class> 
+    <class>       	
+		<teacher>Melissa Cabral</teacher>
+		<title term="6">WP 400 - CMS for Designers</title>
+    </class>        
+    <class>
+		<teacher>Tiziana d'Agostino</teacher>
+		<title term="6">UX 400 - User Experience</title>
+    </class>          
+</data>

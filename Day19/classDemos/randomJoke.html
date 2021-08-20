@@ -39,15 +39,17 @@
 <!-- any plugins/extensions on jQuery go here-->
 
 <script type="text/javascript">
+	'use strict';
+
 function getData(){
-url = 'https://official-joke-api.appspot.com/jokes/programming/random'
+const url = 'https://official-joke-api.appspot.com/jokes/programming/random'
 
 $.getJSON(url, successFN);
 
 }//end getData
 
 function successFN(d){
-console.log(d); //show us what data we have
+	console.log(d); //show us what data we have
 	let setup = d[0].setup;
 	let punchline = d[0].punchline;
 
