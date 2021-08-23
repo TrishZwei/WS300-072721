@@ -552,6 +552,15 @@ $(document).keydown(function(e){
 		dir.right = true;
 		facing = 1;
 	}
+	
+if(e.which == 32){
+		jumping = 1;
+		if(i != false){
+			jump();
+			i = false;
+		}
+	}
+
 });
 $(document).keyup(function(e){
 
@@ -570,7 +579,7 @@ var i = true;
 
 
 function jumpspeed(){
-	upspeed = upspeed - 2;
+	upspeed-=2;
 	//decreases upspeed every 40 MS.
 };
 
@@ -581,16 +590,6 @@ function jump(){
 	jumpInterval = setInterval(jumpspeed, 40);
 };
 
-$(document).keydown(function(e){
-	//console.log('i is:',i);
-	if(e.which == 32){
-		jumping = 1;
-		if(i != false){
-			jump();
-			i = false;
-		}
-	};
-});
 
 function checkspeed(){
 	// console.log(upspeed);
